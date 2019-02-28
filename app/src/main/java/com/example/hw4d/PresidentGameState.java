@@ -94,18 +94,26 @@ public class PresidentGameState implements Serializable {
      */
     public PresidentGameState(PresidentGameState masterGameState) {
         playedCards = new ArrayList<Card>();
-        for (int i = 0; i < masterGameState.getPlayedCards().size(); i++) {
-            playedCards.add(masterGameState.getPlayedCards().get(i));
+        for (Card c : masterGameState.playedCards) {
+            playedCards.add(new Card(c.getValue(), c.getSuit()));
         }
+
         players = new ArrayList<PlayerInfo>();
-        for (int i = 0; i < masterGameState.getPlayers().size(); i++) {
-            players.add(masterGameState.getPlayers().get(i));
+        for (PlayerInfo p : masterGameState.players) {
+            PlayerInfo toAdd = new PlayerInfo(p);
+            players.add(toAdd);
         }
+        
         currentSet = new ArrayList<Card>();
-        for (int i = 0; i < masterGameState.getCurrentSet().size(); i++) {
-            currentSet.add(masterGameState.getCurrentSet().get(i));
+        for (Card c : masterGameState.currentSet) {
+            currentSet.add(new Card(c.getValue(), c.getSuit()));
         }
+
         currentValid = new ArrayList<Card>();
+        for (Card c : masterGameState.currentValid) {
+            currentValid.add(new Card(c.getValue(), c.getSuit()));
+        }
+
         turn = masterGameState.getCurrentPlayer();
         prevTurn = masterGameState.getLastPlayed();
     }
