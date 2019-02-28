@@ -103,7 +103,7 @@ public class PresidentGameState implements Serializable {
             PlayerInfo toAdd = new PlayerInfo(p);
             players.add(toAdd);
         }
-        
+
         currentSet = new ArrayList<Card>();
         for (Card c : masterGameState.currentSet) {
             currentSet.add(new Card(c.getValue(), c.getSuit()));
