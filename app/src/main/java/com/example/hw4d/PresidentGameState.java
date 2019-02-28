@@ -345,7 +345,50 @@ public class PresidentGameState implements Serializable {
 
     @Override
     public String toString(){
-        String str = "MUST CHANGE";
+
+        /**Stringing played cards*/
+        String playedCards = "Played Cards:";
+        for(Card c : this.playedCards){
+            playedCards = playedCards + " " + c.getCardName();
+        }
+        playedCards = playedCards + "\n";
+
+        /**Current player's hand*/
+        String currentHand = "Current Player's Hand:";
+        for(Card c : this.currentPlayerHand){
+            currentHand = currentHand + " " + c.getCardName();
+        }
+        currentHand = currentHand + "" + "\n";
+
+        /**Current player's valid cards*/
+        String currentValid = "Current Player's Valid Cards:";
+        for(Card c : this.currentValid){
+            currentValid = currentValid + " " + c.getCardName();
+        }
+        currentValid = currentValid + "\n";
+
+        /**Stringing togther each player and the player's hand*/
+        String playerString = "";
+        String playerCards = "";
+        for(PlayerInfo p : players){
+            for(Card c : p.getHand()){
+                playerCards = playerCards + " " + c.getCardName();
+            }
+            playerString = playerString
+                    + "Name: " + p.getName()
+                    + "Rank: " + p.getRank()
+                    + "Score: " + p.getScore()
+                    + "\nCards:" + playerCards + "\n";
+            playerCards = "";
+        }
+
+
+
+        String str = "Current President Game State:\n"
+                + playedCards
+                + currentHand
+                + currentValid
+                + playerCards;
         return str;
     }
 }
