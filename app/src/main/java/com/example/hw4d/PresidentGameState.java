@@ -37,9 +37,9 @@ public class PresidentGameState implements Serializable {
     private int turn;
     private int prevTurn;
 
-    /** Discard and Deal Cards */
-    private Deck discardPile = new Deck(); // possible delete
-    private Deck dealPile = new Deck(); // possible delete
+    /**a deck*/
+    Deck deck;
+
 
     /** Number of Players in Game */
     private static int NUMPLAYERS = 5;
@@ -49,7 +49,7 @@ public class PresidentGameState implements Serializable {
      */
     public PresidentGameState() {
         /* Initialize deck */
-        Deck deck = new Deck();
+        deck = new Deck();
 
         /* MAKE AN EMPTY LIST OF CARDS FOR DISCARD PILE AND
         * EMPTY LIST OF PLAYERS */
