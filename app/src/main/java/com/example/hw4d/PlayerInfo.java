@@ -42,6 +42,15 @@ public class PlayerInfo {
         name = "No name";
     }
 
+    public PlayerInfo(PlayerInfo thePlayer) {
+        for (Card c : thePlayer.playerHand) {
+            playerHand.add(new Card(c.getValue(), c.getSuit()));
+        }
+        rank = thePlayer.rank;
+        score = thePlayer.score;
+        name = thePlayer.name;
+    }
+
     /** Returns Player's hand */
     public ArrayList<Card> getHand() { return playerHand; }
 

@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Button test = (Button) findViewById(R.id.runButton);
         test.setOnClickListener(this);
-        this.tv = (EditText) findViewById(R.id.editText);
+        this.tv = (EditText) findViewById(r.id.editText);
     }
 
     @Override
@@ -23,6 +23,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.tv.setText("");
 
         PresidentGameState firstInstance = new PresidentGameState();
+
+        PresidentGameState secondInstance = new PresidentGameState(firstInstance);
+
+        this.tv.append("Player 1 has passed his turn");
+        firstInstance.pass(0);
+
+        PresidentGameState thirdInstance = new PresidentGameState();
+
+        PresidentGameState fourthInstance = new PresidentGameState(thirdInstance);
+
+        this.tv.append(secondInstance.toString());
+        this.tv.append(fourthInstance.toString());
 
     }
     }

@@ -37,10 +37,6 @@ public class PresidentGameState implements Serializable {
     private int turn;
     private int prevTurn;
 
-    /** Discard and Deal Cards */
-    private Deck discardPile = new Deck(); // possible delete
-    private Deck dealPile = new Deck(); // possible delete
-
     /** Number of Players in Game */
     private static int NUMPLAYERS = 5;
 
@@ -94,18 +90,26 @@ public class PresidentGameState implements Serializable {
      */
     public PresidentGameState(PresidentGameState masterGameState) {
         playedCards = new ArrayList<Card>();
-        for (int i = 0; i < masterGameState.getPlayedCards().size(); i++) {
-            playedCards.add(masterGameState.getPlayedCards().get(i));
+        for (Card c : masterGameState.playedCards) {
+            playedCards.add(new Card(c.getValue(), c.getSuit()));
         }
+
         players = new ArrayList<PlayerInfo>();
-        for (int i = 0; i < masterGameState.getPlayers().size(); i++) {
-            players.add(masterGameState.getPlayers().get(i));
+        for (PlayerInfo p : masterGameState.players) {
+            PlayerInfo toAdd = new PlayerInfo(p);
+            players.add(toAdd);
         }
+
         currentSet = new ArrayList<Card>();
-        for (int i = 0; i < masterGameState.getCurrentSet().size(); i++) {
-            currentSet.add(masterGameState.getCurrentSet().get(i));
+        for (Card c : masterGameState.currentSet) {
+            currentSet.add(new Card(c.getValue(), c.getSuit()));
         }
+
         currentValid = new ArrayList<Card>();
+        for (Card c : masterGameState.currentValid) {
+            currentValid.add(new Card(c.getValue(), c.getSuit()));
+        }
+
         turn = masterGameState.getCurrentPlayer();
         prevTurn = masterGameState.getLastPlayed();
     }
@@ -148,34 +152,65 @@ public class PresidentGameState implements Serializable {
         prevTurn = in;
     }
     /* actions.txt methods */
+
     /**
      * trade
      * @return true (can trade) or false (cannot trade)
      */
     public boolean trade(){
         for(int i = 0; i < players.size(); i++){
+            ArrayList<Card> scumHand = null;
+            ArrayList<Card> viceScumHand = null;
+            ArrayList<Card> presidentHand = null;
+            ArrayList<Card> vicePresidentHand = null;
+
             if(players.get(i).getRank() == "President"){
+                 presidentHand =  players.get(i).getHand();
+                for(int findScum = 0; findScum < players.size(); findScum++){
+                    if(players.get(findScum).getRank() == "Scum"){
+                        scumHand = players.get(findScum).getHand();
+                    }
+                    for(int scumHandSize = 0; scumHandSize < scumHand.size(); scumHandSize++){
+                    }
+                }
+
+
+
+
                 return true;
             }
             else if(players.get(i).getRank() == "Vice President"){
                 return true;
             }
             else if(players.get(i).getRank() == "Scum"){
-                return true;
+                return false;
             }
             else if(players.get(i).getRank() == "Vice Scum"){
-                return true;
+                return false;
             }
         }
         return false;
     }
 
-    public boolean pass(int turn){
-        if(this.turn == turn){
-
-        }
-        return false;
+    /**
+     * quit
+     * @return true (player can quit game)
+     */
+    public boolean quit(){
+        return true;
     }
+
+    /**
+     * pass
+     * @return true (player can pass turn) or false (player cannot pass turn)
+     */
+    public boolean pass(int turn){
+        if(this.turn != turn){
+            return false;
+        }
+        return true;
+    }
+
 
     /**
      * setFinish
@@ -211,103 +246,6 @@ public class PresidentGameState implements Serializable {
         }
         return false;
     }
-
-//    public boolean selectCard(int playerIndex, int cardIndex) {
-//        if (playerIndex != turn) {
-//            return false;
-//        }
-//        Card card = this.getPlayers().get(playerIndex).getHand().get(cardIndex);
-//        if (currentValid.contains(card)) {
-//            return false;
-//        }
-//        if(currentSet.size() == 0) {
-//            for (int i = 0; i < currentSet.size(); i++) {
-//                if (card.getValue() == currentValid.get(i).getValue() | card.getFace() == "two"
-//                        || currentValid.get(i).getFace() == "two") {/* do nothing */} else {
-//                    return false;
-//                }
-//
-//            }
-//            currentValid.add(card);
-//            return true;
-//        }
-//        else {
-//            if (currentValid.size() < currentSet.size()) {
-//            if (currentValid.size() == 0) {
-//                for (int i = 0; i < currentSet.size(); i++) {
-//                    if (card.getValue() > currentSet.get(i).getValue() || card.getFace() == "two"
-//                            || currentSet.get(i).getFace() == "two") {
-//                        //continues if selected card either matches each card in the current set; is less than; or is a wild
-//                    } else {
-//                        return false;
-//                    }
-//                }
-//                currentValid.add(card);
-//                return true;
-//            } else {
-//                for (int i = 0; i < currentSet.size(); i++) {
-//                    if (card.getValue() > currentSet.get(i).getValue() || card.getFace() == "two" ||
-//                            currentSet.get(i).getFace() == "two") {
-//                        //continues if selected card either matches each card in the current set; is less than; or is a wild
-//                    } else {
-//                        return false;
-//                    }
-//                }
-//                for (int i = 0; i < currentValid.size(); i++) {
-//                    if (card.getValue() == currentValid.get(i).getValue() || card.getFace() == "two" ||
-//                            currentValid.get(i).getFace() == "two") {
-//                        //continues if selected card either matches each card in the player set or either is a wild
-//                    } else {
-//                        return false;
-//                    }
-//                }
-//                currentValid.add(card);
-//                return true;
-//            }
-//        } else {
-//            return false;
-//        }
-//        }
-//    }
-
-//    public boolean deselectCard(int playerIndex, int cardIndex){
-//        if(playerIndex != turn){
-//            return false;
-//        }
-//        if(currentValid.contains(this.getPlayers().get(playerIndex).getHand().get(cardIndex))){
-//            currentValid.remove(this.getPlayers().get(playerIndex).getHand().get(cardIndex));
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    public boolean passTurn(int index){
-//        if(index != turn){
-//            return false;
-//        }
-//        currentValid.clear();
-//        nextPlayer();
-//        while(players.get(turn).getHand().size() < 1){
-//            nextPlayer();
-//        }
-//        if(turn == prevTurn){
-//            ArrayList<Card> emptySet = new ArrayList<Card>();
-//            this.setCurrentSet(emptySet);
-//        }
-//        return true;
-//    }
-//
-//    public boolean playSet(int index){
-//        if(index != turn){
-//            return false;
-//        }
-//        ArrayList<Card> hand = this.getPlayers().get(index).getHand();
-//        int totalPlayers = this.getPlayers().size();
-//        if(currentValid.size() != currentSet.size() && currentSet.size() != 0){
-//            return false;
-//        }
-//        return true;
-//    }
 
     /** Updates turn */
     public void nextPlayer(){
@@ -351,8 +289,52 @@ public class PresidentGameState implements Serializable {
 
     @Override
     public String toString(){
-        String str = "MUST CHANGE";
+
+        /**Stringing played cards*/
+        String playedCards = "Played Cards:";
+        for(Card c : this.playedCards){
+            playedCards = playedCards + " " + c.getCardName();
+        }
+        playedCards = playedCards + "\n";
+
+        /**Current player's hand*/
+        String currentHand = "Current Player's Hand:";
+        for(Card c : this.currentPlayerHand){
+            currentHand = currentHand + " " + c.getCardName();
+        }
+        currentHand = currentHand + "" + "\n";
+
+        /**Current player's valid cards*/
+        String currentValid = "Current Player's Valid Cards:";
+        for(Card c : this.currentValid){
+            currentValid = currentValid + " " + c.getCardName();
+        }
+        currentValid = currentValid + "\n";
+
+        /**Stringing togther each player and the player's hand*/
+        String playerString = "";
+        String playerCards = "";
+        for(PlayerInfo p : players){
+            for(Card c : p.getHand()){
+                playerCards = playerCards + " " + c.getCardName();
+            }
+            playerString = playerString
+                    + "Name: " + p.getName()
+                    + "Rank: " + p.getRank()
+                    + "Score: " + p.getScore()
+                    + "\nCards:" + playerCards + "\n";
+            playerCards = "";
+        }
+
+
+
+        String str = "Current President Game State:\n"
+                + playedCards
+                + currentHand
+                + currentValid
+                + playerCards;
         return str;
     }
 }
+
 
