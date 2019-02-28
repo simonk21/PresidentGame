@@ -37,10 +37,6 @@ public class PresidentGameState implements Serializable {
     private int turn;
     private int prevTurn;
 
-    /** Discard and Deal Cards */
-    private Deck discardPile = new Deck(); // possible delete
-    private Deck dealPile = new Deck(); // possible delete
-
     /** Number of Players in Game */
     private static int NUMPLAYERS = 5;
 
@@ -148,6 +144,7 @@ public class PresidentGameState implements Serializable {
         prevTurn = in;
     }
     /* actions.txt methods */
+
     /**
      * trade
      * @return true (can trade) or false (cannot trade)
@@ -168,6 +165,25 @@ public class PresidentGameState implements Serializable {
             }
         }
         return false;
+    }
+
+    /**
+     * quit
+     * @return true (player can quit game)
+     */
+    public boolean quit(){
+        return true;
+    }
+
+    /**
+     * pass
+     * @return true (player can pass turn) or false (player cannot pass turn)
+     */
+    public boolean pass(int turn){
+        if(this.turn != turn){
+            return false;
+        }
+        return true;
     }
 
 
@@ -205,103 +221,6 @@ public class PresidentGameState implements Serializable {
         }
         return false;
     }
-
-//    public boolean selectCard(int playerIndex, int cardIndex) {
-//        if (playerIndex != turn) {
-//            return false;
-//        }
-//        Card card = this.getPlayers().get(playerIndex).getHand().get(cardIndex);
-//        if (currentValid.contains(card)) {
-//            return false;
-//        }
-//        if(currentSet.size() == 0) {
-//            for (int i = 0; i < currentSet.size(); i++) {
-//                if (card.getValue() == currentValid.get(i).getValue() | card.getFace() == "two"
-//                        || currentValid.get(i).getFace() == "two") {/* do nothing */} else {
-//                    return false;
-//                }
-//
-//            }
-//            currentValid.add(card);
-//            return true;
-//        }
-//        else {
-//            if (currentValid.size() < currentSet.size()) {
-//            if (currentValid.size() == 0) {
-//                for (int i = 0; i < currentSet.size(); i++) {
-//                    if (card.getValue() > currentSet.get(i).getValue() || card.getFace() == "two"
-//                            || currentSet.get(i).getFace() == "two") {
-//                        //continues if selected card either matches each card in the current set; is less than; or is a wild
-//                    } else {
-//                        return false;
-//                    }
-//                }
-//                currentValid.add(card);
-//                return true;
-//            } else {
-//                for (int i = 0; i < currentSet.size(); i++) {
-//                    if (card.getValue() > currentSet.get(i).getValue() || card.getFace() == "two" ||
-//                            currentSet.get(i).getFace() == "two") {
-//                        //continues if selected card either matches each card in the current set; is less than; or is a wild
-//                    } else {
-//                        return false;
-//                    }
-//                }
-//                for (int i = 0; i < currentValid.size(); i++) {
-//                    if (card.getValue() == currentValid.get(i).getValue() || card.getFace() == "two" ||
-//                            currentValid.get(i).getFace() == "two") {
-//                        //continues if selected card either matches each card in the player set or either is a wild
-//                    } else {
-//                        return false;
-//                    }
-//                }
-//                currentValid.add(card);
-//                return true;
-//            }
-//        } else {
-//            return false;
-//        }
-//        }
-//    }
-
-//    public boolean deselectCard(int playerIndex, int cardIndex){
-//        if(playerIndex != turn){
-//            return false;
-//        }
-//        if(currentValid.contains(this.getPlayers().get(playerIndex).getHand().get(cardIndex))){
-//            currentValid.remove(this.getPlayers().get(playerIndex).getHand().get(cardIndex));
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    public boolean passTurn(int index){
-//        if(index != turn){
-//            return false;
-//        }
-//        currentValid.clear();
-//        nextPlayer();
-//        while(players.get(turn).getHand().size() < 1){
-//            nextPlayer();
-//        }
-//        if(turn == prevTurn){
-//            ArrayList<Card> emptySet = new ArrayList<Card>();
-//            this.setCurrentSet(emptySet);
-//        }
-//        return true;
-//    }
-//
-//    public boolean playSet(int index){
-//        if(index != turn){
-//            return false;
-//        }
-//        ArrayList<Card> hand = this.getPlayers().get(index).getHand();
-//        int totalPlayers = this.getPlayers().size();
-//        if(currentValid.size() != currentSet.size() && currentSet.size() != 0){
-//            return false;
-//        }
-//        return true;
-//    }
 
     /** Updates turn */
     public void nextPlayer(){
