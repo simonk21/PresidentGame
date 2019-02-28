@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         PresidentGameState firstInstance = new PresidentGameState();
 
-        PresidentGameState secondInstance = new PresidentGameState(firstInstance,0);
-
     }
     }
 }

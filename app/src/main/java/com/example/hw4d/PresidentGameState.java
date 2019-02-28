@@ -170,6 +170,12 @@ public class PresidentGameState implements Serializable {
         return false;
     }
 
+    public boolean pass(int turn){
+        if(this.turn == turn){
+
+        }
+        return false;
+    }
 
     /**
      * setFinish
