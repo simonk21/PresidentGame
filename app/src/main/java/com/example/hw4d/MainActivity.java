@@ -26,11 +26,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         PresidentGameState secondInstance = new PresidentGameState(firstInstance);
 
+        this.tv.append("Player 1 has passed his turn");
+        firstInstance.pass(0);
+
         PresidentGameState thirdInstance = new PresidentGameState();
 
         PresidentGameState fourthInstance = new PresidentGameState(thirdInstance);
 
-        this.tv.setText(secondInstance.toString() + fourthInstance.toString());
+        this.tv.append(secondInstance.toString());
+        this.tv.append(fourthInstance.toString());
 
     }
     }
