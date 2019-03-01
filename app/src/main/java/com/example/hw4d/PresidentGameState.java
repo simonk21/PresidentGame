@@ -188,26 +188,35 @@ public class PresidentGameState implements Serializable {
                 if (players.get(i).getRank() == "President") {
                     presidentHand = players.get(i).getHand();
                     // Get the first smallest valued card in hand
-                    Card firstMinCardInHand = getMinCard(presidentHand);
-                    presidentHand.remove(firstMinCardInHand);
+                    Card firstMinCardInPresHand = getMinCard(presidentHand);
+                    presidentHand.remove(firstMinCardInPresHand);
                     // Get the second smallest valued card in hand.
-                    Card secondMinCardInHand = getMinCard(presidentHand);
-                    presidentHand.remove(firstMinCardInHand);
-                    presidentHand.remove(secondMinCardInHand);
+                    Card secondMinCardInPresHand = getMinCard(presidentHand);
+                    presidentHand.remove(secondMinCardInPresHand);
 
+                    Card firstMaxCardInScumHand = null;
+                    Card secondMaxCardInScumHand = null;
                     for (int findScum = 0; findScum < players.size(); findScum++) {
                         if (players.get(findScum).getRank() == "Scum") {
                             scumHand = players.get(findScum).getHand();
+
+                            firstMaxCardInScumHand = getMaxCard(scumHand);
+                            scumHand.remove(firstMaxCardInScumHand);
+
+                            secondMaxCardInScumHand = getMaxCard(scumHand);
+                            scumHand.remove(secondMaxCardInScumHand);
                         }
+
+                        scumHand.add(firstMinCardInPresHand);
+                        scumHand.add(secondMinCardInPresHand);
+                        presidentHand.add(firstMaxCardInScumHand);
+                        presidentHand.add(secondMaxCardInScumHand);
+
                     }
-                    return true;
                 } else if (players.get(i).getRank() == "Vice President") {
                     return true;
-                } else if (players.get(i).getRank() == "Vice Scum") {
-                    return false;
                 }
-            }
-           return true;
+            } return true; // Trade is a valid option.
         } else {
             /** If Round Start == False
              *  e.g. if the game is in play, trade is
