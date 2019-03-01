@@ -40,6 +40,9 @@ public class PresidentGameState implements Serializable {
     /** Number of Players in Game */
     private static int NUMPLAYERS = 5;
 
+    /** Used to check if its the start of the round or not */
+    private boolean roundStart = false;
+
     /**
      * PresidentGameState Constructor
      */
@@ -163,43 +166,84 @@ public class PresidentGameState implements Serializable {
     }
     /* actions.txt methods */
 
+    /** Set the round start to be false */
+    public void setRoundStart(boolean roundStart) {
+        this.roundStart = roundStart;
+    }
+
     /**
      * trade
      * @return true (can trade) or false (cannot trade)
      */
-    public boolean trade(){
-        for(int i = 0; i < players.size(); i++){
-            ArrayList<Card> scumHand = null;
-            ArrayList<Card> viceScumHand = null;
-            ArrayList<Card> presidentHand = null;
-            ArrayList<Card> vicePresidentHand = null;
+    public boolean trade() {
 
-            if(players.get(i).getRank() == "President"){
-                 presidentHand =  players.get(i).getHand();
-                for(int findScum = 0; findScum < players.size(); findScum++){
-                    if(players.get(findScum).getRank() == "Scum"){
-                        scumHand = players.get(findScum).getHand();
+        if (roundStart) {
+            for (int i = 0; i < players.size(); i++) {
+                ArrayList<Card> scumHand = null;
+                ArrayList<Card> viceScumHand = null;
+                ArrayList<Card> presidentHand = null;
+                ArrayList<Card> vicePresidentHand = null;
+
+
+                if (players.get(i).getRank() == "President") {
+                    presidentHand = players.get(i).getHand();
+                    // Get the first smallest valued card in hand
+                    Card firstMinCardInHand = getMinCard(presidentHand);
+                    presidentHand.remove(firstMinCardInHand);
+                    // Get the second smallest valued card in hand.
+                    Card secondMinCardInHand = getMinCard(presidentHand);
+                    presidentHand.remove(firstMinCardInHand);
+                    presidentHand.remove(secondMinCardInHand);
+
+                    for (int findScum = 0; findScum < players.size(); findScum++) {
+                        if (players.get(findScum).getRank() == "Scum") {
+                            scumHand = players.get(findScum).getHand();
+                        }
                     }
-                    for(int scumHandSize = 0; scumHandSize < scumHand.size(); scumHandSize++){
-                    }
+                    return true;
+                } else if (players.get(i).getRank() == "Vice President") {
+                    return true;
+                } else if (players.get(i).getRank() == "Vice Scum") {
+                    return false;
                 }
-
-
-
-
-                return true;
             }
-            else if(players.get(i).getRank() == "Vice President"){
-                return true;
-            }
-            else if(players.get(i).getRank() == "Scum"){
-                return false;
-            }
-            else if(players.get(i).getRank() == "Vice Scum"){
-                return false;
-            }
+           return true;
+        } else {
+            /** If Round Start == False
+             *  e.g. if the game is in play, trade is
+             *  not available so return false
+             */
+            return false;
         }
-        return false;
+
+    }
+
+    Card getMaxCard(ArrayList<Card> playerHand){
+        int max = 0; // Smallest reasonable number
+        int currentIndex = 0; // For Loop variable
+        Card maxCard = null;
+        for(Card c : playerHand){
+            if(max < playerHand.get(currentIndex).getValue()){
+                maxCard.setCardVal(c.getValue());
+                maxCard.setCardSuit(c.getSuit());
+            }
+            currentIndex++;
+        }
+        return maxCard;
+    }
+
+    Card getMinCard(ArrayList<Card> playerHand){
+        int min = 100; // Arbitrarily large number
+        int currentIndex = 0; // For Loop variable
+        Card minCard = null;
+        for(Card c : playerHand){
+            if(min > playerHand.get(currentIndex).getValue()){
+                minCard.setCardVal(c.getValue());
+                minCard.setCardSuit(c.getSuit());
+            }
+            currentIndex++;
+        }
+        return minCard;
     }
 
     /**
@@ -236,6 +280,15 @@ public class PresidentGameState implements Serializable {
                 players.get(i).setRank("President");
                 gameWon(players.get(i));
             }
+        }
+
+        /**
+         * If all players have played their cards,
+         * then the round is over and
+         * initialize the trade.
+         */
+        if(playersWithCards() == 0){
+            setRoundStart(true);
         }
         return true;
     }
