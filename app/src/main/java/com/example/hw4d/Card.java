@@ -91,6 +91,5 @@ public class Card implements Serializable {
     /** Returns card name and suit */
     public String getCardName() { return this.getFace() + "_" + this.getSuit(); }
 
-
 }
 

@@ -22,7 +22,6 @@ public class Deck implements Serializable {
     private static int DECKSIZE = 52;
     /* Holds Deck of Cards */
     private ArrayList<Card> presidentDeck;
-    private int playerCount;
 
     /**
      * Deck Constructor
@@ -31,6 +30,7 @@ public class Deck implements Serializable {
      * SUIT AND CARD VALUE
      */
     public Deck(){
+        presidentDeck = new ArrayList<>();
         String suit = "Default";
         for(int i = 0; i < 4; i++){
             if(i == 0){
@@ -53,11 +53,11 @@ public class Deck implements Serializable {
         Collections.shuffle(presidentDeck);
     }
 
-    public Deck(int numPlayers){
-        playerCount = numPlayers;
-        presidentDeck = new ArrayList<>();
-        String suit = "Default";
-    }
+//    public Deck(int numPlayers){
+//        playerCount = numPlayers;
+//        presidentDeck = new ArrayList<>();
+//        String suit = "Default";
+//    }
 
 
     public ArrayList<Card> getDeck() { return presidentDeck; }

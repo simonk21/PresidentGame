@@ -15,11 +15,9 @@ import java.util.ArrayList;
  *
  */
 public class PresidentGameState implements Serializable {
-
+    private int rankCount = 0;
     /** Cards Played Already (Discard Pile) */
     private ArrayList<Card> playedCards;
-
-    private int rankCount;
 
     /** Players */
     private ArrayList<PlayerInfo> players;
@@ -38,7 +36,7 @@ public class PresidentGameState implements Serializable {
     private int prevTurn;
 
     /** Number of Players in Game */
-    private static int NUMPLAYERS = 5;
+    private static int NUMPLAYERS = 4;
 
     /**
      * PresidentGameState Constructor
@@ -156,7 +154,7 @@ public class PresidentGameState implements Serializable {
     public void setLastPlayed(int in) {
         prevTurn = in;
     }
-    /* actions.txt methods */
+
 
     private int find(String rank){
         int index = -1;
@@ -167,7 +165,7 @@ public class PresidentGameState implements Serializable {
         }
         return index;
     }
-
+    /* actions.txt methods */
     /**
      * trade
      * @param turn the current player's turn
@@ -175,6 +173,7 @@ public class PresidentGameState implements Serializable {
      * @return true (able to trade), false (unable to trade)
      */
     public boolean trade(int turn, Card toTrade){
+        if(!setFinish()) { return false; }
         ArrayList<Card> scumHand = null;
         ArrayList<Card> viceScumHand = null;
         ArrayList<Card> presidentHand = null;
@@ -234,7 +233,8 @@ public class PresidentGameState implements Serializable {
      * quit
      * @return true (player can quit game)
      */
-    public boolean quit(){
+    public boolean quit(int turn){
+        players.remove(turn);
         return true;
     }
 
@@ -258,24 +258,54 @@ public class PresidentGameState implements Serializable {
         return true;
     }
 
+    public boolean playCard(int turn, Card in){
+
+    }
     /**
      * setFinish
      * Checks if someone won the game
      * @return
      */
     public boolean setFinish() {
-        for(int i = 0; i < players.size(); i++){
-            if(players.get(i).getHand().size() > 0){
-                return false;
-            }
-            else{
-                players.get(i).setRank("President");
-                gameWon(players.get(i));
-            }
+        if(checkPresident(prevTurn)){
+
         }
-        return true;
+        return false;
     }
 
+    public boolean checkPresident(int turn) {
+        if (players.get(turn).getHand().size() == 0 && rankCount == 0) {
+            players.get(turn).setRank("President");
+            rankCount++;
+            return true;
+        }
+        return false;
+    }
+    public boolean checkVP(int turn){
+        if(players.get(turn).getHand().size() == 0 && rankCount == 1){
+            players.get(turn).setRank("Vice President");
+            rankCount++;
+            return true;
+        }
+        return false;
+    }
+    public boolean checkVScum(int turn){
+        if(players.get(turn).getHand().size() == 0 && rankCount == 2){
+            players.get(turn).setRank("Vice Scum");
+            rankCount++;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkScum(int turn){
+        if(players.get(turn).getHand().size() > 0 && rankCount == 3){
+            players.get(turn).setRank("Scum");
+            rankCount++;
+            return true;
+        }
+        return false;
+    }
     /**
      * gameWon
      * Checks if player won game
@@ -314,24 +344,24 @@ public class PresidentGameState implements Serializable {
         return count;
     }
 
-    /** Redeals Cards after each set */
-    public void reDeal(){
-        for(int i = 0; i < players.size(); i++){
-            players.get(i).getHand().clear();
-        }
-        Deck deck = new Deck(players.size());
-        int j = 0;
-        int size = deck.size();
-        for(int i = 0; i < size; i++){
-            players.get(i).addCard(deck.remove(0));
-            if(i < players.size() - 1){
-                j++;
-            }
-            else{
-                j = 0;
-            }
-        }
-    }
+//    /** Redeals Cards after each set */
+//    public void reDeal(){
+//        for(int i = 0; i < players.size(); i++){
+//            players.get(i).getHand().clear();
+//        }
+//        Deck deck = new Deck(players.size());
+//        int j = 0;
+//        int size = deck.size();
+//        for(int i = 0; i < size; i++){
+//            players.get(i).addCard(deck.remove(0));
+//            if(i < players.size() - 1){
+//                j++;
+//            }
+//            else{
+//                j = 0;
+//            }
+//        }
+//    }
 
     @Override
     public String toString(){
