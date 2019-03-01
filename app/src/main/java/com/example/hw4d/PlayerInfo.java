@@ -28,7 +28,7 @@ public class PlayerInfo {
     private String name;
 
     /** MAX CARDS a player can have */
-    /* Standard 52 deck, MAX: 5 players */
+    /* Standard 52 deck, MAX: 4 players */
     private static int MAX_CARDS = 13;
 
     /**
@@ -42,6 +42,10 @@ public class PlayerInfo {
         name = "No name";
     }
 
+    /**
+     * PlayerInfo Copy Constructor
+     * @param thePlayer
+     */
     public PlayerInfo(PlayerInfo thePlayer) {
         playerHand = new ArrayList<>(MAX_CARDS);
         for (Card c : thePlayer.playerHand) {
@@ -64,8 +68,11 @@ public class PlayerInfo {
     /** Returns Player's Name */
     public String getName() { return name; }
 
-    public void setHand(ArrayList<Card> in) { playerHand = in; }
+    public void setName(String name){
+        this.name = name;
+    }
 
+//    public void setHand(ArrayList<Card> in) { playerHand = in; }
 
     public void addCard(Card in) { playerHand.add(in); }
 
@@ -89,10 +96,10 @@ public class PlayerInfo {
      * @param playersRank the new rank of player
      */
     public void addScore(String playersRank){
-        if(playersRank == "President"){
+        if(playersRank.equals("President")){
             score += 2;
         }
-        else if(playersRank == "Vice President"){
+        else if(playersRank.equals("Vice President")){
             score += 1;
         }
         else{/* other players don't receive points */}
@@ -105,6 +112,15 @@ public class PlayerInfo {
      */
     public void setRank(String newRank){
         rank = newRank;
+    }
+
+    /**
+     * resetRank
+     * Should reset player's rank to nothing
+     * Used after trading
+     */
+    public void resetRank(){
+        this.setRank("");
     }
 
 }
