@@ -49,8 +49,8 @@ public class PresidentGameState implements Serializable {
 
         /* MAKE AN EMPTY LIST OF CARDS FOR DISCARD PILE AND
         * EMPTY LIST OF PLAYERS */
-        playedCards = new ArrayList<Card>();
-        players = new ArrayList<PlayerInfo>();
+        playedCards = new ArrayList<>();
+        players = new ArrayList<>();
 
         /* CREATE NEW PLAYER AND ADD TO LIST */
         for (int i = 0; i < NUMPLAYERS; i++) {
@@ -63,8 +63,9 @@ public class PresidentGameState implements Serializable {
         int size = deck.size();
 
         for (int i = 0; i < size; i++) {
-            players.get(count).addCard(deck.remove(0));
-            if (count < players.size()) {
+            players.get(count).addCard(deck.getDeck().get(0));
+            deck.remove(0);
+            if (count < players.size() - 1 ) {
                 count++;
             } else {
                 count = 0;

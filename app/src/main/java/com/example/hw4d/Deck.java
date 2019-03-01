@@ -30,6 +30,7 @@ public class Deck implements Serializable {
      * SUIT AND CARD VALUE
      */
     public Deck(){
+        presidentDeck = new ArrayList<>();
         String suit = "Default";
         for(int i = 0; i < 4; i++){
             if(i == 0){
