@@ -150,7 +150,7 @@ public class PresidentGameState implements Serializable {
 
     public void setPlayerSet(ArrayList<Card>  in) { currentValid = in; }
 
-    /** Sets whose turn it is */
+    /** Sets the player, the hand, and valid cards */
     public void setCurrentPlayer(int in) {
         turn = in;
         currentPlayerHand = players.get(turn).getHand();
