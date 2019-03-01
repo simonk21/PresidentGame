@@ -398,6 +398,88 @@ public class PresidentGameState implements Serializable {
                 + playerCards;
         return str;
     }
+
+    private int find(String rank) {
+        int index = -1;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getRank().equals(rank)) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    public boolean trade(int turn, Card toTrade) {
+        if (!setFinish()) {
+            return false;
+        }
+        ArrayList<Card> scumHand = null;
+        ArrayList<Card> viceScumHand = null;
+        ArrayList<Card> presidentHand = null;
+        ArrayList<Card> vicePresidentHand = null;
+        if (players.get(turn).getRank().equals("President")) {
+            scumHand.add(toTrade);
+            if (scumHand.size() != 2) {
+                scumHand.clear();
+                return false;
+            }
+            players.get(turn).removeCard(toTrade);
+            int index = find("Scum");
+            players.get(index).addCard(toTrade);
+            scumHand.clear();
+            return true;
+        } else if (players.get(turn).getRank().equals("Vice President")) {
+            viceScumHand.add(toTrade);
+            if (viceScumHand.size() != 1) {
+                viceScumHand.clear();
+                return false;
+            }
+            players.get(turn).removeCard(toTrade);
+            int index = find("Vice Scum");
+            players.get(index).addCard(toTrade);
+            viceScumHand.clear();
+            return true;
+        } else if (players.get(turn).getRank().equals("Vice Scum")) {
+            vicePresidentHand.add(toTrade);
+            if (vicePresidentHand.size() != 1) {
+                vicePresidentHand.clear();
+                return false;
+            }
+            players.get(turn).removeCard(toTrade);
+            int index = find("Vice President");
+            players.get(index).addCard(toTrade);
+            vicePresidentHand.clear();
+            return true;
+        } else if (players.get(turn).getRank().equals("Scum")) {
+            presidentHand.add(toTrade);
+            if (presidentHand.size() != 2) {
+                presidentHand.clear();
+                return false;
+            }
+            players.get(turn).removeCard(toTrade);
+            int index = find("President");
+            players.get(index).addCard(toTrade);
+            presidentHand.clear();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * quit
+     *
+     * @return true (player can quit game)
+     */
+    public boolean quit(int turn) {
+        players.remove(turn);
+        return true;
+    }
+
+
+    public boolean playCard(int turn, Card in) {
+        return true;
+    }
+
 }
 
 
