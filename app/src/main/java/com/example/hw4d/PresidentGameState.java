@@ -58,13 +58,13 @@ public class PresidentGameState implements Serializable {
             players.add(temp);
         }
 
-        /* CREATE'S PLAYER'S HAND */
-        /** POSSIBLY NEED TO CHANGE */
+        /** CREATE'S PLAYER'S HAND */
         int count = 0;
         int size = deck.size();
+
         for (int i = 0; i < size; i++) {
             players.get(count).addCard(deck.remove(0));
-            if (count < players.size() - 1) {
+            if (count < players.size()) {
                 count++;
             } else {
                 count = 0;
@@ -108,6 +108,11 @@ public class PresidentGameState implements Serializable {
         currentValid = new ArrayList<Card>();
         for (Card c : masterGameState.currentValid) {
             currentValid.add(new Card(c.getValue(), c.getSuit()));
+        }
+
+        currentPlayerHand = new ArrayList<Card>();
+        for (Card c : masterGameState.currentPlayerHand) {
+            currentPlayerHand.add(new Card(c.getValue(), c.getSuit()));
         }
 
         turn = masterGameState.getCurrentPlayer();
