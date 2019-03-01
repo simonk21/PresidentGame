@@ -73,8 +73,8 @@ public class PresidentGameState implements Serializable {
         }
 
         /* Initializes current set, current valid */
-        currentSet = new ArrayList<Card>();
-        currentValid = new ArrayList<Card>();
+        currentSet = new ArrayList<>();
+        currentValid = new ArrayList<>();
 
         /* Initializes player with index 0 to start */
         turn = 0;
@@ -90,30 +90,32 @@ public class PresidentGameState implements Serializable {
      * @param masterGameState the master game state
      */
     public PresidentGameState(PresidentGameState masterGameState) {
-        playedCards = new ArrayList<Card>();
+        playedCards = new ArrayList<>();
         for (Card c : masterGameState.playedCards) {
             playedCards.add(new Card(c.getValue(), c.getSuit()));
         }
 
-        players = new ArrayList<PlayerInfo>();
+        players = new ArrayList<>();
         for (PlayerInfo p : masterGameState.players) {
             PlayerInfo toAdd = new PlayerInfo(p);
             players.add(toAdd);
         }
 
-        currentSet = new ArrayList<Card>();
+        currentSet = new ArrayList<>();
         for (Card c : masterGameState.currentSet) {
             currentSet.add(new Card(c.getValue(), c.getSuit()));
         }
 
-        currentValid = new ArrayList<Card>();
+        currentValid = new ArrayList<>();
         for (Card c : masterGameState.currentValid) {
             currentValid.add(new Card(c.getValue(), c.getSuit()));
         }
 
-        currentPlayerHand = new ArrayList<Card>();
-        for (Card c : masterGameState.currentPlayerHand) {
-            currentPlayerHand.add(new Card(c.getValue(), c.getSuit()));
+        currentPlayerHand = new ArrayList<>();
+        if (masterGameState.currentPlayerHand != null) {
+            for (Card c : masterGameState.currentPlayerHand) {
+                currentPlayerHand.add(new Card(c.getValue(), c.getSuit()));
+            }
         }
 
         turn = masterGameState.getCurrentPlayer();
@@ -151,6 +153,8 @@ public class PresidentGameState implements Serializable {
     /** Sets whose turn it is */
     public void setCurrentPlayer(int in) {
         turn = in;
+        currentPlayerHand = players.get(turn).getHand();
+        currentValid = players.get(turn).getHand();
     }
 
     /** Sets previous player */

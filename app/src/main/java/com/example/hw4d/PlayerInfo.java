@@ -36,13 +36,14 @@ public class PlayerInfo {
      * Initializes Player's information
      */
     public PlayerInfo(){
-        playerHand = new ArrayList<Card>(MAX_CARDS);
+        playerHand = new ArrayList<>(MAX_CARDS);
         rank = "No rank";
         score = 0;
         name = "No name";
     }
 
     public PlayerInfo(PlayerInfo thePlayer) {
+        playerHand = new ArrayList<>(MAX_CARDS);
         for (Card c : thePlayer.playerHand) {
             playerHand.add(new Card(c.getValue(), c.getSuit()));
         }
