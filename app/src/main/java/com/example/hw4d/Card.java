@@ -1,5 +1,7 @@
 package com.example.hw4d;
 
+import java.io.Serializable;
+
 /**
  * Card.java
  *
@@ -11,7 +13,7 @@ package com.example.hw4d;
  * @version February 2019
  *
  */
-public class Card {
+public class Card implements Serializable {
     /** Descriptive variable for the card */
     /* 0-7: numbers 8: Jack, 9: Queen, 10: King, 11: A, 12: 2 */
     private int cardVal;

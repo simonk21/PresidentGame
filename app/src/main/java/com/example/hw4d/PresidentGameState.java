@@ -164,17 +164,34 @@ public class PresidentGameState implements Serializable {
      */
     public boolean trade(){
         for(int i = 0; i < players.size(); i++){
+            ArrayList<Card> scumHand = null;
+            ArrayList<Card> viceScumHand = null;
+            ArrayList<Card> presidentHand = null;
+            ArrayList<Card> vicePresidentHand = null;
+
             if(players.get(i).getRank() == "President"){
+                 presidentHand =  players.get(i).getHand();
+                for(int findScum = 0; findScum < players.size(); findScum++){
+                    if(players.get(findScum).getRank() == "Scum"){
+                        scumHand = players.get(findScum).getHand();
+                    }
+                    for(int scumHandSize = 0; scumHandSize < scumHand.size(); scumHandSize++){
+                    }
+                }
+
+
+
+
                 return true;
             }
             else if(players.get(i).getRank() == "Vice President"){
                 return true;
             }
             else if(players.get(i).getRank() == "Scum"){
-                return true;
+                return false;
             }
             else if(players.get(i).getRank() == "Vice Scum"){
-                return true;
+                return false;
             }
         }
         return false;
@@ -324,4 +341,5 @@ public class PresidentGameState implements Serializable {
         return str;
     }
 }
+
 

@@ -1,5 +1,6 @@
 package com.example.hw4d;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +17,7 @@ import java.util.Random;
  * @version February 2019
  *
  */
-public class Deck {
+public class Deck implements Serializable {
     private static int SUITDECKSIZE = 13;
     /* Holds Deck of Cards */
     private ArrayList<Card> presidentDeck;
