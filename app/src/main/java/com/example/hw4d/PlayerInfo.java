@@ -42,6 +42,10 @@ public class PlayerInfo {
         name = "No name";
     }
 
+    /**
+     * PlayerInfo Copy Constructor
+     * @param thePlayer
+     */
     public PlayerInfo(PlayerInfo thePlayer) {
         for (Card c : thePlayer.playerHand) {
             playerHand.add(new Card(c.getValue(), c.getSuit()));
@@ -65,7 +69,6 @@ public class PlayerInfo {
 
     public void setHand(ArrayList<Card> in) { playerHand = in; }
 
-
     public void addCard(Card in) { playerHand.add(in); }
 
     /**
@@ -88,10 +91,10 @@ public class PlayerInfo {
      * @param playersRank the new rank of player
      */
     public void addScore(String playersRank){
-        if(playersRank == "President"){
+        if(playersRank.equals("President")){
             score += 2;
         }
-        else if(playersRank == "Vice President"){
+        else if(playersRank.equals("Vice President")){
             score += 1;
         }
         else{/* other players don't receive points */}

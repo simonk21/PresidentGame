@@ -12,9 +12,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button test = (Button) findViewById(R.id.runButton);
+        Button test = findViewById(R.id.runButton);
         test.setOnClickListener(this);
-        this.tv = (EditText) findViewById(r.id.editText);
+        this.tv = findViewById(R.id.editText);
     }
 
     @Override
@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         this.tv.append("Player 1 has passed his turn");
         firstInstance.pass(0);
+
+        firstInstance.reDeal();
+
+        Card card = firstInstance.getPlayers().get(0).getHand().get(0);
+        firstInstance.trade(0,card);
 
         PresidentGameState thirdInstance = new PresidentGameState();
 
