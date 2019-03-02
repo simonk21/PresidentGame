@@ -408,7 +408,7 @@ public class PresidentGameState implements Serializable {
         return str;
     }
 
-    private int find(String rank) {
+    public int find(String rank) {
         int index = -1;
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getRank().equals(rank)) {
@@ -418,9 +418,12 @@ public class PresidentGameState implements Serializable {
         return index;
     }
 
-    public boolean trade(int turn, Card toTrade) {
-        if (!setFinish()) {
-            return false;
+    public boolean trade(int turn) {
+        return true;
+
+        /**Code written for reference in the future*/
+        /*if (!setFinish()) {
+           return false;
         }
         ArrayList<Card> scumHand = null;
         ArrayList<Card> viceScumHand = null;
@@ -471,7 +474,7 @@ public class PresidentGameState implements Serializable {
             presidentHand.clear();
             return true;
         }
-        return false;
+        return false;*/
     }
 
     /**
@@ -485,7 +488,7 @@ public class PresidentGameState implements Serializable {
     }
 
 
-    public boolean playCard(int turn, Card in) {
+    public boolean playCard(int turn) {
         return true;
     }
 
