@@ -51,7 +51,7 @@ public class PresidentGameState implements Serializable {
         Deck deck = new Deck();
 
         /* MAKE AN EMPTY LIST OF CARDS FOR DISCARD PILE AND
-        * EMPTY LIST OF PLAYERS */
+         * EMPTY LIST OF PLAYERS */
         playedCards = new ArrayList<>();
         players = new ArrayList<>();
 
@@ -176,7 +176,11 @@ public class PresidentGameState implements Serializable {
      * @return true (can trade) or false (cannot trade)
      */
     public boolean trade() {
+        /**
+         *  Check if the round is just starting and is not the first
+         *  round of the game, if it isn't, initialize trade
 
+         */
         if (roundStart) {
             for (int i = 0; i < players.size(); i++) {
                 ArrayList<Card> scumHand = null;
@@ -227,6 +231,11 @@ public class PresidentGameState implements Serializable {
 
     }
 
+    /**
+     *  Method to find the maximum valued card in the players hand
+     * @param playerHand
+     * @return max card in player hand
+     */
     Card getMaxCard(ArrayList<Card> playerHand){
         int max = 0; // Smallest reasonable number
         int currentIndex = 0; // For Loop variable
@@ -241,6 +250,11 @@ public class PresidentGameState implements Serializable {
         return maxCard;
     }
 
+    /**
+     * Method to find the maximum valued card in the players hand
+     * @param playerHand
+     * @return
+     */
     Card getMinCard(ArrayList<Card> playerHand){
         int min = 100; // Arbitrarily large number
         int currentIndex = 0; // For Loop variable
@@ -418,62 +432,6 @@ public class PresidentGameState implements Serializable {
         return index;
     }
 
-    public boolean trade(int turn, Card toTrade) {
-        if (!setFinish()) {
-            return false;
-        }
-        ArrayList<Card> scumHand = null;
-        ArrayList<Card> viceScumHand = null;
-        ArrayList<Card> presidentHand = null;
-        ArrayList<Card> vicePresidentHand = null;
-        if (players.get(turn).getRank().equals("President")) {
-            scumHand.add(toTrade);
-            if (scumHand.size() != 2) {
-                scumHand.clear();
-                return false;
-            }
-            players.get(turn).removeCard(toTrade);
-            int index = find("Scum");
-            players.get(index).addCard(toTrade);
-            scumHand.clear();
-            return true;
-        } else if (players.get(turn).getRank().equals("Vice President")) {
-            viceScumHand.add(toTrade);
-            if (viceScumHand.size() != 1) {
-                viceScumHand.clear();
-                return false;
-            }
-            players.get(turn).removeCard(toTrade);
-            int index = find("Vice Scum");
-            players.get(index).addCard(toTrade);
-            viceScumHand.clear();
-            return true;
-        } else if (players.get(turn).getRank().equals("Vice Scum")) {
-            vicePresidentHand.add(toTrade);
-            if (vicePresidentHand.size() != 1) {
-                vicePresidentHand.clear();
-                return false;
-            }
-            players.get(turn).removeCard(toTrade);
-            int index = find("Vice President");
-            players.get(index).addCard(toTrade);
-            vicePresidentHand.clear();
-            return true;
-        } else if (players.get(turn).getRank().equals("Scum")) {
-            presidentHand.add(toTrade);
-            if (presidentHand.size() != 2) {
-                presidentHand.clear();
-                return false;
-            }
-            players.get(turn).removeCard(toTrade);
-            int index = find("President");
-            players.get(index).addCard(toTrade);
-            presidentHand.clear();
-            return true;
-        }
-        return false;
-    }
-
     /**
      * quit
      *
@@ -490,5 +448,3 @@ public class PresidentGameState implements Serializable {
     }
 
 }
-
-
