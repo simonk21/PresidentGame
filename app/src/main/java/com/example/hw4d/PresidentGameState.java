@@ -18,28 +18,21 @@ import java.util.Collections;
  */
 public class PresidentGameState implements Serializable {
 
+    /** Number of Players in Game */
+    private static int NUMPLAYERS = 5;
     /** Cards Played Already like Discard Pile */
     private ArrayList<Card> playedCards;
-
     /** Players */
     private ArrayList<PlayerInfo> players;
-
     /** Current Played Cards */
     private ArrayList<Card> currentSet;
-
     /** Used to check if current player's set is valid */
     private ArrayList<Card> currentValid;
-
     /** Current Player's hand */
     private ArrayList<Card> currentPlayerHand;
-
     /** whose turn it is and who previously played */
     private int turn;
     private int prevTurn;
-
-    /** Number of Players in Game */
-    private static int NUMPLAYERS = 5;
-
     /** Used to check if its the start of the round or not */
     private boolean roundStart = false;
 
@@ -128,30 +121,25 @@ public class PresidentGameState implements Serializable {
     /** Returns played cards or discard pile */
     public ArrayList<Card> getPlayedCards() { return playedCards; }
 
+    /** */
+    public void setPlayedCards(ArrayList<Card> in) { playedCards = in; }
+
     /** Returns the Player's Array list with their information */
     public ArrayList<PlayerInfo> getPlayers() { return players; }
 
+    public void setPlayers(ArrayList<PlayerInfo> in) { players = in; }
+
     /** Returns Current Set */
     public ArrayList<Card> getCurrentSet() { return currentSet; }
+
+    /** Sets the current set */
+    public void setCurrentSet(ArrayList<Card> in) { currentSet = in; }
 
     /** Returns if move is valid */
     public ArrayList<Card> getCurrentValid() { return currentValid; }
 
     /** Returns whose turn it is */
     public int getCurrentPlayer() { return turn; }
-
-    /** Returns the turn of previous player */
-    public int getLastPlayed() { return prevTurn; }
-
-    /** */
-    public void setPlayedCards(ArrayList<Card> in) { playedCards = in; }
-
-    public void setPlayers(ArrayList<PlayerInfo> in) { players = in; }
-
-    /** Sets the current set */
-    public void setCurrentSet(ArrayList<Card> in) { currentSet = in; }
-
-    public void setPlayerSet(ArrayList<Card>  in) { currentValid = in; }
 
     /** Sets the player, the hand, and valid cards */
     public void setCurrentPlayer(int in) {
@@ -160,10 +148,15 @@ public class PresidentGameState implements Serializable {
         currentValid = players.get(turn).getHand();
     }
 
+    /** Returns the turn of previous player */
+    public int getLastPlayed() { return prevTurn; }
+
     /** Sets previous player */
     public void setLastPlayed(int in) {
         prevTurn = in;
     }
+
+    public void setPlayerSet(ArrayList<Card>  in) { currentValid = in; }
     /* actions.txt methods */
 
     /** Set the round start to be false */
@@ -340,25 +333,11 @@ public class PresidentGameState implements Serializable {
         return count;
     }
 
-    /** Redeals Cards after each set */
-    /*public void reDeal(){
-        for(int i = 0; i < players.size(); i++){
-            players.get(i).getHand().clear();
-        }
-       Deck deck = new Deck(players.size());
-        int j = 0;
-        int size = deck.size();
-        for(int i = 0; i < size; i++){
-            players.get(i).addCard(deck.remove(0));
-            if(i < players.size() - 1){
-                j++;
-            }
-            else{
-                j = 0;
-            }
-        }
-    }*/
-
+    /**
+     * toString
+     *
+     * @return String (string of gamestate)
+     */
     @Override
     public String toString(){
 
@@ -416,65 +395,6 @@ public class PresidentGameState implements Serializable {
             }
         }
         return index;
-    }
-
-    public boolean trade(int turn) {
-        return true;
-
-        /**Code written for reference in the future*/
-        /*if (!setFinish()) {
-           return false;
-        }
-        ArrayList<Card> scumHand = null;
-        ArrayList<Card> viceScumHand = null;
-        ArrayList<Card> presidentHand = null;
-        ArrayList<Card> vicePresidentHand = null;
-        if (players.get(turn).getRank().equals("President")) {
-            scumHand.add(toTrade);
-            if (scumHand.size() != 2) {
-                scumHand.clear();
-                return false;
-            }
-            players.get(turn).removeCard(toTrade);
-            int index = find("Scum");
-            players.get(index).addCard(toTrade);
-            scumHand.clear();
-            return true;
-        } else if (players.get(turn).getRank().equals("Vice President")) {
-            viceScumHand.add(toTrade);
-            if (viceScumHand.size() != 1) {
-                viceScumHand.clear();
-                return false;
-            }
-            players.get(turn).removeCard(toTrade);
-            int index = find("Vice Scum");
-            players.get(index).addCard(toTrade);
-            viceScumHand.clear();
-            return true;
-        } else if (players.get(turn).getRank().equals("Vice Scum")) {
-            vicePresidentHand.add(toTrade);
-            if (vicePresidentHand.size() != 1) {
-                vicePresidentHand.clear();
-                return false;
-            }
-            players.get(turn).removeCard(toTrade);
-            int index = find("Vice President");
-            players.get(index).addCard(toTrade);
-            vicePresidentHand.clear();
-            return true;
-        } else if (players.get(turn).getRank().equals("Scum")) {
-            presidentHand.add(toTrade);
-            if (presidentHand.size() != 2) {
-                presidentHand.clear();
-                return false;
-            }
-            players.get(turn).removeCard(toTrade);
-            int index = find("President");
-            players.get(index).addCard(toTrade);
-            presidentHand.clear();
-            return true;
-        }
-        return false;*/
     }
 
     /**

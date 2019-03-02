@@ -28,8 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         firstInstance.setCurrentPlayer(0);
         this.tv.append("Player 1 has Traded with Player 5(2_spades and 2_diamonds with 3_spades and 3_diamonds)\n");
-        firstInstance.trade(0);
-        firstInstance.trade(0);
+        firstInstance.trade();
 
         this.tv.append("Player 1 has passed\n");
         firstInstance.pass(0);
