@@ -202,15 +202,34 @@ public class PresidentGameState implements Serializable {
 
                             secondMaxCardInScumHand = getMaxCard(scumHand);
                             scumHand.remove(secondMaxCardInScumHand);
+
+                            scumHand.add(firstMinCardInPresHand);
+                            scumHand.add(secondMinCardInPresHand);
+                            presidentHand.add(firstMaxCardInScumHand);
+                            presidentHand.add(secondMaxCardInScumHand);
+
                         }
-
-                        scumHand.add(firstMinCardInPresHand);
-                        scumHand.add(secondMinCardInPresHand);
-                        presidentHand.add(firstMaxCardInScumHand);
-                        presidentHand.add(secondMaxCardInScumHand);
-
                     }
                 } else if (players.get(i).getRank() == "Vice President") {
+                    vicePresidentHand = players.get(i).getHand();
+
+                    // Get the lowest valued card in hand
+                    Card firstCardInVPHand = getMinCard(vicePresidentHand);
+                    vicePresidentHand.remove(firstCardInVPHand);
+
+                    Card firstCardInViceScumHand = null;
+                    for (int findViceScum = 0; findViceScum < players.size(); findViceScum++) {
+                        if (players.get(findViceScum).getRank() == "Vice Scum") {
+                            viceScumHand = players.get(findViceScum).getHand();
+
+                            firstCardInViceScumHand = getMaxCard(scumHand);
+                            viceScumHand.remove(firstCardInViceScumHand);
+
+                            viceScumHand.add(firstCardInVPHand);
+                            vicePresidentHand.add(firstCardInViceScumHand);
+                        }
+                    }
+
                     return true;
                 }
             } return true; // Trade is a valid option.
