@@ -33,11 +33,25 @@ public class Card implements Serializable {
         this.cardSuit = cardSuit;
     }
 
+    /** Setter / Getter for Card value specifically for
+     *  the trade function
+     */
+    public void setCardVal(int cardVal) {
+        this.cardVal = cardVal;
+    }
+
+    public void setCardSuit(String cardSuit) {
+        this.cardSuit = cardSuit;
+    }
+
     /** Returns the card's value */
     public int getValue() { return cardVal; }
 
     /** Returns the card's suit */
     public String getSuit() { return cardSuit; }
+
+
+
 
     /**
      * getFace
