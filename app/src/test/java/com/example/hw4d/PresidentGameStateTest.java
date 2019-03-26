@@ -34,8 +34,13 @@ public class PresidentGameStateTest {
     public void getCurrentValid() {
     }
 
+    /** vinoya21 */
     @Test
     public void getCurrentPlayer() {
+        PresidentGameState gs = new PresidentGameState();
+        assertEquals(0, gs.getCurrentPlayer());
+        gs.nextPlayer();
+        assertEquals(1, gs.getCurrentPlayer());
     }
 
     @Test
@@ -86,17 +91,30 @@ public class PresidentGameStateTest {
     public void gameWon() {
     }
 
+    /** vinoya21 */
     @Test
     public void nextPlayer() {
+        PresidentGameState gs = new PresidentGameState();
+        assertEquals(0, gs.getCurrentPlayer());
+        gs.nextPlayer();
+        assertEquals(1, gs.getCurrentPlayer());
+        gs.nextPlayer();
+        assertEquals(2, gs.getCurrentPlayer());
+        gs.nextPlayer();
+        assertEquals(3, gs.getCurrentPlayer());
+        gs.nextPlayer();
+        assertEquals(4, gs.getCurrentPlayer());
+        gs.nextPlayer();
+        assertEquals(0, gs.getCurrentPlayer());
     }
 
     @Test
     public void playersWithCards() {
     }
 
-    @Test
+    /*@Test
     public void toString() {
-    }
+    }*/
 
     @Test
     public void find() {
