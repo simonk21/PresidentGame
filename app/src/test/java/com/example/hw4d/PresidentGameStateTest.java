@@ -97,7 +97,7 @@ public class PresidentGameStateTest {
         PlayerInfo winPlayer =  new PlayerInfo();
         winPlayer.setScore(11);
         testState.gameWon(winPlayer);
-        assertTrue(true);
+        assertTrue(testState.gameWon(winPlayer));
     }
 
     @Test
@@ -109,7 +109,7 @@ public class PresidentGameStateTest {
     }
 
     @Test
-    public void toString() {
+    public void testToString() {
     }
 
     @Test
