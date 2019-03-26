@@ -24,6 +24,7 @@ public class PresidentGameStateTest {
 
     @Test
     public void getCurrentSet() {
+
     }
 
     @Test
@@ -45,6 +46,10 @@ public class PresidentGameStateTest {
 
     @Test
     public void setCurrentPlayer() {
+        PresidentGameState test = new PresidentGameState();
+        test.setCurrentPlayer(1);
+        int turn = test.getCurrentPlayer();
+        assertEquals(turn, 1);
     }
 
     @Test
@@ -81,6 +86,15 @@ public class PresidentGameStateTest {
 
     @Test
     public void pass() {
+        PresidentGameState test = new PresidentGameState();
+        test.setCurrentPlayer(0);
+        int turn = test.getCurrentPlayer();
+        assertEquals(0,turn);
+        boolean check = test.pass(0);
+        assertTrue(check);
+        boolean check1 = test.pass(6);
+        assertTrue(!check1);
+
     }
 
     @Test
@@ -112,9 +126,9 @@ public class PresidentGameStateTest {
     public void playersWithCards() {
     }
 
-    /*@Test
-    public void toString() {
-    }*/
+//    @Test
+//    public void toString() {
+//    }
 
     @Test
     public void find() {
