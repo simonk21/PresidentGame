@@ -64,7 +64,7 @@ public class PlayerInfo {
 
     /** Returns Player's Current Score */
     public int getScore() { return score; }
-
+    public void setScore(int score){ this.score = score; }
     /** Returns Player's Name */
     public String getName() { return name; }
 
