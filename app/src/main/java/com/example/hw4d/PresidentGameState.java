@@ -1,9 +1,7 @@
 package com.example.hw4d;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * PresidentGameState.java
@@ -23,7 +21,7 @@ public class PresidentGameState implements Serializable {
     /** Cards Played Already like Discard Pile */
     private ArrayList<Card> playedCards;
     /** Players */
-    private ArrayList<PlayerInfo> players;
+    private ArrayList<GamePlayer> players;
     /** Current Played Cards */
     private ArrayList<Card> currentSet;
     /** Used to check if current player's set is valid */
@@ -50,7 +48,7 @@ public class PresidentGameState implements Serializable {
 
         /* CREATE NEW PLAYER AND ADD TO LIST */
         for (int i = 0; i < NUMPLAYERS; i++) {
-            PlayerInfo temp = new PlayerInfo();
+            GamePlayer temp = new GamePlayer();
             players.add(temp);
         }
 
@@ -92,8 +90,8 @@ public class PresidentGameState implements Serializable {
         }
 
         players = new ArrayList<>();
-        for (PlayerInfo p : masterGameState.players) {
-            PlayerInfo toAdd = new PlayerInfo(p);
+        for (GamePlayer p : masterGameState.players) {
+            GamePlayer toAdd = new GamePlayer(p);
             players.add(toAdd);
         }
 
@@ -125,9 +123,9 @@ public class PresidentGameState implements Serializable {
     public void setPlayedCards(ArrayList<Card> in) { playedCards = in; }
 
     /** Returns the Player's Array list with their information */
-    public ArrayList<PlayerInfo> getPlayers() { return players; }
+    public ArrayList<GamePlayer> getPlayers() { return players; }
 
-    public void setPlayers(ArrayList<PlayerInfo> in) { players = in; }
+    public void setPlayers(ArrayList<GamePlayer> in) { players = in; }
 
     /** Returns Current Set */
     public ArrayList<Card> getCurrentSet() { return currentSet; }
@@ -334,7 +332,7 @@ public class PresidentGameState implements Serializable {
      * Must have reached 11 points
      * @return true (player won game) or false (game continues)
      */
-    public boolean gameWon(PlayerInfo player){
+    public boolean gameWon(GamePlayer player){
         for(int i = 0; i < players.size(); i++){
             if(players.get(i) == player){
                 if(player.getScore() >= 11) {
@@ -398,12 +396,12 @@ public class PresidentGameState implements Serializable {
         /**Stringing togther each player and the player's hand*/
         String playerString = "";
         String playerCards = "";
-        for(PlayerInfo p : players){
+        for(GamePlayer p : players){
             for(Card c : p.getHand()){
                 playerCards = playerCards + " " + c.getCardName();
             }
             playerString = playerString
-                    + "Name: " + p.getName()
+                    + "Num: " + p.getPlayerNum()
                     + "Rank: " + p.getRank()
                     + "Score: " + p.getScore()
                     + "\nCards:" + playerCards + "\n";
