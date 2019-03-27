@@ -24,7 +24,6 @@ public class PresidentGameStateTest {
 
     @Test
     public void getCurrentSet() {
-
     }
 
     @Test
@@ -35,21 +34,12 @@ public class PresidentGameStateTest {
     public void getCurrentValid() {
     }
 
-    /** vinoya21 */
     @Test
     public void getCurrentPlayer() {
-        PresidentGameState gs = new PresidentGameState();
-        assertEquals(0, gs.getCurrentPlayer());
-        gs.nextPlayer();
-        assertEquals(1, gs.getCurrentPlayer());
     }
 
     @Test
     public void setCurrentPlayer() {
-        PresidentGameState test = new PresidentGameState();
-        test.setCurrentPlayer(1);
-        int turn = test.getCurrentPlayer();
-        assertEquals(turn, 1);
     }
 
     @Test
@@ -78,6 +68,15 @@ public class PresidentGameStateTest {
 
     @Test
     public void getMinCard() {
+        PresidentGameState testState = new PresidentGameState();
+        PlayerInfo player = new PlayerInfo();
+        Card newCard1 = new Card(8, "Spades");
+        Card newCard2 = new Card(7, "Spades");
+        Card newCard3 = new Card(6, "Spades");
+        player.addCard(newCard1);
+        player.addCard(newCard2);
+        player.addCard(newCard3);
+        assertTrue(testState.getMinCard(player.getHand()).getValue() == 6);
     }
 
     @Test
@@ -86,15 +85,6 @@ public class PresidentGameStateTest {
 
     @Test
     public void pass() {
-        PresidentGameState test = new PresidentGameState();
-        test.setCurrentPlayer(0);
-        int turn = test.getCurrentPlayer();
-        assertEquals(0,turn);
-        boolean check = test.pass(0);
-        assertTrue(check);
-        boolean check1 = test.pass(6);
-        assertTrue(!check1);
-
     }
 
     @Test
@@ -103,32 +93,24 @@ public class PresidentGameStateTest {
 
     @Test
     public void gameWon() {
+        PresidentGameState testState = new PresidentGameState();
+        PlayerInfo winPlayer =  new PlayerInfo();
+        winPlayer.setScore(11);
+        testState.gameWon(winPlayer);
+        assertTrue(testState.gameWon(winPlayer));
     }
 
-    /** vinoya21 */
     @Test
     public void nextPlayer() {
-        PresidentGameState gs = new PresidentGameState();
-        assertEquals(0, gs.getCurrentPlayer());
-        gs.nextPlayer();
-        assertEquals(1, gs.getCurrentPlayer());
-        gs.nextPlayer();
-        assertEquals(2, gs.getCurrentPlayer());
-        gs.nextPlayer();
-        assertEquals(3, gs.getCurrentPlayer());
-        gs.nextPlayer();
-        assertEquals(4, gs.getCurrentPlayer());
-        gs.nextPlayer();
-        assertEquals(0, gs.getCurrentPlayer());
     }
 
     @Test
     public void playersWithCards() {
     }
 
-//    @Test
-//    public void toString() {
-//    }
+    @Test
+    public void testToString() {
+    }
 
     @Test
     public void find() {
