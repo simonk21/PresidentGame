@@ -82,12 +82,10 @@ public class PlayerInfo {
      * @param in card to be removed
      * @return true (able to remove) or false (not able to remove)
      */
-    public boolean removeCard(Card in){
-        if(playerHand.contains(in)){
+    public void removeCard(Card in) {
+        if (playerHand.contains(in)) {
             playerHand.remove(in);
-            return true;
         }
-        return false;
     }
 
     /**

@@ -127,7 +127,7 @@ public class PresidentGameState implements Serializable {
     /** Returns the Player's Array list with their information */
     public ArrayList<PlayerInfo> getPlayers() { return players; }
 
-    public void setPlayers(ArrayList<PlayerInfo> in) { players = in; }
+    public void setPlayers(PlayerInfo in) { players.add(in); }
 
     /** Returns Current Set */
     public ArrayList<Card> getCurrentSet() { return currentSet; }
@@ -176,57 +176,45 @@ public class PresidentGameState implements Serializable {
          */
         if (roundStart) {
             for (int i = 0; i < players.size(); i++) {
-                ArrayList<Card> scumHand = null;
-                ArrayList<Card> viceScumHand = null;
-                ArrayList<Card> presidentHand = null;
-                ArrayList<Card> vicePresidentHand = null;
-
-
                 if (players.get(i).getRank() == "President") {
-                    presidentHand = players.get(i).getHand();
                     // Get the first smallest valued card in hand
-                    Card firstMinCardInPresHand = getMinCard(presidentHand);
-                    presidentHand.remove(firstMinCardInPresHand);
+                    Card firstMinCardInPresHand = getMinCard(players.get(i).getHand());
+                    players.get(i).removeCard(firstMinCardInPresHand);
                     // Get the second smallest valued card in hand.
-                    Card secondMinCardInPresHand = getMinCard(presidentHand);
-                    presidentHand.remove(secondMinCardInPresHand);
+                    Card secondMinCardInPresHand = getMinCard(players.get(i).getHand());
+                    players.get(i).removeCard(secondMinCardInPresHand);
 
                     Card firstMaxCardInScumHand = null;
                     Card secondMaxCardInScumHand = null;
                     for (int findScum = 0; findScum < players.size(); findScum++) {
                         if (players.get(findScum).getRank() == "Scum") {
-                            scumHand = players.get(findScum).getHand();
+                            firstMaxCardInScumHand = getMaxCard(players.get(findScum).getHand());
+                            players.get(findScum).removeCard(firstMaxCardInScumHand);
 
-                            firstMaxCardInScumHand = getMaxCard(scumHand);
-                            scumHand.remove(firstMaxCardInScumHand);
+                            secondMaxCardInScumHand = getMaxCard(players.get(findScum).getHand());
+                            players.get(findScum).removeCard(secondMaxCardInScumHand);
 
-                            secondMaxCardInScumHand = getMaxCard(scumHand);
-                            scumHand.remove(secondMaxCardInScumHand);
-
-                            scumHand.add(firstMinCardInPresHand);
-                            scumHand.add(secondMinCardInPresHand);
-                            presidentHand.add(firstMaxCardInScumHand);
-                            presidentHand.add(secondMaxCardInScumHand);
+                            players.get(findScum).getHand().add(firstMinCardInPresHand);
+                            players.get(findScum).getHand().add(secondMinCardInPresHand);
+                            players.get(i).getHand().add(firstMaxCardInScumHand);
+                            players.get(i).getHand().add(secondMaxCardInScumHand);
 
                         }
                     }
                 } else if (players.get(i).getRank() == "Vice President") {
-                    vicePresidentHand = players.get(i).getHand();
 
                     // Get the lowest valued card in hand
-                    Card firstCardInVPHand = getMinCard(vicePresidentHand);
-                    vicePresidentHand.remove(firstCardInVPHand);
+                    Card firstCardInVPHand = getMinCard(players.get(i).getHand());
+                    players.get(i).removeCard(firstCardInVPHand);
 
                     Card firstCardInViceScumHand = null;
                     for (int findViceScum = 0; findViceScum < players.size(); findViceScum++) {
                         if (players.get(findViceScum).getRank() == "Vice Scum") {
-                            viceScumHand = players.get(findViceScum).getHand();
+                            firstCardInViceScumHand = getMaxCard(players.get(findViceScum).getHand());
+                            players.get(findViceScum).removeCard(firstCardInViceScumHand);
 
-                            firstCardInViceScumHand = getMaxCard(scumHand);
-                            viceScumHand.remove(firstCardInViceScumHand);
-
-                            viceScumHand.add(firstCardInVPHand);
-                            vicePresidentHand.add(firstCardInViceScumHand);
+                            players.get(findViceScum).getHand().add(firstCardInVPHand);
+                            players.get(i).getHand().add(firstCardInViceScumHand);
                         }
                     }
 
@@ -249,11 +237,10 @@ public class PresidentGameState implements Serializable {
      * @return max card in player hand
      */
     Card getMaxCard(ArrayList<Card> playerHand){
-        int max = 0; // Smallest reasonable number
         int currentIndex = 0; // For Loop variable
-        Card maxCard = null;
+        Card maxCard = new Card(-1, null);
         for(Card c : playerHand){
-            if(max < playerHand.get(currentIndex).getValue()){
+            if(maxCard.getValue() < playerHand.get(currentIndex).getValue()){
                 maxCard.setCardVal(c.getValue());
                 maxCard.setCardSuit(c.getSuit());
             }
@@ -268,11 +255,10 @@ public class PresidentGameState implements Serializable {
      * @return
      */
     Card getMinCard(ArrayList<Card> playerHand){
-        int min = 100; // Arbitrarily large number
         int currentIndex = 0; // For Loop variable
-        Card minCard = null;
+        Card minCard = new Card(55, null); // Arbitrary
         for(Card c : playerHand){
-            if(min > playerHand.get(currentIndex).getValue()){
+            if(minCard.getValue() > playerHand.get(currentIndex).getValue()){
                 minCard.setCardVal(c.getValue());
                 minCard.setCardSuit(c.getSuit());
             }
