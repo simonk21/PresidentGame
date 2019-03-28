@@ -1,4 +1,6 @@
-package com.example.hw4d;
+package com.example.hw4d.Player;
+
+import com.example.hw4d.Card;
 
 import java.util.ArrayList;
 
