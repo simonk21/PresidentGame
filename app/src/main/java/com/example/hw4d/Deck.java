@@ -64,7 +64,9 @@ public class Deck implements Serializable {
 
     public int size() { return presidentDeck.size(); }
 
-    public Card remove(int index) { return presidentDeck.remove(index); }
+    public Card remove(int index) {
+        return presidentDeck.remove(index);
+    }
 
 }
 
