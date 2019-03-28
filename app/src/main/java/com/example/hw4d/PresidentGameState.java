@@ -510,13 +510,45 @@ public class PresidentGameState implements Serializable {
      *
      * @return true (player can pass turn) or false (player cannot pass turn)
      */
-    public boolean playCard(GamePlayer player) {
 
-        if(player.getPlayerNum() != turn) {
-            return false;
-        }
-
-        nextPlayer();
+    public boolean playCard(int turn, Card cardToPlay) {
+        // IF CARD ON THE STACK IS LESS THAN OR EQUAL
+        // TO CARD TRYING TO BE PLAYED,
+        // PLAY THE CARD
+        // ELSE, PROMPT PLAYER TO CHOSE ANOTHER CARD
         return true;
     }
+
+    public void dumbAI(ComputerPlayer dumbBot){
+        ArrayList<Card> botHand = new ArrayList<>();
+                botHand = dumbBot.getHand();
+
+                Card tradeCard = new Card(0, "Arbitrary");
+                for(Card c: botHand){
+                        if(tradeCard.getValue() < c.getValue()){
+                            tradeCard.setCardVal(c.getValue());
+                            tradeCard.setCardSuit(c.getSuit());
+                        }
+                }
+
+
+                dumbBot.removeCard(tradeCard);
+
+                // Algorithm to randomly choose an action
+                // The AI might just skip its turn, or it might just
+                // play its highest card randomly
+                // You never know...
+
+                // Select a random value between 1 and 100
+                int max = 100;
+                int min = 0;
+                double turnRoulette = (int)(Math.random()*((max-min)+1));
+
+                if(turnRoulette < 50){
+                    pass(dumbBot.getPlayerNum());
+                } else {
+                    playCard(dumbBot.getPlayerNum(), tradeCard);
+                }
+    }
+
 }
