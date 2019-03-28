@@ -155,7 +155,12 @@ public class PresidentGameState implements Serializable {
         return players;
     }
 
-    public void setPlayers(ArrayList<GamePlayer> in) { players.add(in); }
+    public void setPlayers(ArrayList<GamePlayer> in) {
+        for(GamePlayer player : in)
+        {
+            players.add(player);
+        }
+    }
 
     /**
      * Returns Current Set
@@ -478,15 +483,6 @@ public class PresidentGameState implements Serializable {
         return str;
     }
 
-    public int find(String rank) {
-        int index = -1;
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getRank().equals(rank)) {
-                index = i;
-            }
-        }
-
-    }
 
     /**
      * quit
