@@ -16,6 +16,8 @@ public class PresidentGameStateTest {
 
     @Test
     public void getPlayers() {
+        PresidentGameState test = new PresidentGameState();
+
     }
 
     @Test
