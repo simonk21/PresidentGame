@@ -1,5 +1,6 @@
 package com.example.hw4d;
 
+import com.example.hw4d.Player.ComputerPlayer;
 import com.example.hw4d.Player.GamePlayer;
 import com.example.hw4d.Player.HumanPlayer;
 
@@ -154,7 +155,7 @@ public class PresidentGameState implements Serializable {
         return players;
     }
 
-    public void setPlayers(ArrayList<GamePlayer> in) { players.add(in); }
+    public void setPlayers(GamePlayer in) { players.add(in); }
 
     /**
      * Returns Current Set
@@ -413,17 +414,6 @@ public class PresidentGameState implements Serializable {
         return count;
     }
 
-
-    public int find(String rank) {
-        int index = -1;
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getRank().equals(rank)) {
-                index = i;
-            }
-        }
-        return index;
-    }
-
     /**
      * toString
      *
@@ -484,7 +474,7 @@ public class PresidentGameState implements Serializable {
                 index = i;
             }
         }
-
+        return index;
     }
 
     /**
