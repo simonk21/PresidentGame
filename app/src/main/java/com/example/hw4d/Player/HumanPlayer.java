@@ -1,4 +1,4 @@
-package com.example.hw4d;
+package com.example.hw4d.Player;
 
 public class HumanPlayer extends GamePlayer {
 

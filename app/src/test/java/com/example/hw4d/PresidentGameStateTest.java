@@ -1,5 +1,7 @@
 package com.example.hw4d;
 
+import com.example.hw4d.Player.GamePlayer;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -69,7 +71,7 @@ public class PresidentGameStateTest {
     @Test
     public void getMinCard() {
         PresidentGameState testState = new PresidentGameState();
-        PlayerInfo player = new PlayerInfo();
+        GamePlayer player = new GamePlayer();
         Card newCard1 = new Card(8, "Spades");
         Card newCard2 = new Card(7, "Spades");
         Card newCard3 = new Card(6, "Spades");
@@ -94,7 +96,7 @@ public class PresidentGameStateTest {
     @Test
     public void gameWon() {
         PresidentGameState testState = new PresidentGameState();
-        PlayerInfo winPlayer =  new PlayerInfo();
+        GamePlayer winPlayer =  new GamePlayer();
         winPlayer.setScore(11);
         testState.gameWon(winPlayer);
         assertTrue(testState.gameWon(winPlayer));
