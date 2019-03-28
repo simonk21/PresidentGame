@@ -1,10 +1,11 @@
-package com.example.hw4d;
+package com.example.hw4d.Player;
 
-import java.lang.reflect.Array;
+import com.example.hw4d.Card;
+
 import java.util.ArrayList;
 
 /**
- * PlayerInfo.java
+ * GamePlayer.java
  *
  * @author Ben Pirkl
  * @author Geryl Vinoya
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * @version February 2019
  *
  */
-public class PlayerInfo {
+public class GamePlayer {
     /** Player's cards */
     private ArrayList<Card> playerHand;
 
@@ -25,35 +26,39 @@ public class PlayerInfo {
     private int score;
 
     /** Player's Name */
-    private String name;
+    private int playerNum;
 
     /** MAX CARDS a player can have */
     /* Standard 52 deck, MAX: 4 players */
     private static int MAX_CARDS = 13;
 
     /**
-     * PlayerInfo Constructor
+     * GamePlayer Constructor
      * Initializes Player's information
      */
-    public PlayerInfo(){
+
+
+    public GamePlayer(){
         playerHand = new ArrayList<>(MAX_CARDS);
         rank = "No rank";
         score = 0;
-        name = "No name";
+        playerNum = -1;
     }
 
+
+
     /**
-     * PlayerInfo Copy Constructor
+     * GamePlayer Copy Constructor
      * @param thePlayer
      */
-    public PlayerInfo(PlayerInfo thePlayer) {
+    public GamePlayer(GamePlayer thePlayer) {
         playerHand = new ArrayList<>(MAX_CARDS);
         for (Card c : thePlayer.playerHand) {
             playerHand.add(new Card(c.getValue(), c.getSuit()));
         }
         rank = thePlayer.rank;
         score = thePlayer.score;
-        name = thePlayer.name;
+        playerNum = thePlayer.playerNum;
     }
 
     /** Returns Player's hand */
@@ -64,12 +69,12 @@ public class PlayerInfo {
 
     /** Returns Player's Current Score */
     public int getScore() { return score; }
-
+    public void setScore(int score){ this.score = score; }
     /** Returns Player's Name */
-    public String getName() { return name; }
+    public int getPlayerNum() { return playerNum; }
 
-    public void setName(String name){
-        this.name = name;
+    public void setPlayerNum(int num){
+        this.playerNum = num;
     }
 
 //    public void setHand(ArrayList<Card> in) { playerHand = in; }
@@ -82,12 +87,10 @@ public class PlayerInfo {
      * @param in card to be removed
      * @return true (able to remove) or false (not able to remove)
      */
-    public boolean removeCard(Card in){
-        if(playerHand.contains(in)){
+    public void removeCard(Card in) {
+        if (playerHand.contains(in)) {
             playerHand.remove(in);
-            return true;
         }
-        return false;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.example.hw4d;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,7 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     private EditText tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,15 +34,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         firstInstance.trade();
 
         this.tv.append("Player 1 has passed\n");
-        firstInstance.pass(0);
+        //firstInstance.pass(0);
 
         firstInstance.setCurrentPlayer(1);
         this.tv.append("Player 2 has played a card(2_hearts)\n");
-        firstInstance.playCard(1);
+        //firstInstance.playCard(1);
 
         firstInstance.setCurrentPlayer(2);
         this.tv.append("Player 3 has quit the game\n\n");
-        firstInstance.quit(2);
+        //firstInstance.quit(2);
 
 
         PresidentGameState thirdInstance = new PresidentGameState();
