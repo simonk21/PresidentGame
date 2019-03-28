@@ -6,51 +6,35 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText tv;
+    ImageView card0, card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button test = (Button) findViewById(R.id.runButton);
-        test.setOnClickListener(this);
-        this.tv = (EditText) findViewById(R.id.editText);
+
+        card0 = findViewById(R.id.card0);
+        card1 = findViewById(R.id.card1);
+        card2 = findViewById(R.id.card2);
+        card3 = findViewById(R.id.card3);
+        card4 = findViewById(R.id.card4);
+        card5 = findViewById(R.id.card5);
+        card6 = findViewById(R.id.card6);
+        card7 = findViewById(R.id.card7);
+        card8 = findViewById(R.id.card8);
+        card9 = findViewById(R.id.card9);
+        card10 = findViewById(R.id.card10);
+        card11 = findViewById(R.id.card11);
+        card12 = findViewById(R.id.card12);
     }
 
     @Override
     public void onClick(View v) {
-    if(v.getId() == R.id.runButton){
-        this.tv.setText("");
 
-        PresidentGameState firstInstance = new PresidentGameState();
-
-        PresidentGameState secondInstance = new PresidentGameState(firstInstance);
-
-        firstInstance.setCurrentPlayer(0);
-        this.tv.append("Player 1 has Traded with Player 5(2_spades and 2_diamonds with 3_spades and 3_diamonds)\n");
-        firstInstance.trade();
-
-        this.tv.append("Player 1 has passed\n");
-        //firstInstance.pass(0);
-
-        firstInstance.setCurrentPlayer(1);
-        this.tv.append("Player 2 has played a card(2_hearts)\n");
-        //firstInstance.playCard(1);
-
-        firstInstance.setCurrentPlayer(2);
-        this.tv.append("Player 3 has quit the game\n\n");
-        //firstInstance.quit(2);
-
-
-        PresidentGameState thirdInstance = new PresidentGameState();
-
-        PresidentGameState fourthInstance = new PresidentGameState(thirdInstance);
-
-        this.tv.append(secondInstance.toString());
-        this.tv.append(fourthInstance.toString());
-    }
     }
 }
