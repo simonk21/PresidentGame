@@ -1,5 +1,6 @@
 package com.example.hw4d;
 
+import com.example.hw4d.Player.ComputerPlayer;
 import com.example.hw4d.Player.GamePlayer;
 import com.example.hw4d.Player.HumanPlayer;
 
@@ -545,7 +546,7 @@ public class PresidentGameState implements Serializable {
                 double turnRoulette = (int)(Math.random()*((max-min)+1));
 
                 if(turnRoulette < 50){
-                    pass(dumbBot.getPlayerNum());
+                    pass(dumbBot);
                 } else {
                     playCard(dumbBot.getPlayerNum(), tradeCard);
                 }
