@@ -155,7 +155,12 @@ public class PresidentGameState implements Serializable {
         return players;
     }
 
-    public void setPlayers(GamePlayer in) { players.add(in); }
+    public void setPlayers(ArrayList<GamePlayer> in) {
+        for(GamePlayer player : in)
+        {
+            players.add(player);
+        }
+    }
 
     /**
      * Returns Current Set
@@ -547,7 +552,7 @@ public class PresidentGameState implements Serializable {
                 double turnRoulette = (int)(Math.random()*((max-min)+1));
 
                 if(turnRoulette < 50){
-                    pass(dumbBot.getPlayerNum());
+                    pass(dumbBot);
                 } else {
                     playCard(dumbBot.getPlayerNum(), tradeCard);
                 }
