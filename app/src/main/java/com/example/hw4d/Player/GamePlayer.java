@@ -84,12 +84,14 @@ public class GamePlayer {
     /**
      * removeCard
      * Removes card after set is played
-     * @param in card to be removed
+     * @param suit card to be removed
      * @return true (able to remove) or false (not able to remove)
      */
-    public void removeCard(Card in) {
-        if (playerHand.contains(in)) {
-            playerHand.remove(in);
+    public void removeCard(String suit, int val) {
+        for(int i = 0; i < playerHand.size(); i++){
+            if(playerHand.get(i).getValue() == val && playerHand.get(i).getSuit().equals(suit)){
+                playerHand.remove(i);
+            }
         }
     }
 

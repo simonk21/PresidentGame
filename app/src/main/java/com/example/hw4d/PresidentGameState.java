@@ -237,23 +237,21 @@ public class PresidentGameState implements Serializable {
          */
         if (roundStart) {
             for (int i = 0; i < players.size(); i++) {
-                if (players.get(i).getRank() == "President") {
+                if (players.get(i).getRank().equals("President")) {
                     // Get the first smallest valued card in hand
                     Card firstMinCardInPresHand = getMinCard(players.get(i).getHand());
-                    players.get(i).removeCard(firstMinCardInPresHand);
+                    players.get(i).removeCard(firstMinCardInPresHand.getSuit(),firstMinCardInPresHand.getValue());
                     // Get the second smallest valued card in hand.
                     Card secondMinCardInPresHand = getMinCard(players.get(i).getHand());
-                    players.get(i).removeCard(secondMinCardInPresHand);
+                    players.get(i).removeCard(secondMinCardInPresHand.getSuit(), secondMinCardInPresHand.getValue());
 
-                    Card firstMaxCardInScumHand = null;
-                    Card secondMaxCardInScumHand = null;
                     for (int findScum = 0; findScum < players.size(); findScum++) {
-                        if (players.get(findScum).getRank() == "Scum") {
-                            firstMaxCardInScumHand = getMaxCard(players.get(findScum).getHand());
-                            players.get(findScum).removeCard(firstMaxCardInScumHand);
+                        if (players.get(findScum).getRank().equals("Scum")) {
+                            Card firstMaxCardInScumHand = getMaxCard(players.get(findScum).getHand());
+                            players.get(findScum).removeCard(firstMaxCardInScumHand.getSuit(), firstMaxCardInScumHand.getValue());
 
-                            secondMaxCardInScumHand = getMaxCard(players.get(findScum).getHand());
-                            players.get(findScum).removeCard(secondMaxCardInScumHand);
+                            Card secondMaxCardInScumHand = getMaxCard(players.get(findScum).getHand());
+                            players.get(findScum).removeCard(secondMaxCardInScumHand.getSuit(), secondMaxCardInScumHand.getValue());
 
                             players.get(findScum).getHand().add(firstMinCardInPresHand);
                             players.get(findScum).getHand().add(secondMinCardInPresHand);
@@ -266,13 +264,13 @@ public class PresidentGameState implements Serializable {
 
                     // Get the lowest valued card in hand
                     Card firstCardInVPHand = getMinCard(players.get(i).getHand());
-                    players.get(i).removeCard(firstCardInVPHand);
+                    players.get(i).removeCard(firstCardInVPHand.getSuit(), firstCardInVPHand.getValue());
 
                     Card firstCardInViceScumHand = null;
                     for (int findViceScum = 0; findViceScum < players.size(); findViceScum++) {
                         if (players.get(findViceScum).getRank() == "Vice Scum") {
                             firstCardInViceScumHand = getMaxCard(players.get(findViceScum).getHand());
-                            players.get(findViceScum).removeCard(firstCardInViceScumHand);
+                            players.get(findViceScum).removeCard(firstCardInViceScumHand.getSuit(), firstCardInViceScumHand.getValue());
 
                             players.get(findViceScum).getHand().add(firstCardInVPHand);
                             players.get(i).getHand().add(firstCardInViceScumHand);
@@ -539,7 +537,7 @@ public class PresidentGameState implements Serializable {
                 }
 
 
-                dumbBot.removeCard(tradeCard);
+                dumbBot.removeCard(tradeCard.getSuit(), tradeCard.getValue());
 
                 // Algorithm to randomly choose an action
                 // The AI might just skip its turn, or it might just
