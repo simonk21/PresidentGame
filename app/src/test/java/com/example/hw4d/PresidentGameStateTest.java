@@ -162,6 +162,12 @@ public class PresidentGameStateTest {
 
     @Test
     public void pass() {
+        PresidentGameState test = new PresidentGameState();
+        ArrayList<GamePlayer> players = test.getPlayers();
+        test.pass(0);
+        assertEquals(test.getCurrentPlayer(), 1);
+        test.pass(0);
+        assertEquals(test.getCurrentPlayer(), 1);
     }
 
     @Test

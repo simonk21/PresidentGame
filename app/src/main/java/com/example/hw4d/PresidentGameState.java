@@ -344,6 +344,7 @@ public class PresidentGameState implements Serializable {
         if(this.turn != turn){
             return false;
         }
+        nextPlayer();
         return true;
     }
 
