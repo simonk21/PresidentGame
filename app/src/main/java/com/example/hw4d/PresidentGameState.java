@@ -517,11 +517,58 @@ public class PresidentGameState implements Serializable {
      * @return true (player can pass turn) or false (player cannot pass turn)
      */
 
-    public boolean playCard(int turn, Card cardToPlay) {
+    public boolean playCard(int turn, ArrayList<Card> cardsToPlay) {
+
+        // Set of logical checks to ensure that Player logic is sound
+        if(getCurrentPlayer() != turn){
+            return false;
+        } else if(cardsToPlay.size() == 0 || cardsToPlay.size() < 8){
+            return false;
+        } else if(cardsToPlay.size() != currentSet.size()){
+            return false;
+        }
+
+
+
+        // Instance variable that will be used to label the size of
+        // the array of cards passed in
+        int sizeOfCardsToPlay = cardsToPlay.size();
+        for(int checkLegalHand = 0; checkLegalHand < cardsToPlay.size(); checkLegalHand++){
+            if(cardsToPlay.get(checkLegalHand).getValue() == cardsToPlay.get(sizeOfCardsToPlay).getValue()
+                    || cardsToPlay.get(checkLegalHand).getValue() == 2){
+            } else {
+                return false;
+            }
+
+        }
+
+
         // IF CARD ON THE STACK IS LESS THAN OR EQUAL
         // TO CARD TRYING TO BE PLAYED,
         // PLAY THE CARD
         // ELSE, PROMPT PLAYER TO CHOSE ANOTHER CARD
+
+        if(cardsToPlay.size() == 1){
+            if(cardsToPlay.get(0).getValue() < currentSet.get(0).getValue()){
+            }
+
+        } else if(cardsToPlay.size() == 2){
+
+        } else if(cardsToPlay.size() == 3){
+
+        } else if(cardsToPlay.size() == 4){
+
+        } else if(cardsToPlay.size() == 5){
+
+        } else if(cardsToPlay.size() == 6){
+
+        } else if(cardsToPlay.size() == 7){
+
+        } else if(cardsToPlay.size() == 8){
+
+        }else {
+            return false;
+        }
         return true;
     }
 
@@ -549,11 +596,12 @@ public class PresidentGameState implements Serializable {
                 int max = 100;
                 int min = 0;
                 double turnRoulette = (int)(Math.random()*((max-min)+1));
-
+                ArrayList<Card> cardToPlay = null;
+                cardToPlay.add(tradeCard);
                 if(turnRoulette < 50){
                     pass(dumbBot);
                 } else {
-                    playCard(dumbBot.getPlayerNum(), tradeCard);
+                    playCard(dumbBot.getPlayerNum(), cardToPlay);
                 }
     }
 

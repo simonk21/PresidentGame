@@ -59,45 +59,45 @@ public class Card implements Serializable {
      * @return String of Card Value
      */
     public String getFace(){
-        int temp = this.cardVal;
-        if(temp == 0){
-            return "three";
+        int nameOfCard = this.cardVal;
+        if(nameOfCard == 1){
+            return "Three";
         }
-        else if(temp == 1){
-            return "four";
+        else if(nameOfCard == 2){
+            return "Four";
         }
-        else if(temp == 2){
-            return "five";
+        else if(nameOfCard == 3){
+            return "Five";
         }
-        else if(temp == 3){
-            return "six";
+        else if(nameOfCard == 4){
+            return "Six";
         }
-        else if(temp == 4){
-            return "seven";
+        else if(nameOfCard == 5){
+            return "Seven";
         }
-        else if(temp == 5){
-            return "eight";
+        else if(nameOfCard == 6){
+            return "Eight";
         }
-        else if(temp == 6){
-            return "nine";
+        else if(nameOfCard == 7){
+            return "Nine";
         }
-        else if(temp == 7){
-            return "ten";
+        else if(nameOfCard == 8){
+            return "Ten";
         }
-        else if(temp == 8){
-            return "jack";
+        else if(nameOfCard == 9){
+            return "Jack";
         }
-        else if(temp == 9){
-            return "queen";
+        else if(nameOfCard == 10) {
+            return "Queen";
         }
-        else if(temp == 10){
-            return "king";
+        else if(nameOfCard == 11){
+            return "King";
         }
-        else if(temp == 11){
-            return "ace";
+        else if(nameOfCard == 12){
+            return "Ace";
         }
-        else if(temp == 12){
-            return "two";
+        else if(nameOfCard == 13){
+            return "Two";
         }
         return null;
     }

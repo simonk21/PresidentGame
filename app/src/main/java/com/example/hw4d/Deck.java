@@ -34,18 +34,18 @@ public class Deck implements Serializable {
         String suit = "Default";
         for(int i = 0; i < 4; i++){
             if(i == 0){
-                suit = "hearts";
+                suit = "Hearts";
             }
             else if(i == 1){
-                suit = "clubs";
+                suit = "Clubs";
             }
             else if(i == 2){
-                suit = "spades";
+                suit = "Spades";
             }
             else if(i == 3){
-                suit = "diamonds";
+                suit = "Diamonds";
             }
-            for(int j = 0; j < SUITDECKSIZE; j++){
+            for(int j = 1; j < SUITDECKSIZE + 1; j++){
                 Card card = new Card(j, suit);
                 presidentDeck.add(card);
             }
