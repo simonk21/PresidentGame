@@ -156,91 +156,91 @@
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/two_hearts" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card1"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/king_spades" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card2"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/queen_clubs" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/jack_diamonds" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card4"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ten_diamonds" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card5"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/nine_hearts" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card6"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/eight_clubs" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card7"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/seven_diamonds" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card8"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/six_clubs" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card9"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/five_clubs" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card10"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/four_diamonds" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card11"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/three_hearts" />
+                    app:srcCompat="@drawable/seven_spades" />
 
                 <ImageView
                     android:id="@+id/card12"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/two_hearts" />
+                    app:srcCompat="@drawable/seven_spades" />
 
             </LinearLayout>
             <Space
@@ -335,17 +335,6 @@
                 <Space
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-
-                <Button
-                    android:id="@+id/TradeButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:textColor="#FFFFFF"
-                    android:background="@drawable/scoreboard"
-                    android:layout_weight="1"
-                    android:text="Trade"
-                    android:gravity="center"
-                    android:textSize="25dp"/>
 
                 <Space
                     android:layout_width="10dp"
