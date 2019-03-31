@@ -1,6 +1,8 @@
 package com.example.hw4d;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -21,46 +23,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         card[0] = findViewById(R.id.card0);
-        card[0].setOnTouchListener(new TouchListener());
+        //card[0].setOnTouchListener(new TouchListener());
         card[1] = findViewById(R.id.card1);
-        card[1].setOnTouchListener(new TouchListener());
+        //card[1].setOnTouchListener(new TouchListener());
         card[2] = findViewById(R.id.card2);
-        card[2].setOnTouchListener(new TouchListener());
+        //card[2].setOnTouchListener(new TouchListener());
         card[3] = findViewById(R.id.card3);
-        card[3].setOnTouchListener(new TouchListener());
+        //card[3].setOnTouchListener(new TouchListener());
         card[4] = findViewById(R.id.card4);
-        card[4].setOnTouchListener(new TouchListener());
+        //card[4].setOnTouchListener(new TouchListener());
         card[5] = findViewById(R.id.card5);
-        card[5].setOnTouchListener(new TouchListener());
+        //card[5].setOnTouchListener(new TouchListener());
         card[6] = findViewById(R.id.card6);
-        card[6].setOnTouchListener(new TouchListener());
+        //card[6].setOnTouchListener(new TouchListener());
         card[7] = findViewById(R.id.card7);
-        card[7].setOnTouchListener(new TouchListener());
+        //card[7].setOnTouchListener(new TouchListener());
         card[8] = findViewById(R.id.card8);
-        card[8].setOnTouchListener(new TouchListener());
+        //card[8].setOnTouchListener(new TouchListener());
         card[9] = findViewById(R.id.card9);
-        card[9].setOnTouchListener(new TouchListener());
+        //card[9].setOnTouchListener(new TouchListener());
         card[10] = findViewById(R.id.card10);
-        card[10].setOnTouchListener(new TouchListener());
+        //card[10].setOnTouchListener(new TouchListener());
         card[11] = findViewById(R.id.card11);
-        card[11].setOnTouchListener(new TouchListener());
+        //card[11].setOnTouchListener(new TouchListener());
         card[12] = findViewById(R.id.card12);
-        card[12].setOnTouchListener(new TouchListener());
-        play = findViewById(R.id.playButton);
-        play.setOnClickListener(this);
-        pause = findViewById(R.id.pauseButton);
-        pause.setOnClickListener(this);
-        order = findViewById(R.id.orderButton);
-        order.setOnClickListener(this);
-        pass = findViewById(R.id.passButton);
-        pass.setOnClickListener(this);
+        //card[12].setOnTouchListener(new TouchListener());
+//        play = findViewById(R.id.playButton);
+//        play.setOnClickListener(this);
+//        pause = findViewById(R.id.pauseButton);
+//        pause.setOnClickListener(this);
+//        order = findViewById(R.id.orderButton);
+//        order.setOnClickListener(this);
+//        pass = findViewById(R.id.passButton);
+//        pass.setOnClickListener(this);
 
         PresidentGameState initial = new PresidentGameState();
 
         setCardGui(initial);
 
-
-
+        /*card[0].setImageResource(R.drawable.two_hearts);
+        card[1].setImageResource(R.drawable.two_hearts);
+        card[2].setImageResource(R.drawable.two_hearts);
+        card[3].setImageResource(R.drawable.two_hearts);
+        card[4].setImageResource(R.drawable.two_hearts);
+        card[5].setImageResource(R.drawable.two_hearts);
+        card[6].setImageResource(R.drawable.two_hearts);
+        card[7].setImageResource(R.drawable.two_hearts);
+        card[8].setImageResource(R.drawable.two_hearts);
+        card[9].setImageResource(R.drawable.two_hearts);
+        card[10].setImageResource(R.drawable.two_hearts);
+        card[11].setImageResource(R.drawable.two_hearts);
+        card[12].setImageResource(R.drawable.two_hearts);*/
     }
 
     @Override
@@ -68,191 +81,197 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public class TouchListener implements View.OnTouchListener{
-
-        @SuppressLint("ClickableViewAccessibility")
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-
-            return false;
-        }
-    }
+//    public class TouchListener implements View.OnTouchListener{
+//
+//        @SuppressLint("ClickableViewAccessibility")
+//        @Override
+//        public boolean onTouch(View v, MotionEvent event) {
+//
+//            return false;
+//        }
+//    }
 
     public void setCardGui(PresidentGameState gs) {
-        for (int i = 0; i < gs.getPlayers().get(0).getHand().size(); i++) {
+        for (int i = 0; i < 11; i++) {
             Card theCard = gs.getPlayers().get(0).getHand().get(i);
+            int imageId = 0;
             if(theCard.getSuit().equals("Spades")) {
                 switch(theCard.getValue()) {
                     case 1:
-                        card[i].setImageResource(R.drawable.three_spades);
+                        imageId = R.drawable.three_spades;
                         break;
                     case 2:
-                        card[i].setImageResource(R.drawable.four_spades);
+                        imageId = R.drawable.four_spades;
                         break;
                     case 3:
-                        card[i].setImageResource(R.drawable.five_spades);
+                        imageId = R.drawable.five_spades;
                         break;
                     case 4:
-                        card[i].setImageResource(R.drawable.six_spades);
+                        imageId = R.drawable.six_spades;
                         break;
                     case 5:
-                        card[i].setImageResource(R.drawable.seven_spades);
+                        imageId = R.drawable.seven_spades;
                         break;
                     case 6:
-                        card[i].setImageResource(R.drawable.eight_spades);
+                        imageId = R.drawable.eight_spades;
                         break;
                     case 7:
-                        card[i].setImageResource(R.drawable.nine_spades);
+                        imageId = R.drawable.nine_spades;
                         break;
                     case 8:
-                        card[i].setImageResource(R.drawable.ten_spades);
+                        imageId = R.drawable.ten_spades;
                         break;
                     case 9:
-                        card[i].setImageResource(R.drawable.jack_spades);
+                        imageId = R.drawable.jack_spades;
                         break;
                     case 10:
-                        card[i].setImageResource(R.drawable.queen_spades);
+                        imageId = R.drawable.queen_spades;
                         break;
                     case 11:
-                        card[i].setImageResource(R.drawable.king_spades);
+                        imageId = R.drawable.king_spades;
                         break;
                     case 12:
-                        card[i].setImageResource(R.drawable.ace_spades);
+                        imageId = R.drawable.ace_spades;
                         break;
                     case 13:
-                        card[i].setImageResource(R.drawable.two_spades);
+                        imageId = R.drawable.two_spades;
                         break;
                 }
             }
             else if(theCard.getSuit().equals("Hearts")){
                 switch(theCard.getValue()) {
                     case 1:
-                        card[i].setImageResource(R.drawable.three_hearts);
+                        imageId = R.drawable.three_hearts;
                         break;
                     case 2:
-                        card[i].setImageResource(R.drawable.four_hearts);
+                        imageId = R.drawable.four_hearts;
                         break;
                     case 3:
-                        card[i].setImageResource(R.drawable.five_hearts);
+                        imageId = R.drawable.five_hearts;
                         break;
                     case 4:
-                        card[i].setImageResource(R.drawable.six_hearts);
+                        imageId = R.drawable.six_hearts;
                         break;
                     case 5:
-                        card[i].setImageResource(R.drawable.seven_hearts);
+                        imageId = R.drawable.seven_hearts;
                         break;
                     case 6:
-                        card[i].setImageResource(R.drawable.eight_hearts);
+                        imageId = R.drawable.eight_hearts;
                         break;
                     case 7:
-                        card[i].setImageResource(R.drawable.nine_hearts);
+                        imageId = R.drawable.nine_hearts;
                         break;
                     case 8:
-                        card[i].setImageResource(R.drawable.ten_hearts);
+                        imageId = R.drawable.ten_hearts;
                         break;
                     case 9:
-                        card[i].setImageResource(R.drawable.jack_hearts);
+                        imageId = R.drawable.jack_hearts;
                         break;
                     case 10:
-                        card[i].setImageResource(R.drawable.queen_hearts);
+                        imageId = R.drawable.queen_hearts;
                         break;
                     case 11:
-                        card[i].setImageResource(R.drawable.king_hearts);
+                        imageId = R.drawable.king_hearts;
                         break;
                     case 12:
-                        card[i].setImageResource(R.drawable.ace_hearts);
+                        imageId = R.drawable.ace_hearts;
                         break;
                     case 13:
-                        card[i].setImageResource(R.drawable.two_hearts);
+                        imageId = R.drawable.two_hearts;
                         break;
                 }
             }
             else if(theCard.getSuit().equals("Diamonds")){
                 switch(theCard.getValue()) {
                     case 1:
-                        card[i].setImageResource(R.drawable.three_diamonds);
+                        imageId = R.drawable.three_diamonds;
                         break;
                     case 2:
-                        card[i].setImageResource(R.drawable.four_diamonds);
+                        imageId = R.drawable.four_diamonds;
                         break;
                     case 3:
-                        card[i].setImageResource(R.drawable.five_diamonds);
+                        imageId = R.drawable.five_diamonds;
                         break;
                     case 4:
-                        card[i].setImageResource(R.drawable.six_diamonds);
+                        imageId = R.drawable.six_diamonds;
                         break;
                     case 5:
-                        card[i].setImageResource(R.drawable.seven_diamonds);
+                        imageId = R.drawable.seven_diamonds;
                         break;
                     case 6:
-                        card[i].setImageResource(R.drawable.eight_diamonds);
+                        imageId = R.drawable.eight_diamonds;
                         break;
                     case 7:
-                        card[i].setImageResource(R.drawable.nine_diamonds);
+                        imageId = R.drawable.nine_diamonds;
                         break;
                     case 8:
-                        card[i].setImageResource(R.drawable.ten_diamonds);
+                        imageId = R.drawable.ten_diamonds;
                         break;
                     case 9:
-                        card[i].setImageResource(R.drawable.jack_diamonds);
+                        imageId = R.drawable.jack_diamonds;
                         break;
                     case 10:
-                        card[i].setImageResource(R.drawable.queen_diamonds);
+                        imageId = R.drawable.queen_diamonds;
                         break;
                     case 11:
-                        card[i].setImageResource(R.drawable.king_diamonds);
+                        imageId = R.drawable.king_diamonds;
                         break;
                     case 12:
-                        card[i].setImageResource(R.drawable.ace_diamonds);
+                        imageId = R.drawable.ace_diamonds;
                         break;
                     case 13:
-                        card[i].setImageResource(R.drawable.two_diamonds);
+                        imageId = R.drawable.two_diamonds;
                         break;
                 }
             }
             else if(theCard.getSuit().equals("Clubs")){
                 switch(theCard.getValue()) {
                     case 1:
-                        card[i].setImageResource(R.drawable.three_clubs);
+                        imageId = R.drawable.three_clubs;
                         break;
                     case 2:
-                        card[i].setImageResource(R.drawable.four_clubs);
+                        imageId = R.drawable.four_clubs;
                         break;
                     case 3:
-                        card[i].setImageResource(R.drawable.five_clubs);
+                        imageId = R.drawable.five_clubs;
                         break;
                     case 4:
-                        card[i].setImageResource(R.drawable.six_clubs);
+                        imageId = R.drawable.six_clubs;
                         break;
                     case 5:
-                        card[i].setImageResource(R.drawable.seven_clubs);
+                        imageId = R.drawable.seven_clubs;
                         break;
                     case 6:
-                        card[i].setImageResource(R.drawable.eight_clubs);
+                        imageId = R.drawable.eight_clubs;
                         break;
                     case 7:
-                        card[i].setImageResource(R.drawable.nine_clubs);
+                        imageId = R.drawable.nine_clubs;
                         break;
                     case 8:
-                        card[i].setImageResource(R.drawable.ten_clubs);
+                        imageId = R.drawable.ten_clubs;
                         break;
                     case 9:
-                        card[i].setImageResource(R.drawable.jack_clubs);
+                        imageId = R.drawable.jack_clubs;
                         break;
                     case 10:
-                        card[i].setImageResource(R.drawable.queen_clubs);
+                        imageId = R.drawable.queen_clubs;
                         break;
                     case 11:
-                        card[i].setImageResource(R.drawable.king_clubs);
+                        imageId = R.drawable.king_clubs;
                         break;
                     case 12:
-                        card[i].setImageResource(R.drawable.ace_clubs);
+                        imageId = R.drawable.ace_clubs;
                         break;
                     case 13:
-                        card[i].setImageResource(R.drawable.two_clubs);
+                        imageId = R.drawable.two_clubs;
                         break;
                 }
             }
+
+            /*Bitmap bImage = BitmapFactory.decodeResource(this.getResources(), imageId);
+            card[i].setImageBitmap(bImage);*/
+
+            card[i].setImageResource(imageId);
         }
     }
 
