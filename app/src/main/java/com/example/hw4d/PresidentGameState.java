@@ -611,7 +611,7 @@ public class PresidentGameState implements Serializable {
                     if(currentSet.size() != 1){
                         pass(dumbBot);
                     } else {
-                        playCard(dumbBot.getPlayerNum(), cardToPlay)
+                        playCard(dumbBot.getPlayerNum(), cardToPlay);
                     }
                 }
     }

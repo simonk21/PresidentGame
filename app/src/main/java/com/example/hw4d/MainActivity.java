@@ -59,21 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         PresidentGameState initial = new PresidentGameState();
 
-        setCardGui(initial);
-
-        /*card[0].setImageResource(R.drawable.two_hearts);
-        card[1].setImageResource(R.drawable.two_hearts);
-        card[2].setImageResource(R.drawable.two_hearts);
-        card[3].setImageResource(R.drawable.two_hearts);
-        card[4].setImageResource(R.drawable.two_hearts);
-        card[5].setImageResource(R.drawable.two_hearts);
-        card[6].setImageResource(R.drawable.two_hearts);
-        card[7].setImageResource(R.drawable.two_hearts);
-        card[8].setImageResource(R.drawable.two_hearts);
-        card[9].setImageResource(R.drawable.two_hearts);
-        card[10].setImageResource(R.drawable.two_hearts);
-        card[11].setImageResource(R.drawable.two_hearts);
-        card[12].setImageResource(R.drawable.two_hearts);*/
+        updatePlayerGui(initial);
     }
 
     @Override
@@ -91,8 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        }
 //    }
 
-    public void setCardGui(PresidentGameState gs) {
-        for (int i = 0; i < 11; i++) {
+    public void updateCardGui(PresidentGameState gs, int i) {
             Card theCard = gs.getPlayers().get(0).getHand().get(i);
             int imageId = 0;
             if(theCard.getSuit().equals("Spades")) {
@@ -272,6 +257,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             card[i].setImageBitmap(bImage);*/
 
             card[i].setImageResource(imageId);
+    }
+
+    public void updatePlayerGui (PresidentGameState gs) {
+        int i = 0;
+        for (Card c : gs.getPlayers().get(0).getHand()){
+            updateCardGui(gs, i);
+            i++;
         }
     }
 
