@@ -532,24 +532,29 @@ public class PresidentGameState implements Serializable {
 
         // Instance variable that will be used to label the size of
         // the array of cards passed in
-        int sizeOfCardsToPlay = cardsToPlay.size();
+        int numCardsPassedIn = cardsToPlay.size();
         for(int checkLegalHand = 0; checkLegalHand < cardsToPlay.size(); checkLegalHand++){
-            if(cardsToPlay.get(checkLegalHand).getValue() == cardsToPlay.get(sizeOfCardsToPlay).getValue()
+            if(cardsToPlay.get(checkLegalHand).getValue() == cardsToPlay.get(numCardsPassedIn).getValue()
                     || cardsToPlay.get(checkLegalHand).getValue() == 2){
             } else {
                 return false;
             }
-
         }
 
-
-        // IF CARD ON THE STACK IS LESS THAN OR EQUAL
-        // TO CARD TRYING TO BE PLAYED,
-        // PLAY THE CARD
-        // ELSE, PROMPT PLAYER TO CHOSE ANOTHER CARD
-
         if(cardsToPlay.size() == 1){
-            if(cardsToPlay.get(0).getValue() < currentSet.get(0).getValue()){
+            if(cardsToPlay.get(0).getValue() <= currentSet.get(0).getValue()){
+                return false;
+            } else if(cardsToPlay.get(0).getValue() > currentSet.get(0).getValue()){
+                ArrayList<Card> tmpHand = players.get(turn).getHand();
+                for(int i = 0; i < tmpHand.size(); i++) {
+                    if(tmpHand.get(i) == cardsToPlay.get(0)){
+
+                        Card cardToMakeTheCurrent = tmpHand.get(i);
+                        players.get(turn).removeCard(tmpHand.get(i).getSuit(), tmpHand.get(i).getValue());
+                        currentSet.removeAll(currentSet);
+                        currentSet.add(cardToMakeTheCurrent);
+                    }
+                }
             }
 
         } else if(cardsToPlay.size() == 2){
@@ -585,6 +590,7 @@ public class PresidentGameState implements Serializable {
                 }
 
 
+
                 dumbBot.removeCard(tradeCard.getSuit(), tradeCard.getValue());
 
                 // Algorithm to randomly choose an action
@@ -601,7 +607,12 @@ public class PresidentGameState implements Serializable {
                 if(turnRoulette < 50){
                     pass(dumbBot);
                 } else {
-                    playCard(dumbBot.getPlayerNum(), cardToPlay);
+                    // If the dumb bot cant play only the 1 card it has, then it passes
+                    if(currentSet.size() != 1){
+                        pass(dumbBot);
+                    } else {
+                        playCard(dumbBot.getPlayerNum(), cardToPlay)
+                    }
                 }
     }
 
