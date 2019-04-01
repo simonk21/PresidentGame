@@ -513,7 +513,6 @@ public class PresidentGameState implements Serializable {
         if (player.getPlayerNum() != turn) {
             return false;
         }
-
         nextPlayer();
         return true;
     }
@@ -593,7 +592,7 @@ public class PresidentGameState implements Serializable {
         ArrayList<Card> botHand = new ArrayList<>();
                 botHand = dumbBot.getHand();
 
-                Card tradeCard = new Card(0, "Arbitrary");
+                Card tradeCard = new Card(0, "Default");
                 for(Card c: botHand){
                         if(tradeCard.getValue() < c.getValue()){
                             tradeCard.setCardVal(c.getValue());
