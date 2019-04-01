@@ -1,8 +1,10 @@
 package com.example.hw4d;
 
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     public PresidentGameState initial;
     private ImageButton card[] = new ImageButton[13];
     private ImageButton selectedCard;
@@ -106,176 +108,280 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplication().getApplicationContext(), "No card selected!",
                                         Toast.LENGTH_SHORT).show();
                                 break;
+
                             case R.drawable.two_clubs:
                                 toAdd.setCardVal(13);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.two_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.three_clubs:
                                 toAdd.setCardVal(1);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.three_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.four_clubs:
                                 toAdd.setCardVal(2);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.four_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.five_clubs:
                                 toAdd.setCardVal(3);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.five_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.six_clubs:
                                 toAdd.setCardVal(4);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.six_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.seven_clubs:
                                 toAdd.setCardVal(5);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.seven_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.eight_clubs:
                                 toAdd.setCardVal(6);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.eight_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.nine_clubs:
                                 toAdd.setCardVal(7);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.nine_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.ten_clubs:
                                 toAdd.setCardVal(8);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.ten_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.jack_clubs:
                                 toAdd.setCardVal(9);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.jack_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.queen_clubs:
                                 toAdd.setCardVal(10);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.queen_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
+
                                 break;
+
                             case R.drawable.king_clubs:
                                 toAdd.setCardVal(11);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.king_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.ace_clubs:
                                 toAdd.setCardVal(12);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
-                                    currentPlay.setImageResource(R.drawable.ace_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
+                                break;
+
+                            case R.drawable.two_spades:
+                                toAdd.setCardVal(13);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.three_spades:
+                                toAdd.setCardVal(1);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.four_spades:
+                                toAdd.setCardVal(2);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.five_spades:
+                                toAdd.setCardVal(3);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.six_spades:
+                                toAdd.setCardVal(4);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.seven_spades:
+                                toAdd.setCardVal(5);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.eight_spades:
+                                toAdd.setCardVal(6);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.nine_spades:
+                                toAdd.setCardVal(7);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.ten_spades:
+                                toAdd.setCardVal(8);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.jack_spades:
+                                toAdd.setCardVal(9);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.queen_spades:
+                                toAdd.setCardVal(10);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.king_spades:
+                                toAdd.setCardVal(11);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.ace_spades:
+                                toAdd.setCardVal(12);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.two_diamonds:
+                                toAdd.setCardVal(13);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.three_diamonds:
+                                toAdd.setCardVal(1);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.four_diamonds:
+                                toAdd.setCardVal(2);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.five_diamonds:
+                                toAdd.setCardVal(3);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.six_diamonds:
+                                toAdd.setCardVal(4);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.seven_diamonds:
+                                toAdd.setCardVal(5);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.eight_diamonds:
+                                toAdd.setCardVal(6);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.nine_diamonds:
+                                toAdd.setCardVal(7);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.ten_diamonds:
+                                toAdd.setCardVal(8);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.jack_diamonds:
+                                toAdd.setCardVal(9);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.queen_diamonds:
+                                toAdd.setCardVal(10);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.king_diamonds:
+                                toAdd.setCardVal(11);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.ace_diamonds:
+                                toAdd.setCardVal(12);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.two_hearts:
+                                toAdd.setCardVal(13);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.three_hearts:
+                                toAdd.setCardVal(1);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.four_hearts:
+                                toAdd.setCardVal(2);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.five_hearts:
+                                toAdd.setCardVal(3);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.six_hearts:
+                                toAdd.setCardVal(4);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.seven_hearts:
+                                toAdd.setCardVal(5);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.eight_hearts:
+                                toAdd.setCardVal(6);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.nine_hearts:
+                                toAdd.setCardVal(7);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.ten_hearts:
+                                toAdd.setCardVal(8);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.jack_hearts:
+                                toAdd.setCardVal(9);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.queen_hearts:
+                                toAdd.setCardVal(10);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.king_hearts:
+                                toAdd.setCardVal(11);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.ace_hearts:
+                                toAdd.setCardVal(12);
+                                toAdd.setCardSuit("Hearts");
                                 break;
                         }
+
+                        play.add(toAdd);
+                        if(initial.playCard(index, play) == true) {
+                            selectedCard.setBackgroundResource(0);
+                            currentPlay.setImageResource(tagValue);
+                            computerMoves(initial);
+                        }
+                        else{
+                            Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
                         switch(initial.getCurrentPlayer()){
                             case 0:
                                 switchHighlight(0);
@@ -539,15 +645,24 @@ public class MainActivity extends AppCompatActivity {
     public void updatePlayerGui (PresidentGameState gs) {
         int i = 0;
         for (int j = 0; j < 13; j++) {
-            card[j].getBackground().clearColorFilter();
-            card[j].getBackground().setAlpha(0);
-            card[j].invalidate();
+            card[j].setBackgroundResource(R.drawable.scoreboard);
         }
         for (Card c : gs.getPlayers().get(0).getHand()){
             updateCardGui(gs, i);
             card[i].getBackground().setAlpha(255);
             card[i].invalidate();
             i++;
+        }
+    }
+
+    public void computerMoves(PresidentGameState gs) {
+        while (gs.getTurn() != 0) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            gs.dumbAI(gs.getPlayers().get(gs.getTurn()));
         }
     }
 

@@ -588,7 +588,7 @@ public class PresidentGameState implements Serializable {
         return true;
     }
 
-    public void dumbAI(ComputerPlayer dumbBot){
+    public void dumbAI(GamePlayer dumbBot){
         ArrayList<Card> botHand = new ArrayList<>();
                 botHand = dumbBot.getHand();
 
@@ -614,7 +614,7 @@ public class PresidentGameState implements Serializable {
                 int min = 0;
                 double turnRoulette = (int)(Math.random()*((max-min)+1));
                 ArrayList<Card> cardToPlay = null;
-                cardToPlay.add(tradeCard);
+                cardToPlay.add(tradeCard); //game stops over here
                 if(turnRoulette < 50){
                     pass(dumbBot);
                 } else {
@@ -625,5 +625,9 @@ public class PresidentGameState implements Serializable {
                         playCard(dumbBot.getPlayerNum(), cardToPlay);
                     }
                 }
+    }
+
+    public int getTurn() {
+        return turn;
     }
 }
