@@ -1,7 +1,7 @@
 package com.example.hw4d;
 
 import android.annotation.SuppressLint;
-import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     public PresidentGameState initial;
     private ImageButton card[] = new ImageButton[13];
+    private ImageButton selectedCard;
     private Button play, pause, order, pass;
     private int index;
     private TextView p0, p1, p2, p3;
@@ -24,31 +25,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         index = 0;
         card[0] = findViewById(R.id.card0);
-        card[0].setOnClickListener(new CardClickListener());
         card[1] = findViewById(R.id.card1);
-        card[1].setOnClickListener(new CardClickListener());
         card[2] = findViewById(R.id.card2);
-        card[2].setOnClickListener(new CardClickListener());
         card[3] = findViewById(R.id.card3);
-        card[3].setOnClickListener(new CardClickListener());
         card[4] = findViewById(R.id.card4);
-        card[4].setOnClickListener(new CardClickListener());
         card[5] = findViewById(R.id.card5);
-        card[5].setOnClickListener(new CardClickListener());
         card[6] = findViewById(R.id.card6);
-        card[6].setOnClickListener(new CardClickListener());
         card[7] = findViewById(R.id.card7);
-        card[7].setOnClickListener(new CardClickListener());
         card[8] = findViewById(R.id.card8);
-        card[8].setOnClickListener(new CardClickListener());
         card[9] = findViewById(R.id.card9);
-        card[9].setOnClickListener(new CardClickListener());
         card[10] = findViewById(R.id.card10);
-        card[10].setOnClickListener(new CardClickListener());
         card[11] = findViewById(R.id.card11);
-        card[11].setOnClickListener(new CardClickListener());
         card[12] = findViewById(R.id.card12);
-        card[12].setOnClickListener(new CardClickListener());
+
+        for (int i = 0; i < 13; i++) {
+            card[i].setOnClickListener(new CardClickListener());
+        }
+
         play = findViewById(R.id.playButton);
         play.setOnClickListener(new ButtonClickListener());
         pause = findViewById(R.id.pauseButton);
@@ -73,8 +66,15 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-
+            for (int i = 0; i < 13; i++) {
+                card[i].getBackground().clearColorFilter();
+                v.invalidate();
+            }
+            selectedCard = (ImageButton) v;
+            selectedCard.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+            v.invalidate();
         }
+        //https://stackoverflow.com/questions/5327553/android-highlight-an-imagebutton-when-clicked
     }
 
     public class ButtonClickListener implements View.OnClickListener {
