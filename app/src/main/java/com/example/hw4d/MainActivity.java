@@ -65,18 +65,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        PresidentGameState updateGS;
         switch(v.getId()){
             case R.id.playButton:
                 break;
             case R.id.pauseButton:
                 break;
             case R.id.orderButton:
-                initial.setOrder(index);
-                updatePlayerGui(initial);
                 break;
             case R.id.passButton:
                 if(initial.pass(index)) {
-                    PresidentGameState updateGS = new PresidentGameState(initial);
+                    updateGS = new PresidentGameState(initial);
                     switchHighlight(updateGS.getCurrentPlayer());
                 }
                 else{

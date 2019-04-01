@@ -219,9 +219,11 @@ public class PresidentGameState implements Serializable {
     }
     /* actions.txt methods */
 
-    public void setOrder(int index){
-        Collections.sort(players.get(index).getHand(),Collections.<Card>reverseOrder());
-    }
+//    public void setOrder(int index){
+//        Card left;
+//        Card right;
+//        int i = players.get(index).getHand().size();
+//    }
     // https://javahungry.blogspot.com/2017/11/how-to-sort-arraylist-in-descending-order-in-java.html
     /**
      * Set the round start to be false
