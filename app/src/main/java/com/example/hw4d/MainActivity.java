@@ -276,6 +276,20 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                         }
+                        switch(initial.getCurrentPlayer()){
+                            case 0:
+                                switchHighlight(0);
+                                break;
+                            case 1:
+                                switchHighlight(1);
+                                break;
+                            case 2:
+                                switchHighlight(2);
+                                break;
+                            case 3:
+                                switchHighlight(3);
+                                break;
+                        }
                     }
                     updatePlayerGui(initial);
 
