@@ -624,5 +624,4 @@ public class PresidentGameState implements Serializable {
                     }
                 }
     }
-
 }
