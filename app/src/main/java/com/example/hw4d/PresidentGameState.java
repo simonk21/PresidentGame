@@ -529,7 +529,7 @@ public class PresidentGameState implements Serializable {
         // Set of logical checks to ensure that Player logic is sound
         if(getCurrentPlayer() != turn){
             return false;
-        } else if(cardsToPlay.size() == 0 || cardsToPlay.size() < 8){
+        } else if(cardsToPlay.size() == 0 || cardsToPlay.size() > 13){ /* you had  < 8 which didn't make sense */
             return false;
         } else if(cardsToPlay.size() != currentSet.size()){
             return false;
@@ -539,14 +539,14 @@ public class PresidentGameState implements Serializable {
 
         // Instance variable that will be used to label the size of
         // the array of cards passed in
-        int numCardsPassedIn = cardsToPlay.size();
-        for(int checkLegalHand = 0; checkLegalHand < cardsToPlay.size(); checkLegalHand++){
-            if(cardsToPlay.get(checkLegalHand).getValue() == cardsToPlay.get(numCardsPassedIn).getValue()
-                    || cardsToPlay.get(checkLegalHand).getValue() == 2){
-            } else {
-                return false;
-            }
-        }
+//        int numCardsPassedIn = cardsToPlay.size();
+//        for(int checkLegalHand = 0; checkLegalHand < cardsToPlay.size(); checkLegalHand++){
+//            if(cardsToPlay.get(checkLegalHand).getValue() == cardsToPlay.get(numCardsPassedIn - 1).getValue() /* changed numCardsPassedIn to numCardsPassedIn - 1 */
+//                    || cardsToPlay.get(checkLegalHand).getValue() == 2){
+//            } else {
+//                return false;
+//            }
+//        }
 
         if(cardsToPlay.size() == 1){
             if(cardsToPlay.get(0).getValue() <= currentSet.get(0).getValue()){
@@ -554,12 +554,14 @@ public class PresidentGameState implements Serializable {
             } else if(cardsToPlay.get(0).getValue() > currentSet.get(0).getValue()){
                 ArrayList<Card> tmpHand = players.get(turn).getHand();
                 for(int i = 0; i < tmpHand.size(); i++) {
-                    if(tmpHand.get(i) == cardsToPlay.get(0)){
+                    if(tmpHand.get(i).getValue() == cardsToPlay.get(0).getValue() &&
+                        tmpHand.get(i).getSuit().equals(cardsToPlay.get(0).getSuit())){
 
                         Card cardToMakeTheCurrent = tmpHand.get(i);
                         players.get(turn).removeCard(tmpHand.get(i).getSuit(), tmpHand.get(i).getValue());
                         currentSet.removeAll(currentSet);
                         currentSet.add(cardToMakeTheCurrent);
+                        nextPlayer();
                     }
                 }
             }

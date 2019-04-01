@@ -208,5 +208,25 @@ public class PresidentGameStateTest {
 
     @Test
     public void playCard() {
+        PresidentGameState test = new PresidentGameState();
+        ArrayList<GamePlayer> p = new ArrayList<>();
+        p = test.getPlayers();
+        assertTrue(p.size() == 4);
+        p.remove(0);
+        p.remove(0);
+        GamePlayer p1 = new GamePlayer();
+        GamePlayer p2 = new GamePlayer();
+        p.add(0, p1);
+        p.add(1, p2);
+        assertTrue(p.size() == 4);
+        Card c1 = new Card(12,"Clubs");
+        Card c2 = new Card(2,"Clubs");
+        p1.addCard(c1);
+        p2.addCard(c2);
+        test.setCurrentSet(p2.getHand());
+        test.playCard(0, p1.getHand());
+        assertTrue(p1.getHand().size() == 0);
+        assertTrue(test.getCurrentSet().get(0).getValue() == 12 && test.getCurrentSet().get(0).getSuit().equals("Clubs"));
+        assertTrue(test.getCurrentPlayer() == 1);
     }
 }

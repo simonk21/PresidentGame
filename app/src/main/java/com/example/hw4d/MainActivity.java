@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     public PresidentGameState initial;
     private ImageButton card[] = new ImageButton[13];
@@ -81,8 +83,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             PresidentGameState updateGS;
+            ArrayList<Card> c = new ArrayList<>();
+            Card add = new Card(0, null);
+            for(int i = 0; i < c.size(); i++){
+                c.remove(0);
+            }
             switch (v.getId()) {
                 case R.id.playButton:
+
                     break;
                 case R.id.pauseButton:
                     break;
