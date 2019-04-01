@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public PresidentGameState initial;
-    private ImageView card[] = new ImageView[13];
+    private ImageButton card[] = new ImageButton[13];
     private Button play, pause, order, pass;
     private int index;
     private TextView p0, p1, p2, p3;
@@ -318,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
 
-            card[i].setImageResource(imageId);
+            card[i].setBackgroundResource(imageId);
     }
 
     public void updatePlayerGui (PresidentGameState gs) {
