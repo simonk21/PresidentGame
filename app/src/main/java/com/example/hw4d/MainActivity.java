@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.two_clubs);
                                 }
                                 else{
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.three_clubs);
                                 }
                                 else{
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.four_clubs);
                                 }
                                 else{
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.five_clubs);
                                 }
                                 else{
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.six_clubs);
                                 }
                                 else{
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.seven_clubs);
                                 }
                                 else{
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.eight_clubs);
                                 }
                                 else{
@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.nine_clubs);
                                 }
                                 else{
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.ten_clubs);
                                 }
                                 else{
@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.jack_clubs);
                                 }
                                 else{
@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.queen_clubs);
                                 }
                                 else{
@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.king_clubs);
                                 }
                                 else{
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                                 toAdd.setCardSuit("Clubs");
                                 play.add(toAdd);
                                 if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(0);
+                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
                                     currentPlay.setImageResource(R.drawable.ace_clubs);
                                 }
                                 else{
