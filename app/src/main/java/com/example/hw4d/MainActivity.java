@@ -1,6 +1,5 @@
 package com.example.hw4d;
 
-import android.annotation.SuppressLint;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
         p0 = findViewById(R.id.userPlayer);
         initial = new PresidentGameState();
         updatePlayerGui(initial);
+
+        card[0].setBackgroundResource(R.drawable.three_spades);
+
+
     }
 
 
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             selectedCard = (ImageButton) v;
             selectedCard.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
             v.invalidate();
+
         }
         //https://stackoverflow.com/questions/5327553/android-highlight-an-imagebutton-when-clicked
     }
@@ -83,6 +87,18 @@ public class MainActivity extends AppCompatActivity {
             PresidentGameState updateGS;
             switch (v.getId()) {
                 case R.id.playButton:
+                    if(selectedCard.getTag() == null) {
+
+                    }
+                    else {
+                        int tagValue = (Integer)selectedCard.getTag();
+                        switch (tagValue) {
+                            case 0:
+                                Toast.makeText(getApplication().getApplicationContext(), "No card selected!",
+                                        Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
                     break;
                 case R.id.pauseButton:
                     break;
@@ -322,6 +338,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+            card[i].setTag(Integer.valueOf(imageId));
             card[i].setBackgroundResource(imageId);
     }
 
