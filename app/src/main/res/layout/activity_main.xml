@@ -130,7 +130,7 @@
                     app:srcCompat="@drawable/card_back" />
 
                 <ImageView
-                    android:id="@+id/sevenSpades"
+                    android:id="@+id/currentPlay"
                     android:layout_width="170dp"
                     android:layout_height="170dp"
                     android:layout_weight="10"

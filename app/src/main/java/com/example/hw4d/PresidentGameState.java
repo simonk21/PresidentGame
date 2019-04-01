@@ -532,7 +532,10 @@ public class PresidentGameState implements Serializable {
         } else if(cardsToPlay.size() == 0 || cardsToPlay.size() > 13){ /* you had  < 8 which didn't make sense */
             return false;
         } else if(cardsToPlay.size() != currentSet.size()){
-            return false;
+            if(currentSet.size() != 0) {
+                return false;
+            }
+            currentSet.add(new Card(0,"Default"));
         }
 
 
