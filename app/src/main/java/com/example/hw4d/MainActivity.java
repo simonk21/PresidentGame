@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         initial = new PresidentGameState();
         updatePlayerGui(initial);
 
-        card[0].setBackgroundResource(R.drawable.three_spades);
 
 
     }
@@ -278,6 +277,8 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                         }
                     }
+                    updatePlayerGui(initial);
+
                     break;
                 case R.id.pauseButton:
                     break;
@@ -523,8 +524,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void updatePlayerGui (PresidentGameState gs) {
         int i = 0;
+        for (int j = 0; j < 13; j++) {
+            card[j].getBackground().clearColorFilter();
+            card[j].getBackground().setAlpha(0);
+            card[j].invalidate();
+        }
         for (Card c : gs.getPlayers().get(0).getHand()){
             updateCardGui(gs, i);
+            card[i].getBackground().setAlpha(255);
+            card[i].invalidate();
             i++;
         }
     }
