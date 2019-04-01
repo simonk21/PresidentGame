@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     public PresidentGameState initial;
     private ImageButton card[] = new ImageButton[13];
     private Button play, pause, order, pass;
@@ -23,39 +23,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         index = 0;
         card[0] = findViewById(R.id.card0);
-        card[0].setOnTouchListener(new TouchListener());
+        card[0].setOnClickListener(new CardClickListener());
         card[1] = findViewById(R.id.card1);
-        card[1].setOnTouchListener(new TouchListener());
+        card[1].setOnClickListener(new CardClickListener());
         card[2] = findViewById(R.id.card2);
-        card[2].setOnTouchListener(new TouchListener());
+        card[2].setOnClickListener(new CardClickListener());
         card[3] = findViewById(R.id.card3);
-        card[3].setOnTouchListener(new TouchListener());
+        card[3].setOnClickListener(new CardClickListener());
         card[4] = findViewById(R.id.card4);
-        card[4].setOnTouchListener(new TouchListener());
+        card[4].setOnClickListener(new CardClickListener());
         card[5] = findViewById(R.id.card5);
-        card[5].setOnTouchListener(new TouchListener());
+        card[5].setOnClickListener(new CardClickListener());
         card[6] = findViewById(R.id.card6);
-        card[6].setOnTouchListener(new TouchListener());
+        card[6].setOnClickListener(new CardClickListener());
         card[7] = findViewById(R.id.card7);
-        card[7].setOnTouchListener(new TouchListener());
+        card[7].setOnClickListener(new CardClickListener());
         card[8] = findViewById(R.id.card8);
-        card[8].setOnTouchListener(new TouchListener());
+        card[8].setOnClickListener(new CardClickListener());
         card[9] = findViewById(R.id.card9);
-        card[9].setOnTouchListener(new TouchListener());
+        card[9].setOnClickListener(new CardClickListener());
         card[10] = findViewById(R.id.card10);
-        card[10].setOnTouchListener(new TouchListener());
+        card[10].setOnClickListener(new CardClickListener());
         card[11] = findViewById(R.id.card11);
-        card[11].setOnTouchListener(new TouchListener());
+        card[11].setOnClickListener(new CardClickListener());
         card[12] = findViewById(R.id.card12);
-        card[12].setOnTouchListener(new TouchListener());
+        card[12].setOnClickListener(new CardClickListener());
         play = findViewById(R.id.playButton);
-        play.setOnClickListener(this);
+        play.setOnClickListener(new ButtonClickListener());
         pause = findViewById(R.id.pauseButton);
-        pause.setOnClickListener(this);
+        pause.setOnClickListener(new ButtonClickListener());
         order = findViewById(R.id.orderButton);
-        order.setOnClickListener(this);
+        order.setOnClickListener(new ButtonClickListener());
         pass = findViewById(R.id.passButton);
-        pass.setOnClickListener(this);
+        pass.setOnClickListener(new ButtonClickListener());
         p1 = findViewById(R.id.player1Text);
         p2 = findViewById(R.id.player2Text);
         p3 = findViewById(R.id.Player3Text);
@@ -64,37 +64,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         updatePlayerGui(initial);
     }
 
-    @Override
-    public void onClick(View v) {
-        PresidentGameState updateGS;
-        switch(v.getId()){
-            case R.id.playButton:
-                break;
-            case R.id.pauseButton:
-                break;
-            case R.id.orderButton:
-                break;
-            case R.id.passButton:
-                if(initial.pass(index)) {
-                    updateGS = new PresidentGameState(initial);
-                    switchHighlight(updateGS.getCurrentPlayer());
-                }
-                else{
-                    Toast.makeText(getApplication().getApplicationContext(), "Not your Turn!",
-                            Toast.LENGTH_SHORT).show();
-                }
-                break;
-        }
-    }
+
     // https://www.youtube.com/watch?v=GtxVILjLcw8
     //https://stackoverflow.com/questions/1466788/android-textview-setting-the-background-color-dynamically-doesnt-work
 
-    public class TouchListener implements View.OnTouchListener{
+    public class CardClickListener implements View.OnClickListener{
 
-        @SuppressLint("ClickableViewAccessibility")
         @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            return false;
+        public void onClick(View v) {
+            //nothing so far
+        }
+    }
+
+    public class ButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            PresidentGameState updateGS;
+            switch (v.getId()) {
+                case R.id.playButton:
+                    break;
+                case R.id.pauseButton:
+                    break;
+                case R.id.orderButton:
+                    break;
+                case R.id.passButton:
+                    if (initial.pass(index)) {
+                        updateGS = new PresidentGameState(initial);
+                        switchHighlight(updateGS.getCurrentPlayer());
+                    } else {
+                        Toast.makeText(getApplication().getApplicationContext(), "Not your Turn!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
         }
     }
 
