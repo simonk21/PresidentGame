@@ -1,6 +1,7 @@
 package com.example.hw4d;
 
 import android.annotation.SuppressLint;
+import android.graphics.LightingColorFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            //nothing so far
+
         }
     }
 
