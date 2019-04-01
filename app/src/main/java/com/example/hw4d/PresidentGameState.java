@@ -6,6 +6,7 @@ import com.example.hw4d.Player.HumanPlayer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * PresidentGameState.java
@@ -218,6 +219,10 @@ public class PresidentGameState implements Serializable {
     }
     /* actions.txt methods */
 
+    public void setOrder(int index){
+        Collections.sort(players.get(index).getHand(),Collections.<Card>reverseOrder());
+    }
+    // https://javahungry.blogspot.com/2017/11/how-to-sort-arraylist-in-descending-order-in-java.html
     /**
      * Set the round start to be false
      */

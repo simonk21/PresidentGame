@@ -1,81 +1,147 @@
 package com.example.hw4d;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import java.util.ArrayList;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    public PresidentGameState initial;
     private ImageView card[] = new ImageView[13];
-    //rivate ImageView card0, card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12;
     private Button play, pause, order, pass;
-    private static int HANDSIZE = 13;
+    private int index;
+    private TextView p0, p1, p2, p3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        index = 0;
         card[0] = findViewById(R.id.card0);
-        //card[0].setOnTouchListener(new TouchListener());
+        card[0].setOnTouchListener(new TouchListener());
         card[1] = findViewById(R.id.card1);
-        //card[1].setOnTouchListener(new TouchListener());
+        card[1].setOnTouchListener(new TouchListener());
         card[2] = findViewById(R.id.card2);
-        //card[2].setOnTouchListener(new TouchListener());
+        card[2].setOnTouchListener(new TouchListener());
         card[3] = findViewById(R.id.card3);
-        //card[3].setOnTouchListener(new TouchListener());
+        card[3].setOnTouchListener(new TouchListener());
         card[4] = findViewById(R.id.card4);
-        //card[4].setOnTouchListener(new TouchListener());
+        card[4].setOnTouchListener(new TouchListener());
         card[5] = findViewById(R.id.card5);
-        //card[5].setOnTouchListener(new TouchListener());
+        card[5].setOnTouchListener(new TouchListener());
         card[6] = findViewById(R.id.card6);
-        //card[6].setOnTouchListener(new TouchListener());
+        card[6].setOnTouchListener(new TouchListener());
         card[7] = findViewById(R.id.card7);
-        //card[7].setOnTouchListener(new TouchListener());
+        card[7].setOnTouchListener(new TouchListener());
         card[8] = findViewById(R.id.card8);
-        //card[8].setOnTouchListener(new TouchListener());
+        card[8].setOnTouchListener(new TouchListener());
         card[9] = findViewById(R.id.card9);
-        //card[9].setOnTouchListener(new TouchListener());
+        card[9].setOnTouchListener(new TouchListener());
         card[10] = findViewById(R.id.card10);
-        //card[10].setOnTouchListener(new TouchListener());
+        card[10].setOnTouchListener(new TouchListener());
         card[11] = findViewById(R.id.card11);
-        //card[11].setOnTouchListener(new TouchListener());
+        card[11].setOnTouchListener(new TouchListener());
         card[12] = findViewById(R.id.card12);
-        //card[12].setOnTouchListener(new TouchListener());
-//        play = findViewById(R.id.playButton);
-//        play.setOnClickListener(this);
-//        pause = findViewById(R.id.pauseButton);
-//        pause.setOnClickListener(this);
-//        order = findViewById(R.id.orderButton);
-//        order.setOnClickListener(this);
-//        pass = findViewById(R.id.passButton);
-//        pass.setOnClickListener(this);
-
-        PresidentGameState initial = new PresidentGameState();
-
+        card[12].setOnTouchListener(new TouchListener());
+        play = findViewById(R.id.playButton);
+        play.setOnClickListener(this);
+        pause = findViewById(R.id.pauseButton);
+        pause.setOnClickListener(this);
+        order = findViewById(R.id.orderButton);
+        order.setOnClickListener(this);
+        pass = findViewById(R.id.passButton);
+        pass.setOnClickListener(this);
+        p1 = findViewById(R.id.player1Text);
+        p2 = findViewById(R.id.player2Text);
+        p3 = findViewById(R.id.Player3Text);
+        p0 = findViewById(R.id.userPlayer);
+        initial = new PresidentGameState();
         updatePlayerGui(initial);
     }
 
     @Override
     public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.playButton:
+                break;
+            case R.id.pauseButton:
+                break;
+            case R.id.orderButton:
+                initial.setOrder(index);
+                updatePlayerGui(initial);
+                break;
+            case R.id.passButton:
+                if(initial.pass(index)) {
+                    PresidentGameState updateGS = new PresidentGameState(initial);
+                    switchHighlight(updateGS.getCurrentPlayer());
+                }
+                else{
+                    Toast.makeText(getApplication().getApplicationContext(), "Not your Turn!",
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+    // https://www.youtube.com/watch?v=GtxVILjLcw8
+    //https://stackoverflow.com/questions/1466788/android-textview-setting-the-background-color-dynamically-doesnt-work
 
+    public class TouchListener implements View.OnTouchListener{
+
+        @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            return false;
+        }
     }
 
-//    public class TouchListener implements View.OnTouchListener{
-//
-//        @SuppressLint("ClickableViewAccessibility")
-//        @Override
-//        public boolean onTouch(View v, MotionEvent event) {
-//
-//            return false;
-//        }
-//    }
+    public void switchHighlight(int idx){
+            switch(idx) {
+                case 0:
+                    p0.setBackgroundResource(R.color.yellow);
+                    p0.setTextColor(getResources().getColor(R.color.black));
+                    p1.setBackgroundResource(R.color.black);
+                    p2.setBackgroundResource(R.color.black);
+                    p3.setBackgroundResource(R.color.black);
+                    p1.setTextColor(getResources().getColor(R.color.white));
+                    p2.setTextColor(getResources().getColor(R.color.white));
+                    p3.setTextColor(getResources().getColor(R.color.white));
+                    break;
+                case 1:
+                    p1.setBackgroundResource(R.color.yellow);
+                    p1.setTextColor(getResources().getColor(R.color.black));
+                    p0.setBackgroundResource(R.color.black);
+                    p2.setBackgroundResource(R.color.black);
+                    p3.setBackgroundResource(R.color.black);
+                    p0.setTextColor(getResources().getColor(R.color.white));
+                    p2.setTextColor(getResources().getColor(R.color.white));
+                    p3.setTextColor(getResources().getColor(R.color.white));
+                    break;
+                case 2:
+                    p2.setBackgroundResource(R.color.yellow);
+                    p2.setTextColor(getResources().getColor(R.color.black));
+                    p1.setBackgroundResource(R.color.black);
+                    p0.setBackgroundResource(R.color.black);
+                    p3.setBackgroundResource(R.color.black);
+                    p1.setTextColor(getResources().getColor(R.color.white));
+                    p0.setTextColor(getResources().getColor(R.color.white));
+                    p3.setTextColor(getResources().getColor(R.color.white));
+                    break;
+                case 3:
+                    p3.setBackgroundResource(R.color.yellow);
+                    p3.setTextColor(getResources().getColor(R.color.black));
+                    p1.setBackgroundResource(R.color.black);
+                    p2.setBackgroundResource(R.color.black);
+                    p0.setBackgroundResource(R.color.black);
+                    p1.setTextColor(getResources().getColor(R.color.white));
+                    p2.setTextColor(getResources().getColor(R.color.white));
+                    p0.setTextColor(getResources().getColor(R.color.white));
+                    break;
+            }
+        }
 
     public void updateCardGui(PresidentGameState gs, int i) {
             Card theCard = gs.getPlayers().get(0).getHand().get(i);
@@ -252,9 +318,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                 }
             }
-
-            /*Bitmap bImage = BitmapFactory.decodeResource(this.getResources(), imageId);
-            card[i].setImageBitmap(bImage);*/
 
             card[i].setImageResource(imageId);
     }
