@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity{
         p3 = findViewById(R.id.Player3Text);
         p0 = findViewById(R.id.userPlayer);
         initial = new PresidentGameState();
+        for (int i = 0; i < 4; i++) {
+            initial.getPlayers().get(i).setPlayerNum(i);
+        }
         updatePlayerGui(initial);
 
 
@@ -371,30 +374,16 @@ public class MainActivity extends AppCompatActivity{
                                 break;
                         }
 
-                        play.add(toAdd); //it adds the card to the play deck before it even plays the card, not sure if its a computer AI thing
+                        play.add(toAdd);
                         if(initial.playCard(index, play)) {
+                            switchHighlight(initial.getCurrentPlayer());
                             selectedCard.setBackgroundResource(0);
                             currentPlay.setImageResource(tagValue);
-                            computerMoves(initial);
+                            computerMoves();
                         }
                         else{
                             Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
                                     Toast.LENGTH_SHORT).show();
-                        }
-
-                        switch(initial.getCurrentPlayer()){
-                            case 0:
-                                switchHighlight(0);
-                                break;
-                            case 1:
-                                switchHighlight(1);
-                                break;
-                            case 2:
-                                switchHighlight(2);
-                                break;
-                            case 3:
-                                switchHighlight(3);
-                                break;
                         }
                     }
                     updatePlayerGui(initial);
@@ -407,7 +396,7 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.passButton:
                     if (initial.pass(index)) {
                         switchHighlight(initial.getCurrentPlayer());
-                        computerMoves(initial);
+                        computerMoves();
                     } else {
                         Toast.makeText(getApplication().getApplicationContext(), "Not your Turn!",
                                 Toast.LENGTH_SHORT).show();
@@ -460,6 +449,10 @@ public class MainActivity extends AppCompatActivity{
                     p0.setTextColor(getResources().getColor(R.color.white));
                     break;
             }
+            p0.invalidate();
+            p1.invalidate();
+            p2.invalidate();
+            p3.invalidate();
         }
 
     public void updateCardGui(PresidentGameState gs, int i) {
@@ -483,16 +476,24 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public void computerMoves(PresidentGameState gs) {
-        while (gs.getTurn() != 0) {
-            Card computerPlayedCard = gs.dumbAI(gs.getPlayers().get(gs.getTurn()));
+    public void computerMoves() {
+        while (initial.getTurn() != 0) {
+            switchHighlight(initial.getCurrentPlayer());
+
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Card computerPlayedCard = initial.dumbAI(initial.getPlayers().get(initial.getTurn()));
             if(computerPlayedCard == null) {
                 //dont change card UI
             }
-            else
-            currentPlay.setImageResource(getImageId(computerPlayedCard));
-            switchHighlight(gs.getCurrentPlayer());
+            else {
+                currentPlay.setImageResource(getImageId(computerPlayedCard));
+            }
         }
+        switchHighlight(initial.getCurrentPlayer());
     }
 
     public int getImageId(Card theCard) {

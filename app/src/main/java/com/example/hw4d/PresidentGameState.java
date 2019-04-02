@@ -601,9 +601,6 @@ public class PresidentGameState implements Serializable {
                 }
 
 
-
-                dumbBot.removeCard(tradeCard.getSuit(), tradeCard.getValue());
-
                 // Algorithm to randomly choose an action
                 // The AI might just skip its turn, or it might just
                 // play its highest card randomly
@@ -615,19 +612,18 @@ public class PresidentGameState implements Serializable {
                 double turnRoulette = (int)(Math.random()*((max-min)+1));
                 ArrayList<Card> cardToPlay = new ArrayList<>();
                 cardToPlay.add(tradeCard);
+                turnRoulette = 51;
                 if(turnRoulette < 50){
                     pass(dumbBot);
-                    nextPlayer();
                     return null;
                 } else {
                     // If the dumb bot cant play only the 1 card it has, then it passes
                     if(currentSet.size() != 1){
                         pass(dumbBot);
-                        nextPlayer();
                         return null;
                     } else {
                         if(playCard(dumbBot.getPlayerNum(), cardToPlay)) {
-                            nextPlayer();
+                            dumbBot.removeCard(tradeCard.getSuit(), tradeCard.getValue());
                             return cardToPlay.get(0);
                         }
                         else{
