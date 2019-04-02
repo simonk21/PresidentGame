@@ -693,9 +693,14 @@ public class PresidentGameState implements Serializable {
                         nextPlayer();
                         return null;
                     } else {
-                        playCard(dumbBot.getPlayerNum(), cardToPlay);
-                        nextPlayer();
-                        return cardToPlay.get(0);
+                        if(playCard(dumbBot.getPlayerNum(), cardToPlay)) {
+                            nextPlayer();
+                            return cardToPlay.get(0);
+                        }
+                        else{
+                            pass(getCurrentPlayer());
+                            return null;
+                        }
                     }
                 }
     }
