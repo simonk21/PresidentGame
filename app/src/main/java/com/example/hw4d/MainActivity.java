@@ -372,7 +372,7 @@ public class MainActivity extends AppCompatActivity{
                         }
 
                         play.add(toAdd); //it adds the card to the play deck before it even plays the card, not sure if its a computer AI thing
-                        if(initial.playCard(index, play) == true) {
+                        if(initial.playCard(index, play)) {
                             selectedCard.setBackgroundResource(0);
                             currentPlay.setImageResource(tagValue);
                             computerMoves(initial);
@@ -490,8 +490,9 @@ public class MainActivity extends AppCompatActivity{
             if(computerPlayedCard == null) {
                 //dont change card UI
             }
-            else
-            currentPlay.setImageResource(getImageId(computerPlayedCard));
+            else {
+                currentPlay.setImageResource(getImageId(computerPlayedCard));
+            }
         }
     }
 
