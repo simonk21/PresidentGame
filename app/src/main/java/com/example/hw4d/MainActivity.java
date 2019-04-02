@@ -406,8 +406,7 @@ public class MainActivity extends AppCompatActivity{
                     break;
                 case R.id.passButton:
                     if (initial.pass(index)) {
-                        updateGS = new PresidentGameState(initial);
-                        switchHighlight(updateGS.getCurrentPlayer());
+                        switchHighlight(initial.getCurrentPlayer());
                         computerMoves(initial);
                     } else {
                         Toast.makeText(getApplication().getApplicationContext(), "Not your Turn!",
@@ -490,9 +489,9 @@ public class MainActivity extends AppCompatActivity{
             if(computerPlayedCard == null) {
                 //dont change card UI
             }
-            else {
-                currentPlay.setImageResource(getImageId(computerPlayedCard));
-            }
+            else
+            currentPlay.setImageResource(getImageId(computerPlayedCard));
+            switchHighlight(gs.getCurrentPlayer());
         }
     }
 
