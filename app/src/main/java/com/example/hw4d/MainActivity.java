@@ -1,8 +1,10 @@
 package com.example.hw4d;
 
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     public PresidentGameState initial;
     private ImageButton card[] = new ImageButton[13];
     private ImageButton selectedCard;
@@ -60,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         initial = new PresidentGameState();
         updatePlayerGui(initial);
 
-        card[0].setBackgroundResource(R.drawable.three_spades);
 
 
     }
@@ -107,176 +108,280 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplication().getApplicationContext(), "No card selected!",
                                         Toast.LENGTH_SHORT).show();
                                 break;
+
                             case R.drawable.two_clubs:
                                 toAdd.setCardVal(13);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.two_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.three_clubs:
                                 toAdd.setCardVal(1);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.three_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.four_clubs:
                                 toAdd.setCardVal(2);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.four_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.five_clubs:
                                 toAdd.setCardVal(3);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.five_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.six_clubs:
                                 toAdd.setCardVal(4);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.six_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.seven_clubs:
                                 toAdd.setCardVal(5);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.seven_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.eight_clubs:
                                 toAdd.setCardVal(6);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.eight_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.nine_clubs:
                                 toAdd.setCardVal(7);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.nine_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.ten_clubs:
                                 toAdd.setCardVal(8);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.ten_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.jack_clubs:
                                 toAdd.setCardVal(9);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.jack_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.queen_clubs:
                                 toAdd.setCardVal(10);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.queen_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
+
                                 break;
+
                             case R.drawable.king_clubs:
                                 toAdd.setCardVal(11);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.king_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
                                 break;
+
                             case R.drawable.ace_clubs:
                                 toAdd.setCardVal(12);
                                 toAdd.setCardSuit("Clubs");
-                                play.add(toAdd);
-                                if(initial.playCard(index, play) == true) {
-                                    selectedCard.setBackgroundResource(R.drawable.scoreboard);
-                                    currentPlay.setImageResource(R.drawable.ace_clubs);
-                                }
-                                else{
-                                    Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
+                                break;
+
+                            case R.drawable.two_spades:
+                                toAdd.setCardVal(13);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.three_spades:
+                                toAdd.setCardVal(1);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.four_spades:
+                                toAdd.setCardVal(2);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.five_spades:
+                                toAdd.setCardVal(3);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.six_spades:
+                                toAdd.setCardVal(4);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.seven_spades:
+                                toAdd.setCardVal(5);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.eight_spades:
+                                toAdd.setCardVal(6);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.nine_spades:
+                                toAdd.setCardVal(7);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.ten_spades:
+                                toAdd.setCardVal(8);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.jack_spades:
+                                toAdd.setCardVal(9);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.queen_spades:
+                                toAdd.setCardVal(10);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.king_spades:
+                                toAdd.setCardVal(11);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.ace_spades:
+                                toAdd.setCardVal(12);
+                                toAdd.setCardSuit("Spades");
+                                break;
+
+                            case R.drawable.two_diamonds:
+                                toAdd.setCardVal(13);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.three_diamonds:
+                                toAdd.setCardVal(1);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.four_diamonds:
+                                toAdd.setCardVal(2);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.five_diamonds:
+                                toAdd.setCardVal(3);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.six_diamonds:
+                                toAdd.setCardVal(4);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.seven_diamonds:
+                                toAdd.setCardVal(5);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.eight_diamonds:
+                                toAdd.setCardVal(6);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.nine_diamonds:
+                                toAdd.setCardVal(7);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.ten_diamonds:
+                                toAdd.setCardVal(8);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.jack_diamonds:
+                                toAdd.setCardVal(9);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.queen_diamonds:
+                                toAdd.setCardVal(10);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.king_diamonds:
+                                toAdd.setCardVal(11);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.ace_diamonds:
+                                toAdd.setCardVal(12);
+                                toAdd.setCardSuit("Diamonds");
+                                break;
+
+                            case R.drawable.two_hearts:
+                                toAdd.setCardVal(13);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.three_hearts:
+                                toAdd.setCardVal(1);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.four_hearts:
+                                toAdd.setCardVal(2);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.five_hearts:
+                                toAdd.setCardVal(3);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.six_hearts:
+                                toAdd.setCardVal(4);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.seven_hearts:
+                                toAdd.setCardVal(5);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.eight_hearts:
+                                toAdd.setCardVal(6);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.nine_hearts:
+                                toAdd.setCardVal(7);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.ten_hearts:
+                                toAdd.setCardVal(8);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.jack_hearts:
+                                toAdd.setCardVal(9);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.queen_hearts:
+                                toAdd.setCardVal(10);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.king_hearts:
+                                toAdd.setCardVal(11);
+                                toAdd.setCardSuit("Hearts");
+                                break;
+
+                            case R.drawable.ace_hearts:
+                                toAdd.setCardVal(12);
+                                toAdd.setCardSuit("Hearts");
                                 break;
                         }
+
+                        play.add(toAdd); //it adds the card to the play deck before it even plays the card, not sure if its a computer AI thing
+                        if(initial.playCard(index, play) == true) {
+                            selectedCard.setBackgroundResource(0);
+                            currentPlay.setImageResource(tagValue);
+                            computerMoves(initial);
+                        }
+                        else{
+                            Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
                         switch(initial.getCurrentPlayer()){
                             case 0:
                                 switchHighlight(0);
@@ -292,6 +397,8 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                         }
                     }
+                    updatePlayerGui(initial);
+
                     break;
                 case R.id.pauseButton:
                     break;
@@ -301,6 +408,7 @@ public class MainActivity extends AppCompatActivity {
                     if (initial.pass(index)) {
                         updateGS = new PresidentGameState(initial);
                         switchHighlight(updateGS.getCurrentPlayer());
+                        computerMoves(initial);
                     } else {
                         Toast.makeText(getApplication().getApplicationContext(), "Not your Turn!",
                                 Toast.LENGTH_SHORT).show();
@@ -357,179 +465,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateCardGui(PresidentGameState gs, int i) {
             Card theCard = gs.getPlayers().get(0).getHand().get(i);
-            int imageId = 0;
-            if(theCard.getSuit().equals("Spades")) {
-                switch(theCard.getValue()) {
-                    case 1:
-                        imageId = R.drawable.three_spades;
-                        break;
-                    case 2:
-                        imageId = R.drawable.four_spades;
-                        break;
-                    case 3:
-                        imageId = R.drawable.five_spades;
-                        break;
-                    case 4:
-                        imageId = R.drawable.six_spades;
-                        break;
-                    case 5:
-                        imageId = R.drawable.seven_spades;
-                        break;
-                    case 6:
-                        imageId = R.drawable.eight_spades;
-                        break;
-                    case 7:
-                        imageId = R.drawable.nine_spades;
-                        break;
-                    case 8:
-                        imageId = R.drawable.ten_spades;
-                        break;
-                    case 9:
-                        imageId = R.drawable.jack_spades;
-                        break;
-                    case 10:
-                        imageId = R.drawable.queen_spades;
-                        break;
-                    case 11:
-                        imageId = R.drawable.king_spades;
-                        break;
-                    case 12:
-                        imageId = R.drawable.ace_spades;
-                        break;
-                    case 13:
-                        imageId = R.drawable.two_spades;
-                        break;
-                }
-            }
-            else if(theCard.getSuit().equals("Hearts")){
-                switch(theCard.getValue()) {
-                    case 1:
-                        imageId = R.drawable.three_hearts;
-                        break;
-                    case 2:
-                        imageId = R.drawable.four_hearts;
-                        break;
-                    case 3:
-                        imageId = R.drawable.five_hearts;
-                        break;
-                    case 4:
-                        imageId = R.drawable.six_hearts;
-                        break;
-                    case 5:
-                        imageId = R.drawable.seven_hearts;
-                        break;
-                    case 6:
-                        imageId = R.drawable.eight_hearts;
-                        break;
-                    case 7:
-                        imageId = R.drawable.nine_hearts;
-                        break;
-                    case 8:
-                        imageId = R.drawable.ten_hearts;
-                        break;
-                    case 9:
-                        imageId = R.drawable.jack_hearts;
-                        break;
-                    case 10:
-                        imageId = R.drawable.queen_hearts;
-                        break;
-                    case 11:
-                        imageId = R.drawable.king_hearts;
-                        break;
-                    case 12:
-                        imageId = R.drawable.ace_hearts;
-                        break;
-                    case 13:
-                        imageId = R.drawable.two_hearts;
-                        break;
-                }
-            }
-            else if(theCard.getSuit().equals("Diamonds")){
-                switch(theCard.getValue()) {
-                    case 1:
-                        imageId = R.drawable.three_diamonds;
-                        break;
-                    case 2:
-                        imageId = R.drawable.four_diamonds;
-                        break;
-                    case 3:
-                        imageId = R.drawable.five_diamonds;
-                        break;
-                    case 4:
-                        imageId = R.drawable.six_diamonds;
-                        break;
-                    case 5:
-                        imageId = R.drawable.seven_diamonds;
-                        break;
-                    case 6:
-                        imageId = R.drawable.eight_diamonds;
-                        break;
-                    case 7:
-                        imageId = R.drawable.nine_diamonds;
-                        break;
-                    case 8:
-                        imageId = R.drawable.ten_diamonds;
-                        break;
-                    case 9:
-                        imageId = R.drawable.jack_diamonds;
-                        break;
-                    case 10:
-                        imageId = R.drawable.queen_diamonds;
-                        break;
-                    case 11:
-                        imageId = R.drawable.king_diamonds;
-                        break;
-                    case 12:
-                        imageId = R.drawable.ace_diamonds;
-                        break;
-                    case 13:
-                        imageId = R.drawable.two_diamonds;
-                        break;
-                }
-            }
-            else if(theCard.getSuit().equals("Clubs")){
-                switch(theCard.getValue()) {
-                    case 1:
-                        imageId = R.drawable.three_clubs;
-                        break;
-                    case 2:
-                        imageId = R.drawable.four_clubs;
-                        break;
-                    case 3:
-                        imageId = R.drawable.five_clubs;
-                        break;
-                    case 4:
-                        imageId = R.drawable.six_clubs;
-                        break;
-                    case 5:
-                        imageId = R.drawable.seven_clubs;
-                        break;
-                    case 6:
-                        imageId = R.drawable.eight_clubs;
-                        break;
-                    case 7:
-                        imageId = R.drawable.nine_clubs;
-                        break;
-                    case 8:
-                        imageId = R.drawable.ten_clubs;
-                        break;
-                    case 9:
-                        imageId = R.drawable.jack_clubs;
-                        break;
-                    case 10:
-                        imageId = R.drawable.queen_clubs;
-                        break;
-                    case 11:
-                        imageId = R.drawable.king_clubs;
-                        break;
-                    case 12:
-                        imageId = R.drawable.ace_clubs;
-                        break;
-                    case 13:
-                        imageId = R.drawable.two_clubs;
-                        break;
-                }
-            }
+            int imageId = getImageId(theCard);
 
             card[i].setTag(Integer.valueOf(imageId));
             card[i].setBackgroundResource(imageId);
@@ -537,11 +473,203 @@ public class MainActivity extends AppCompatActivity {
 
     public void updatePlayerGui (PresidentGameState gs) {
         int i = 0;
+        for (int j = 0; j < 13; j++) {
+            card[j].setBackgroundResource(R.drawable.scoreboard);
+        }
         for (Card c : gs.getPlayers().get(0).getHand()){
             updateCardGui(gs, i);
+            card[i].getBackground().setAlpha(255);
+            card[i].invalidate();
             i++;
         }
     }
 
+    public void computerMoves(PresidentGameState gs) {
+        while (gs.getTurn() != 0) {
+            Card computerPlayedCard = gs.dumbAI(gs.getPlayers().get(gs.getTurn()));
+            if(computerPlayedCard == null) {
+                //dont change card UI
+            }
+            else
+            currentPlay.setImageResource(getImageId(computerPlayedCard));
+        }
+    }
+
+    public int getImageId(Card theCard) {
+        int imageId = 0;
+        if(theCard.getSuit().equals("Spades")) {
+            switch(theCard.getValue()) {
+                case 1:
+                    imageId = R.drawable.three_spades;
+                    break;
+                case 2:
+                    imageId = R.drawable.four_spades;
+                    break;
+                case 3:
+                    imageId = R.drawable.five_spades;
+                    break;
+                case 4:
+                    imageId = R.drawable.six_spades;
+                    break;
+                case 5:
+                    imageId = R.drawable.seven_spades;
+                    break;
+                case 6:
+                    imageId = R.drawable.eight_spades;
+                    break;
+                case 7:
+                    imageId = R.drawable.nine_spades;
+                    break;
+                case 8:
+                    imageId = R.drawable.ten_spades;
+                    break;
+                case 9:
+                    imageId = R.drawable.jack_spades;
+                    break;
+                case 10:
+                    imageId = R.drawable.queen_spades;
+                    break;
+                case 11:
+                    imageId = R.drawable.king_spades;
+                    break;
+                case 12:
+                    imageId = R.drawable.ace_spades;
+                    break;
+                case 13:
+                    imageId = R.drawable.two_spades;
+                    break;
+            }
+        }
+        else if(theCard.getSuit().equals("Hearts")){
+            switch(theCard.getValue()) {
+                case 1:
+                    imageId = R.drawable.three_hearts;
+                    break;
+                case 2:
+                    imageId = R.drawable.four_hearts;
+                    break;
+                case 3:
+                    imageId = R.drawable.five_hearts;
+                    break;
+                case 4:
+                    imageId = R.drawable.six_hearts;
+                    break;
+                case 5:
+                    imageId = R.drawable.seven_hearts;
+                    break;
+                case 6:
+                    imageId = R.drawable.eight_hearts;
+                    break;
+                case 7:
+                    imageId = R.drawable.nine_hearts;
+                    break;
+                case 8:
+                    imageId = R.drawable.ten_hearts;
+                    break;
+                case 9:
+                    imageId = R.drawable.jack_hearts;
+                    break;
+                case 10:
+                    imageId = R.drawable.queen_hearts;
+                    break;
+                case 11:
+                    imageId = R.drawable.king_hearts;
+                    break;
+                case 12:
+                    imageId = R.drawable.ace_hearts;
+                    break;
+                case 13:
+                    imageId = R.drawable.two_hearts;
+                    break;
+            }
+        }
+        else if(theCard.getSuit().equals("Diamonds")){
+            switch(theCard.getValue()) {
+                case 1:
+                    imageId = R.drawable.three_diamonds;
+                    break;
+                case 2:
+                    imageId = R.drawable.four_diamonds;
+                    break;
+                case 3:
+                    imageId = R.drawable.five_diamonds;
+                    break;
+                case 4:
+                    imageId = R.drawable.six_diamonds;
+                    break;
+                case 5:
+                    imageId = R.drawable.seven_diamonds;
+                    break;
+                case 6:
+                    imageId = R.drawable.eight_diamonds;
+                    break;
+                case 7:
+                    imageId = R.drawable.nine_diamonds;
+                    break;
+                case 8:
+                    imageId = R.drawable.ten_diamonds;
+                    break;
+                case 9:
+                    imageId = R.drawable.jack_diamonds;
+                    break;
+                case 10:
+                    imageId = R.drawable.queen_diamonds;
+                    break;
+                case 11:
+                    imageId = R.drawable.king_diamonds;
+                    break;
+                case 12:
+                    imageId = R.drawable.ace_diamonds;
+                    break;
+                case 13:
+                    imageId = R.drawable.two_diamonds;
+                    break;
+            }
+        }
+        else if(theCard.getSuit().equals("Clubs")){
+            switch(theCard.getValue()) {
+                case 1:
+                    imageId = R.drawable.three_clubs;
+                    break;
+                case 2:
+                    imageId = R.drawable.four_clubs;
+                    break;
+                case 3:
+                    imageId = R.drawable.five_clubs;
+                    break;
+                case 4:
+                    imageId = R.drawable.six_clubs;
+                    break;
+                case 5:
+                    imageId = R.drawable.seven_clubs;
+                    break;
+                case 6:
+                    imageId = R.drawable.eight_clubs;
+                    break;
+                case 7:
+                    imageId = R.drawable.nine_clubs;
+                    break;
+                case 8:
+                    imageId = R.drawable.ten_clubs;
+                    break;
+                case 9:
+                    imageId = R.drawable.jack_clubs;
+                    break;
+                case 10:
+                    imageId = R.drawable.queen_clubs;
+                    break;
+                case 11:
+                    imageId = R.drawable.king_clubs;
+                    break;
+                case 12:
+                    imageId = R.drawable.ace_clubs;
+                    break;
+                case 13:
+                    imageId = R.drawable.two_clubs;
+                    break;
+            }
+        }
+        return imageId;
+    }
     //http://www.devexchanges.info/2015/03/simple-moving-object-with-touch-events.html
 }

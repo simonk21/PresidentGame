@@ -153,91 +153,91 @@
                 android:layout_marginTop="40dp">
                 <ImageButton
                     android:id="@+id/card0"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades"/>
 
                 <ImageButton
                     android:id="@+id/card1"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades"/>
 
                 <ImageButton
                     android:id="@+id/card2"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades"/>
 
                 <ImageButton
                     android:id="@+id/card3"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades" />
 
                 <ImageButton
                     android:id="@+id/card4"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades" />
 
                 <ImageButton
                     android:id="@+id/card5"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades" />
 
                 <ImageButton
                     android:id="@+id/card6"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades" />
 
                 <ImageButton
                     android:id="@+id/card7"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades" />
 
                 <ImageButton
                     android:id="@+id/card8"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades" />
 
                 <ImageButton
                     android:id="@+id/card9"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades" />
 
                 <ImageButton
                     android:id="@+id/card10"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades" />
 
                 <ImageButton
                     android:id="@+id/card11"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades" />
 
                 <ImageButton
                     android:id="@+id/card12"
-                    android:layout_width="10dp"
+                    android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/seven_spades" />
