@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity{
     private ImageView currentPlay;
     private int index;
     private TextView p0, p1, p2, p3;
+    private TextView cards_1, cards_2, cards_3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,9 @@ public class MainActivity extends AppCompatActivity{
         card[11] = findViewById(R.id.card11);
         card[12] = findViewById(R.id.card12);
         currentPlay = findViewById(R.id.currentPlay);
-
+        cards_1 = findViewById(R.id.p1);
+        cards_2 = findViewById(R.id.p2);
+        cards_3 = findViewById(R.id.p3);
         for (int i = 0; i < 13; i++) {
             card[i].setOnClickListener(new CardClickListener());
         }

@@ -20,7 +20,7 @@ import java.util.Collections;
  *
  */
 public class PresidentGameState implements Serializable {
-
+    private int passAll[] = new int[4];
     /**
      * Number of Players in Game
      */
@@ -351,10 +351,28 @@ public class PresidentGameState implements Serializable {
         if(this.turn != turn){
             return false;
         }
+//        passAll[turn] = 1;
+//        if(checkPassAll()){
+//               currentSet.removeAll(getCurrentSet());
+//        }
         nextPlayer();
         return true;
     }
 
+//    public boolean checkPassAll(){
+//        int count = 0;
+//        for(int i = 0; i < passAll.length; i++){
+//            if(passAll[i] == 1){
+//                count++;
+//            }
+//        }
+//        if(count == 4){
+//            return true;
+//        }
+//        else{
+//            return false;
+//        }
+//    }
 
     /**
      * setFinish
@@ -408,7 +426,7 @@ public class PresidentGameState implements Serializable {
         if (turn == players.size() - 1) {
             turn = 0;
         } else {
-            turn++;
+            turn = turn + 1;
         }
     }
 
@@ -561,7 +579,7 @@ public class PresidentGameState implements Serializable {
 
                         Card cardToMakeTheCurrent = tmpHand.get(i);
                         players.get(turn).removeCard(tmpHand.get(i).getSuit(), tmpHand.get(i).getValue());
-                        currentSet.removeAll(currentSet);
+                        currentSet.removeAll(getCurrentSet());
                         currentSet.add(cardToMakeTheCurrent);
                         nextPlayer();
                     }
@@ -588,57 +606,54 @@ public class PresidentGameState implements Serializable {
         return true;
     }
 
-    public Card dumbAI(GamePlayer dumbBot){
+    public Card dumbAI(GamePlayer dumbBot) {
         ArrayList<Card> botHand = new ArrayList<>();
-                botHand = dumbBot.getHand();
+        botHand = dumbBot.getHand();
 
-                Card tradeCard = new Card(0, "Default");
-                for(Card c: botHand){
-                        if(tradeCard.getValue() < c.getValue()){
-                            tradeCard.setCardVal(c.getValue());
-                            tradeCard.setCardSuit(c.getSuit());
-                        }
-                }
+        Card tradeCard = new Card(0, "Default");
+        for (Card c : botHand) {
+            if (tradeCard.getValue() < c.getValue()) {
+                tradeCard.setCardVal(c.getValue());
+                tradeCard.setCardSuit(c.getSuit());
+            }
+        }
 
 
+        dumbBot.removeCard(tradeCard.getSuit(), tradeCard.getValue());
 
-                dumbBot.removeCard(tradeCard.getSuit(), tradeCard.getValue());
+        // Algorithm to randomly choose an action
+        // The AI might just skip its turn, or it might just
+        // play its highest card randomly
+        // You never know...
 
-                // Algorithm to randomly choose an action
-                // The AI might just skip its turn, or it might just
-                // play its highest card randomly
-                // You never know...
-
-                // Select a random value between 1 and 100
-                int max = 100;
-                int min = 0;
-                double turnRoulette = (int)(Math.random()*((max-min)+1));
-                ArrayList<Card> cardToPlay = new ArrayList<>();
-                cardToPlay.add(tradeCard);
-                if(turnRoulette < 50){
-                    pass(dumbBot);
-                    nextPlayer();
-                    return null;
+        // Select a random value between 1 and 100
+//        int max = 100;
+//        int min = 0;
+//        double turnRoulette = (int) (Math.random() * ((max - min) + 1));
+        ArrayList<Card> cardToPlay = new ArrayList<>();
+        cardToPlay.add(tradeCard);
+//        if (turnRoulette < 10) {
+//            pass(dumbBot);
+//            return null;
+//        } else {
+            // If the dumb bot cant play only the 1 card it has, then it passes
+            if (currentSet.size() != 1) {
+                pass(dumbBot);
+                return null;
+            } else {
+                if (currentSet.get(0).getValue() < cardToPlay.get(0).getValue()) {
+                    playCard(dumbBot.getPlayerNum(), cardToPlay);
+                    return cardToPlay.get(0);
                 } else {
-                    // If the dumb bot cant play only the 1 card it has, then it passes
-                    if(currentSet.size() != 1){
-                        pass(dumbBot);
-                        nextPlayer();
-                        return null;
-                    } else {
-                        if(playCard(dumbBot.getPlayerNum(), cardToPlay)) {
-                            nextPlayer();
-                            return cardToPlay.get(0);
-                        }
-                        else{
-                            pass(getCurrentPlayer());
-                            return null;
-                        }
-                    }
+                    pass(getCurrentPlayer());
                 }
+            }
+//        }
+        return null;
     }
 
     public int getTurn() {
+
         return turn;
     }
 }
