@@ -20,7 +20,7 @@ import java.util.Collections;
  *
  */
 public class PresidentGameState implements Serializable {
-    private int passAll[] = new int[4];
+
     /**
      * Number of Players in Game
      */
@@ -351,28 +351,10 @@ public class PresidentGameState implements Serializable {
         if(this.turn != turn){
             return false;
         }
-//        passAll[turn] = 1;
-//        if(checkPassAll()){
-//               currentSet.removeAll(getCurrentSet());
-//        }
         nextPlayer();
         return true;
     }
 
-//    public boolean checkPassAll(){
-//        int count = 0;
-//        for(int i = 0; i < passAll.length; i++){
-//            if(passAll[i] == 1){
-//                count++;
-//            }
-//        }
-//        if(count == 4){
-//            return true;
-//        }
-//        else{
-//            return false;
-//        }
-//    }
 
     /**
      * setFinish
@@ -426,7 +408,7 @@ public class PresidentGameState implements Serializable {
         if (turn == players.size() - 1) {
             turn = 0;
         } else {
-            turn = turn + 1;
+            turn++;
         }
     }
 
@@ -546,7 +528,7 @@ public class PresidentGameState implements Serializable {
         // Set of logical checks to ensure that Player logic is sound
         if(getCurrentPlayer() != turn){
             return false;
-        } else if(cardsToPlay.size() == 0 || cardsToPlay.size() > 13){ /* you had  < 8 which didn't make sense */
+        } else if(cardsToPlay.size() == 0 || cardsToPlay.size() > 8){
             return false;
         } else if(cardsToPlay.size() != currentSet.size()){
             if(currentSet.size() != 0) {
@@ -555,23 +537,26 @@ public class PresidentGameState implements Serializable {
             currentSet.add(new Card(0,"Default"));
         }
 
+        // Index through the Array of cards the user
+        // is attempting to play and make sure they
+        // are making a legal play
+        int numCardsFirstIndex = 0;
+        int numCardsSecondIndex = 1;
+        while(numCardsSecondIndex < cardsToPlay.size()){
+            if(cardsToPlay.get(numCardsFirstIndex).getValue() == cardsToPlay.get(numCardsSecondIndex).getValue() ||
+                    cardsToPlay.get(numCardsFirstIndex).getValue() == 13 ||  cardsToPlay.get(numCardsSecondIndex).getValue() == 13){
+                        numCardsFirstIndex++;
+                        numCardsSecondIndex++;
+            } else {
+                return false;
+            }
+        }
 
-
-        // Instance variable that will be used to label the size of
-        // the array of cards passed in
-//        int numCardsPassedIn = cardsToPlay.size();
-//        for(int checkLegalHand = 0; checkLegalHand < cardsToPlay.size(); checkLegalHand++){
-//            if(cardsToPlay.get(checkLegalHand).getValue() == cardsToPlay.get(numCardsPassedIn - 1).getValue() /* changed numCardsPassedIn to numCardsPassedIn - 1 */
-//                    || cardsToPlay.get(checkLegalHand).getValue() == 2){
-//            } else {
-//                return false;
-//            }
-//        }
 
         if(cardsToPlay.size() == 1){
             if(cardsToPlay.get(0).getValue() <= currentSet.get(0).getValue()){
                 return false;
-            } else if(cardsToPlay.get(0).getValue() > currentSet.get(0).getValue()){
+            } else {
                 ArrayList<Card> tmpHand = players.get(turn).getHand();
                 for(int i = 0; i < tmpHand.size(); i++) {
                     if(tmpHand.get(i).getValue() == cardsToPlay.get(0).getValue() &&
@@ -579,15 +564,79 @@ public class PresidentGameState implements Serializable {
 
                         Card cardToMakeTheCurrent = tmpHand.get(i);
                         players.get(turn).removeCard(tmpHand.get(i).getSuit(), tmpHand.get(i).getValue());
-                        currentSet.removeAll(getCurrentSet());
+                        currentSet.removeAll(currentSet);
                         currentSet.add(cardToMakeTheCurrent);
-                        nextPlayer();
+
                     }
                 }
+                nextPlayer();
             }
 
         } else if(cardsToPlay.size() == 2){
 
+
+
+            Card cardNotEqualToTwo = new Card(0, "Default");
+            // Find the value of the card that creates the triplet
+            for(Card c : cardsToPlay){
+                if(c.getValue() != 13){
+                    cardNotEqualToTwo.setCardSuit(c.getSuit());
+                    cardNotEqualToTwo.setCardVal(c.getValue());
+                }
+            }
+
+            // If all the cards in the hand are two then
+            // set the "representative card" to one of those
+            // two's -> For the cardsToPlay
+            if(cardNotEqualToTwo.getValue() == 0){
+                cardNotEqualToTwo.setCardVal(13);
+                cardNotEqualToTwo.setCardSuit(cardsToPlay.get(0).getCardName());
+            }
+
+            // Find a representative card that is not a two within the current set
+            // to set the value-to-be-compared to
+            Card cardNotEqualToTwoCurrentSet = new Card(0, "Default");
+            for(Card c : currentSet){
+                if(c.getValue() != 13){
+                    cardNotEqualToTwoCurrentSet.setCardSuit(c.getSuit());
+                    cardNotEqualToTwoCurrentSet.setCardVal(c.getValue());
+                }
+            }
+
+            // If all the cards in the hand are two then
+            // set the "representative card" to one of those
+            // two's -> For the currentSet
+            if(cardNotEqualToTwoCurrentSet.getValue() == 0){
+                cardNotEqualToTwo.setCardVal(13);
+                cardNotEqualToTwo.setCardSuit(cardsToPlay.get(0).getCardName());
+            }
+
+            // Check if the move is legal by comparing the sets
+            // representative cards ---------------------------
+            if(cardNotEqualToTwo.getValue() < cardNotEqualToTwoCurrentSet.getValue()){
+                return false;
+            }
+
+            // Remove the current set and
+            // add the new cards to the set
+            currentSet.removeAll(currentSet);
+            currentSet.addAll(cardsToPlay);
+
+            // Remove the cards played by the user
+            // from their hand.
+            ArrayList<Card> tmpHand = players.get(turn).getHand();
+            for(int i = 0; i < tmpHand.size(); i++){
+                if(tmpHand.get(i).getValue() == cardsToPlay.get(0).getValue() &&
+                        tmpHand.get(i).getSuit().equals(cardsToPlay.get(0).getSuit())){
+
+                    players.get(turn).removeCard(tmpHand.get(i).getSuit(), tmpHand.get(i).getValue());
+                }else if(tmpHand.get(i).getValue() == cardsToPlay.get(1).getValue() &&
+                        tmpHand.get(i).getSuit().equals(cardsToPlay.get(1).getSuit())){
+
+                    players.get(turn).removeCard(tmpHand.get(i).getSuit(), tmpHand.get(i).getValue());
+                }
+            }
+            nextPlayer();
         } else if(cardsToPlay.size() == 3){
 
         } else if(cardsToPlay.size() == 4){
@@ -606,54 +655,53 @@ public class PresidentGameState implements Serializable {
         return true;
     }
 
-    public Card dumbAI(GamePlayer dumbBot) {
+    public Card dumbAI(GamePlayer dumbBot){
         ArrayList<Card> botHand = new ArrayList<>();
-        botHand = dumbBot.getHand();
+                botHand = dumbBot.getHand();
 
-        Card tradeCard = new Card(0, "Default");
-        for (Card c : botHand) {
-            if (tradeCard.getValue() < c.getValue()) {
-                tradeCard.setCardVal(c.getValue());
-                tradeCard.setCardSuit(c.getSuit());
-            }
-        }
-
-
-        dumbBot.removeCard(tradeCard.getSuit(), tradeCard.getValue());
-
-        // Algorithm to randomly choose an action
-        // The AI might just skip its turn, or it might just
-        // play its highest card randomly
-        // You never know...
-
-        // Select a random value between 1 and 100
-//        int max = 100;
-//        int min = 0;
-//        double turnRoulette = (int) (Math.random() * ((max - min) + 1));
-        ArrayList<Card> cardToPlay = new ArrayList<>();
-        cardToPlay.add(tradeCard);
-//        if (turnRoulette < 10) {
-//            pass(dumbBot);
-//            return null;
-//        } else {
-            // If the dumb bot cant play only the 1 card it has, then it passes
-            if (currentSet.size() != 1) {
-                pass(dumbBot);
-                return null;
-            } else {
-                if (currentSet.get(0).getValue() < cardToPlay.get(0).getValue()) {
-                    playCard(dumbBot.getPlayerNum(), cardToPlay);
-                    return cardToPlay.get(0);
-                } else {
-                    pass(getCurrentPlayer());
+                Card tradeCard = new Card(0, "Default");
+                for(Card c: botHand){
+                        if(tradeCard.getValue() < c.getValue()){
+                            tradeCard.setCardVal(c.getValue());
+                            tradeCard.setCardSuit(c.getSuit());
+                        }
                 }
-            }
-//        }
-        return null;
+
+
+                // Algorithm to randomly choose an action
+                // The AI might just skip its turn, or it might just
+                // play its highest card randomly
+                // You never know...
+
+                // Select a random value between 1 and 100
+                int max = 100;
+                int min = 0;
+                double turnRoulette = (int)(Math.random()*((max-min)+1));
+                ArrayList<Card> cardToPlay = new ArrayList<>();
+                cardToPlay.add(tradeCard);
+                turnRoulette = 51;
+                if(turnRoulette < 50){
+                    pass(dumbBot);
+                    return null;
+                } else {
+                    // If the dumb bot cant play only the 1 card it has, then it passes
+                    if(currentSet.size() != 1){
+                        pass(dumbBot);
+                        return null;
+                    } else {
+                        if(playCard(dumbBot.getPlayerNum(), cardToPlay)) {
+                            dumbBot.removeCard(tradeCard.getSuit(), tradeCard.getValue());
+                            return cardToPlay.get(0);
+                        }
+                        else{
+                            pass(getCurrentPlayer());
+                            return null;
+                        }
+                    }
+                }
     }
 
     public int getTurn() {
-
         return turn;
     }
 }
