@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity{
     private int index;
     private TextView p0, p1, p2, p3;
     private TextView cards_1, cards_2, cards_3;
+    private int setCheck[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,10 @@ public class MainActivity extends AppCompatActivity{
         cards_2 = findViewById(R.id.p2);
         cards_3 = findViewById(R.id.p3);
         initial = new PresidentGameState();
+        setCheck = new int[4];
+        for(int i = 0; i < setCheck.length; i++){
+            setCheck[i] = 0;
+        }
         for (int i = 0; i < 4; i++) {
             initial.getPlayers().get(i).setPlayerNum(i);
         }
@@ -383,6 +388,21 @@ public class MainActivity extends AppCompatActivity{
                             switchHighlight(initial.getCurrentPlayer());
                             selectedCard.setBackgroundResource(0);
                             currentPlay.setImageResource(tagValue);
+                            if(checkSetFinish(index)){
+                                setCheck[index] = 1;
+                                Toast.makeText(getApplication().getApplicationContext(), "Got rid of Cards!",
+                                        Toast.LENGTH_SHORT).show();
+                                int count = 0;
+                                for(int idx = 0; idx < setCheck.length; idx++){
+                                    if(setCheck[idx] == 1){
+                                        count++;
+                                    }
+                                }
+                                if(count == 4){
+                                    Toast.makeText(getApplication().getApplicationContext(), "Set over!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
                             computerMoves();
                         }
                         else{
@@ -400,6 +420,20 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.passButton:
                     if (initial.pass(index)) {
                         switchHighlight(initial.getCurrentPlayer());
+                        int count = 0;
+                        for(int idx = 0; idx < setCheck.length; idx++){
+                            if(setCheck[idx] == 1){
+                                count++;
+                            }
+                        }
+                        if(count == 4){
+                            Toast.makeText(getApplication().getApplicationContext(), "Set over!",
+                                    Toast.LENGTH_SHORT).show();
+                            p0.setText(initial.getPlayers().get(0).getRank());
+                            p1.setText(initial.getPlayers().get(1).getRank());
+                            p2.setText(initial.getPlayers().get(2).getRank());
+                            p3.setText(initial.getPlayers().get(3).getRank());
+                        }
                         computerMoves();
                     } else {
                         Toast.makeText(getApplication().getApplicationContext(), "Not your Turn!",
@@ -410,7 +444,12 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-
+    public boolean checkSetFinish(int idx){
+        if(initial.setFinish()){
+            return true;
+        }
+        return false;
+    }
     public void switchHighlight(int idx){
             switch(idx) {
                 case 0:
@@ -498,6 +537,11 @@ public class MainActivity extends AppCompatActivity{
             else {
                 currentPlay.setImageResource(getImageId(computerPlayedCard));
                 changeCardNum(turn);
+                if(checkSetFinish(turn)){
+                    setCheck[turn] = 1;
+                    Toast.makeText(getApplication().getApplicationContext(), "Got rid of Cards!",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         }
         switchHighlight(initial.getCurrentPlayer());

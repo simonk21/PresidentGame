@@ -50,6 +50,8 @@ public class PresidentGameState implements Serializable {
      */
     private int turn;
     private int prevTurn;
+    private int rankCount[];
+    private int numRank;
 
     private int PassAll[];
     /**
@@ -103,6 +105,11 @@ public class PresidentGameState implements Serializable {
         for(int i = 0; i < PassAll.length; i++){
             PassAll[i] = 0;
         }
+        rankCount = new int[4];
+        for(int i = 0; i < rankCount.length;i++){
+            rankCount[i] = 0;
+        }
+        numRank = 0;
     }
 
     /**
@@ -237,6 +244,9 @@ public class PresidentGameState implements Serializable {
      */
     public void setRoundStart(boolean roundStart) {
         this.roundStart = roundStart;
+        if(roundStart == true){
+            trade();
+        }
     }
 
     /**
@@ -390,12 +400,34 @@ public class PresidentGameState implements Serializable {
      * @return
      */
     public boolean setFinish() {
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getHand().size() > 0) {
-                return false;
+            for(int idx = 0; idx < rankCount.length; idx++){
+            if (players.get(idx).getHand().size() > 0) {
+
             } else {
-                players.get(i).setRank("President");
-                gameWon(players.get(i));
+                if (rankCount[idx] == 0) {
+                    numRank++;
+                    rankCount[idx] = 1;
+                    switch(numRank) {
+                        case 1:
+                            players.get(idx).setRank("President");
+                            gameWon(players.get(idx));
+                            return true;
+                        case 2:
+                            players.get(idx).setRank("Vice President");
+                            gameWon(players.get(idx));
+                            return true;
+                        case 3:
+                            players.get(idx).setRank("Vice Scum");
+                            return true;
+                        case 4:
+                            players.get(idx).setRank("Scum");
+                            return true;
+                    }
+
+                }
+                else if(rankCount[idx] == 1){
+
+                }
             }
         }
 
@@ -407,7 +439,7 @@ public class PresidentGameState implements Serializable {
         if (playersWithCards() == 0) {
             setRoundStart(true);
         }
-        return true;
+        return false;
     }
 
     /**
