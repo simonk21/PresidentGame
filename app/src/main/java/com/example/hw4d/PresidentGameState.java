@@ -50,6 +50,8 @@ public class PresidentGameState implements Serializable {
      */
     private int turn;
     private int prevTurn;
+
+    private int PassAll[];
     /**
      * Used to check if its the start of the round or not
      */
@@ -96,6 +98,11 @@ public class PresidentGameState implements Serializable {
 
         /* Initializes previous turn -1 since nobody played yet */
         prevTurn = -1;
+
+        PassAll = new int[4];
+        for(int i = 0; i < PassAll.length; i++){
+            PassAll[i] = 0;
+        }
     }
 
     /**
@@ -351,11 +358,31 @@ public class PresidentGameState implements Serializable {
         if(this.turn != turn){
             return false;
         }
+        PassAll[turn] = 1;
+        if(checkPass()) {
+            getCurrentSet().removeAll(getCurrentSet());
+            for(int i =  0; i < PassAll.length;i++){
+                PassAll[i] = 0;
+            }
+        }
         nextPlayer();
         return true;
     }
 
-
+    public boolean checkPass(){
+        int count = 0;
+        for(int i = 0; i < PassAll.length; i++){
+            if(PassAll[i] == 1){
+                count++;
+            }
+        }
+        if(count == 3){
+            return true; // next player gets to restart
+        }
+        else{
+            return false; // next player cannot restart
+        }
+    }
     /**
      * setFinish
      * Checks if someone won the game
@@ -652,7 +679,12 @@ public class PresidentGameState implements Serializable {
         }else {
             return false;
         }
+
         return true;
+    }
+
+    public void skipTurn(){
+        pass(getCurrentPlayer());
     }
 
     public Card dumbAI(GamePlayer dumbBot){
@@ -685,7 +717,7 @@ public class PresidentGameState implements Serializable {
                     return null;
                 } else {
                     // If the dumb bot cant play only the 1 card it has, then it passes
-                    if(currentSet.size() != 1){
+                    if(currentSet.size() > 1){
                         pass(dumbBot);
                         return null;
                     } else {
@@ -698,6 +730,7 @@ public class PresidentGameState implements Serializable {
                             return null;
                         }
                     }
+
                 }
     }
 

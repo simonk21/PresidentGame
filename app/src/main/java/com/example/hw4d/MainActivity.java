@@ -62,13 +62,14 @@ public class MainActivity extends AppCompatActivity{
         p2 = findViewById(R.id.player2Text);
         p3 = findViewById(R.id.Player3Text);
         p0 = findViewById(R.id.userPlayer);
+        cards_1 = findViewById(R.id.p1);
+        cards_2 = findViewById(R.id.p2);
+        cards_3 = findViewById(R.id.p3);
         initial = new PresidentGameState();
         for (int i = 0; i < 4; i++) {
             initial.getPlayers().get(i).setPlayerNum(i);
         }
         updatePlayerGui(initial);
-
-
 
     }
 
@@ -409,6 +410,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+
     public void switchHighlight(int idx){
             switch(idx) {
                 case 0:
@@ -481,6 +483,7 @@ public class MainActivity extends AppCompatActivity{
 
     public void computerMoves() {
         while (initial.getTurn() != 0) {
+            int turn = initial.getTurn();
             switchHighlight(initial.getCurrentPlayer());
 
             try {
@@ -494,11 +497,26 @@ public class MainActivity extends AppCompatActivity{
             }
             else {
                 currentPlay.setImageResource(getImageId(computerPlayedCard));
+                changeCardNum(turn);
             }
         }
         switchHighlight(initial.getCurrentPlayer());
     }
 
+    public void changeCardNum(int idx){
+        String num = Integer.toString(initial.getPlayers().get(idx).getHand().size());
+        switch (idx){
+            case 1:
+                cards_1.setText(num);
+                break;
+            case 2:
+                cards_2.setText(num);
+                break;
+            case 3:
+                cards_3.setText(num);
+                break;
+        }
+    }
     public int getImageId(Card theCard) {
         int imageId = 0;
         if(theCard.getSuit().equals("Spades")) {
