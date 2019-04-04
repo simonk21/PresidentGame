@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".InGameActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />

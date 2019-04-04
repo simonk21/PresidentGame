@@ -11,22 +11,57 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity{
-    public PresidentGameState initial; // game state
-    private ImageButton card[] = new ImageButton[13];  // array for card's on GUI
-    private ImageButton selectedCard; // the card that user selects
-    private Button play, pause, order, pass; // buttons
-    private ImageView currentPlay; // current set played
-    private int index; // index of user
-    private TextView p0, p1, p2, p3; // Player names
-    private TextView cards_1, cards_2, cards_3; // number of cards that CPU's have
-    private int setCheck[]; // array to check if players got rid of cards
+/**
+ * class InGameActivity
+ *
+ * The activity when a user is in-game
+ *
+ * @authors President Game Team
+ * @date Spring 2019
+ */
+public class InGameActivity extends AppCompatActivity{
+
+    /** Initial game state to be used when starting the game */
+    public PresidentGameState initial;
+
+    /** Array that contains all of the ImageButtons in the GUI that store the cards */
+    private ImageButton card[] = new ImageButton[13];
+
+    /** Keeps track of the most recently selected card by the user */
+    private ImageButton selectedCard;
+
+    /** Buttons that are connected to play, pause, order, and pass */
+    private Button play, pause, order, pass;
+
+    /** Current set of cards played */
+    private ImageView currentPlay;
+
+    /** Index of a user */
+    private int index;
+
+    /** TextView for the player names */
+    private TextView p0, p1, p2, p3;
+
+    /** Displays the amount of cards that the opponents have */
+    private TextView cards_1, cards_2, cards_3;
+
+    /** Array to check if player got rid of cards */
+    private int setCheck[];
+
+    /**
+     * onCreate
+     *
+     * Initializes the game
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        index = 0; // set user index to 0 (will be first player)
-        /* card[0] is leftmost card ImageButton, card[12] is rightmost card ImageButton */
+        setContentView(R.layout.in_game_layout);
+
+        /** set user index to 0 (will be first player) */
+        index = 0;
+
+        /** card[0] is leftmost card ImageButton, card[12] is rightmost card ImageButton */
         card[0] = findViewById(R.id.card0);
         card[1] = findViewById(R.id.card1);
         card[2] = findViewById(R.id.card2);
@@ -44,10 +79,13 @@ public class MainActivity extends AppCompatActivity{
         cards_1 = findViewById(R.id.p1);
         cards_2 = findViewById(R.id.p2);
         cards_3 = findViewById(R.id.p3);
+
+        /** Set onClickListeners for the Cards */
         for (int i = 0; i < 13; i++) {
             card[i].setOnClickListener(new CardClickListener());
         }
-        /* connects instance variables to gui */
+
+        /** connects other instance variables to gui */
         play = findViewById(R.id.playButton);
         play.setOnClickListener(new ButtonClickListener());
         pause = findViewById(R.id.pauseButton);
@@ -63,7 +101,9 @@ public class MainActivity extends AppCompatActivity{
         cards_1 = findViewById(R.id.p1);
         cards_2 = findViewById(R.id.p2);
         cards_3 = findViewById(R.id.p3);
-        initial = new PresidentGameState(); // create new PresidentGameState
+
+        /** Initialize the PresidentGameState */
+        initial = new PresidentGameState();
         setCheck = new int[4]; // set size of array to 4
         for(int i = 0; i < setCheck.length; i++){
             setCheck[i] = 0; // set all values to 0
@@ -71,12 +111,14 @@ public class MainActivity extends AppCompatActivity{
         for (int i = 0; i < 4; i++) {
             initial.getPlayers().get(i).setPlayerNum(i);
         }
-        updatePlayerGui(initial); // update user's gui
+
+        /** update user's gui depending on what cards they received */
+        updatePlayerGui(initial);
 
     }
 
     /**
-        External Citations:
+        External Citation:
         Date:    1 April 2019
         Problem: Forgot how to add an OnClickListener for Multiple Buttons
 
@@ -85,6 +127,10 @@ public class MainActivity extends AppCompatActivity{
         Solution: I used the example code from the video and previous recollection
                   from past assignments
 
+     */
+
+    /**
+        External Citation:
         Date:    1 April 2019
         Problem: Difficulty changing background of Textview (wanted to show whose
                  turn it was)
@@ -94,8 +140,21 @@ public class MainActivity extends AppCompatActivity{
      https://stackoverflow.com/questions/5327553/android-highlight-an-imagebutton-when-clicked
      */
 
+    /**
+     * class CardClickListener
+     *
+     * OnClickListener for the Cards
+     *
+     * @authors President Game Team
+     * @date Spring 2019
+     */
     public class CardClickListener implements View.OnClickListener{
 
+        /**
+         * onClick
+         *
+         * What will happen with a user presses on a Card
+         */
         @Override
         public void onClick(View v) {
             // removes Color Filter from all card Image Buttons
@@ -112,7 +171,7 @@ public class MainActivity extends AppCompatActivity{
 
     }
     /**
-    External Citations:
+    External Citation:
     Date:    1 April 2019
     Problem: Needed to set Color Filter for cards when player selects
 
@@ -121,7 +180,23 @@ public class MainActivity extends AppCompatActivity{
      -imagebutton-when-clicked
     Solution: Used part of the code from this post
      */
+
+    /**
+     * class ButtonClickListender
+     *
+     * OnClickListener for the buttons in the GUI
+     *
+     * @authors President Game Team
+     * @date Spring 2019
+     */
     public class ButtonClickListener implements View.OnClickListener {
+
+        /**
+         * onClick
+         *
+         * Cases for which button a user pressed
+         * Only works for pass and play for the alpha release
+         */
         @Override
         public void onClick(View v) {
             PresidentGameState updateGS;
@@ -138,9 +213,13 @@ public class MainActivity extends AppCompatActivity{
                                 Toast.LENGTH_SHORT).show();
                     }
                     else {
+                        /**
+                         * Obtains the the tag value of a given card
+                         * sets the card value and suit depending on which drawable was used
+                         */
                         int tagValue = (Integer)selectedCard.getTag();
                         switch (tagValue) {
-                            case 0:
+                            case 0: //need to fix this case
                                 Toast.makeText(getApplication().getApplicationContext(), "No card selected!",
                                         Toast.LENGTH_SHORT).show();
                                 break;
@@ -406,7 +485,8 @@ public class MainActivity extends AppCompatActivity{
                                 toAdd.setCardSuit("Hearts");
                                 break;
                         }
-                        // play selected card and change currentPlay ImageView
+
+                        /** play selected card and change currentPlay ImageView */
                         play.add(toAdd);
                         if(initial.playCard(index, play)) {
                             switchHighlight(initial.getCurrentPlayer());
@@ -443,8 +523,11 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.orderButton:
                     // do nothing
                     break;
-                case R.id.passButton: // if pass button is selected
-                    // check if able to pass
+                case R.id.passButton:
+                    /**
+                     * if pass button is selected
+                     * check if able to pass
+                     */
                     if (initial.pass(index)) {
                         switchHighlight(initial.getCurrentPlayer());
                         int count = 0;
@@ -471,13 +554,28 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    /**
+     * checkSetFinish
+     *
+     * Checks if a player is out of cards
+     *
+     * @return true if a player is out of cards
+     */
     public boolean checkSetFinish(int idx){
         if(initial.setFinish()){ // checks if player is out of cards
             return true;
         }
         return false;
     }
-    public void switchHighlight(int idx){ // shows visually whose turn it is
+
+    /**
+     * switchHighlight
+     *
+     * highlights a player on the GUI if it is their turn
+     *
+     * @return void
+     */
+    public void switchHighlight(int idx){
             switch(idx) {
                 case 0:
                     p0.setBackgroundResource(R.color.yellow);
@@ -524,16 +622,29 @@ public class MainActivity extends AppCompatActivity{
             p1.invalidate();
             p2.invalidate();
             p3.invalidate();
-        }
-
-    public void updateCardGui(PresidentGameState gs, int i) { // updates card gui
-            Card theCard = gs.getPlayers().get(0).getHand().get(i);
-            int imageId = getImageId(theCard);
-
-            card[i].setTag(Integer.valueOf(imageId));
-            card[i].setBackgroundResource(imageId);
     }
 
+    /**
+     * updateCardGui
+     *
+     * update the GUI of a card given which card to update
+     *
+     * @return void
+     */
+    public void updateCardGui(PresidentGameState gs, int i) {
+        Card theCard = gs.getPlayers().get(0).getHand().get(i);
+        int imageId = getImageId(theCard);
+        card[i].setTag(Integer.valueOf(imageId));
+        card[i].setBackgroundResource(imageId);
+    }
+
+    /**
+     * updatePlayerGui
+     *
+     * Update's the user's GUI
+     *
+     * @return void
+     */
     public void updatePlayerGui (PresidentGameState gs) { // updates the player's hand
         int i = 0;
         for (int j = 0; j < 13; j++) {
@@ -547,6 +658,13 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    /**
+     * computerMoves
+     *
+     * Has all of the computer players play when it is not the user's turn
+     *
+     * @return void
+     */
     public void computerMoves() { // computer moves
         while (initial.getTurn() != 0) {
             int turn = initial.getTurn();
@@ -574,7 +692,14 @@ public class MainActivity extends AppCompatActivity{
         switchHighlight(initial.getCurrentPlayer());
     }
 
-    public void changeCardNum(int idx){ // grabs the number of cards in other player's hands
+    /**
+     * changeCardNum
+     *
+     * grabs the number of cards in other player's hands
+     *
+     * @return void
+     */
+    public void changeCardNum(int idx){
         String num = Integer.toString(initial.getPlayers().get(idx).getHand().size());
         switch (idx){
             case 1:
@@ -588,6 +713,14 @@ public class MainActivity extends AppCompatActivity{
                 break;
         }
     }
+
+    /**
+     * getImageId
+     *
+     * Cases to find which image ID to use for a player's set of cards
+     *
+     * @return the ID of the card image
+     */
     public int getImageId(Card theCard) { // grabs Image Button ID
         int imageId = 0;
         if(theCard.getSuit().equals("Spades")) {
