@@ -19,46 +19,40 @@ import java.util.ArrayList;
  */
 public class PresidentGameState implements Serializable {
 
-    /**
-     * Number of Players in Game
-     */
+    /** Number of Players in Game */
     private int numPlayers = 4;
-    /**
-     * Cards Played Already like Discard Pile
-     */
+
+    /** Cards Played Already like Discard Pile */
     private ArrayList<Card> playedCards;
-    /**
-     * Players
-     */
+
+    /** Players */
     private ArrayList<GamePlayer> players;
-    /**
-     * Current Played Cards
-     */
+
+    /** Current Played Cards */
     private ArrayList<Card> currentSet;
-    /**
-     * Used to check if current player's set is valid
-     */
+
+    /** Used to check if current player's set is valid */
     private ArrayList<Card> currentValid;
-    /**
-     * Current Player's hand
-     */
+
+    /** Current Player's hand */
+
     private ArrayList<Card> currentPlayerHand;
-    /**
-     * whose turn it is and who previously played
-     */
+
+    /** whose turn it is and who previously played */
     private int turn;
     private int prevTurn;
     private int rankCount[];
     private int numRank;
 
     private int PassAll[];
-    /**
-     * Used to check if its the start of the round or not
-     */
+
+    /** Used to check if its the start of the round or not */
     private boolean roundStart = false;
 
     /**
      * PresidentGameState Constructor
+     *
+     * initializing the deck to be randomized and passed out to the players
      */
     public PresidentGameState() {
         /* Initialize deck */
@@ -114,6 +108,9 @@ public class PresidentGameState implements Serializable {
      * PresidentGameState Constructor
      * Copy constructor for Class PresidentGameState
      *
+     * do not need to make a deep copy of the Deck,
+     * it is only used for giving the players' hands
+     *
      * @param masterGameState the master game state
      */
     public PresidentGameState(PresidentGameState masterGameState) {
@@ -150,19 +147,25 @@ public class PresidentGameState implements Serializable {
     }
 
     /**
-     * Returns played cards or discard pile
+     * getPlayedCards
+     *
+     * @return played cards or discard pile
      */
     public ArrayList<Card> getPlayedCards() {
         return playedCards;
     }
 
-    /** */
+    /**
+     * setPlayedCards
+     */
     public void setPlayedCards(ArrayList<Card> in) {
         playedCards = in;
     }
 
     /**
-     * Returns the Player's Array list with their information
+     * getPlayers
+     *
+     * @return the Player's Array list with their information
      */
     public ArrayList<GamePlayer> getPlayers() {
         return players;
@@ -176,34 +179,42 @@ public class PresidentGameState implements Serializable {
     }
 
     /**
-     * Returns Current Set
+     * getCurrentSet
+     *
+     * @return Current Set
      */
     public ArrayList<Card> getCurrentSet() {
         return currentSet;
     }
 
     /**
-     * Sets the current set
+     * setCurrentSet
      */
     public void setCurrentSet(ArrayList<Card> in) {
         currentSet = in;
     }
 
     /**
-     * Returns if move is valid
+     * getCurrentValid
+     *
+     * @return ArrayList of current valid cards
      */
     public ArrayList<Card> getCurrentValid() {
         return currentValid;
     }
 
     /**
-     * Returns whose turn it is
+     * getCurrentPlayer
+     *
+     * @return whose turn it is
      */
     public int getCurrentPlayer() {
         return turn;
     }
 
     /**
+     * setCurrentPlayer
+     *
      * Sets the player, the hand, and valid cards
      */
     public void setCurrentPlayer(int in) {
@@ -220,6 +231,8 @@ public class PresidentGameState implements Serializable {
     }
 
     /**
+     * setLastPlayed
+     *
      * Sets previous player
      */
     public void setLastPlayed(int in) {
@@ -237,7 +250,10 @@ public class PresidentGameState implements Serializable {
 //        int i = players.get(index).getHand().size();
 //    }
     // https://javahungry.blogspot.com/2017/11/how-to-sort-arraylist-in-descending-order-in-java.html
+
     /**
+     * setRoundStart
+     *
      * Set the round start to be false
      */
     public void setRoundStart(boolean roundStart) {
@@ -249,6 +265,7 @@ public class PresidentGameState implements Serializable {
 
     /**
      * trade
+     *
      * @return true (can trade) or false (cannot trade)
      */
     public boolean trade() {
@@ -352,6 +369,7 @@ public class PresidentGameState implements Serializable {
 
     /**
      * quit
+     *
      * @return true (player can quit game)
      */
     public boolean quit(){
@@ -360,6 +378,7 @@ public class PresidentGameState implements Serializable {
 
     /**
      * pass
+     *
      * @return true (player can pass turn) or false (player cannot pass turn)
      */
     public boolean pass(int turn){
@@ -377,6 +396,11 @@ public class PresidentGameState implements Serializable {
         return true;
     }
 
+    /**
+     * checkPass
+     *
+     * @return boolean if a player can pass
+     */
     public boolean checkPass(){
         int count = 0;
         for(int i = 0; i < PassAll.length; i++){
@@ -393,9 +417,10 @@ public class PresidentGameState implements Serializable {
     }
     /**
      * setFinish
+     *
      * Checks if someone won the game
      *
-     * @return
+     * @return boolean if someone won the game
      */
     public boolean setFinish() {
             for(int idx = 0; idx < rankCount.length; idx++){
@@ -442,6 +467,7 @@ public class PresidentGameState implements Serializable {
 
     /**
      * gameWon
+     *
      * Checks if player won game
      * Must have reached 11 points
      *
@@ -459,6 +485,8 @@ public class PresidentGameState implements Serializable {
     }
 
     /**
+     * nextPlayer
+     *
      * Updates turn
      */
     public void nextPlayer() {
@@ -470,7 +498,9 @@ public class PresidentGameState implements Serializable {
     }
 
     /**
-     * Returns number of players with cards
+     * playersWithCards
+     *
+     * @return number of players with cards
      */
     public int playersWithCards() {
         int count = 0;

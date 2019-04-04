@@ -53,11 +53,6 @@ public class Deck implements Serializable {
         Collections.shuffle(presidentDeck);
     }
 
-//    public Deck(int numPlayers){
-//        playerCount = numPlayers;
-//        presidentDeck = new ArrayList<>();
-//        String suit = "Default";
-//    }
 
 
     public ArrayList<Card> getDeck() { return presidentDeck; }
