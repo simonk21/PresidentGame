@@ -1,35 +1,32 @@
 package com.example.hw4d;
 
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
-    public PresidentGameState initial;
-    private ImageButton card[] = new ImageButton[13];
-    private ImageButton selectedCard;
-    private Button play, pause, order, pass;
-    private ImageView currentPlay;
-    private int index;
-    private TextView p0, p1, p2, p3;
-    private TextView cards_1, cards_2, cards_3;
-    private int setCheck[];
+    public PresidentGameState initial; // game state
+    private ImageButton card[] = new ImageButton[13];  // array for card's on GUI
+    private ImageButton selectedCard; // the card that user selects
+    private Button play, pause, order, pass; // buttons
+    private ImageView currentPlay; // current set played
+    private int index; // index of user
+    private TextView p0, p1, p2, p3; // Player names
+    private TextView cards_1, cards_2, cards_3; // number of cards that CPU's have
+    private int setCheck[]; // array to check if players got rid of cards
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        index = 0;
+        index = 0; // set user index to 0 (will be first player)
+        /* card[0] is leftmost card ImageButton, card[12] is rightmost card ImageButton */
         card[0] = findViewById(R.id.card0);
         card[1] = findViewById(R.id.card1);
         card[2] = findViewById(R.id.card2);
@@ -50,7 +47,7 @@ public class MainActivity extends AppCompatActivity{
         for (int i = 0; i < 13; i++) {
             card[i].setOnClickListener(new CardClickListener());
         }
-
+        /* connects instance variables to gui */
         play = findViewById(R.id.playButton);
         play.setOnClickListener(new ButtonClickListener());
         pause = findViewById(R.id.pauseButton);
@@ -66,38 +63,64 @@ public class MainActivity extends AppCompatActivity{
         cards_1 = findViewById(R.id.p1);
         cards_2 = findViewById(R.id.p2);
         cards_3 = findViewById(R.id.p3);
-        initial = new PresidentGameState();
-        setCheck = new int[4];
+        initial = new PresidentGameState(); // create new PresidentGameState
+        setCheck = new int[4]; // set size of array to 4
         for(int i = 0; i < setCheck.length; i++){
-            setCheck[i] = 0;
+            setCheck[i] = 0; // set all values to 0
         }
         for (int i = 0; i < 4; i++) {
             initial.getPlayers().get(i).setPlayerNum(i);
         }
-        updatePlayerGui(initial);
+        updatePlayerGui(initial); // update user's gui
 
     }
 
+    /**
+        External Citations:
+        Date:    1 April 2019
+        Problem: Forgot how to add an OnClickListener for Multiple Buttons
 
-    // https://www.youtube.com/watch?v=GtxVILjLcw8
-    //https://stackoverflow.com/questions/1466788/android-textview-setting-the-background-color-dynamically-doesnt-work
+        Resource:
+                 https://www.youtube.com/watch?v=GtxVILjLcw8
+        Solution: I used the example code from the video and previous recollection
+                  from past assignments
+
+        Date:    1 April 2019
+        Problem: Difficulty changing background of Textview (wanted to show whose
+                 turn it was)
+        Resource: https://stackoverflow.com/questions/1466788/android-textview-
+                  setting-the-background-color-dynamically-doesnt-work
+        Solution: I used the example code from this post
+     https://stackoverflow.com/questions/5327553/android-highlight-an-imagebutton-when-clicked
+     */
 
     public class CardClickListener implements View.OnClickListener{
 
         @Override
         public void onClick(View v) {
+            // removes Color Filter from all card Image Buttons
             for (int i = 0; i < 13; i++) {
                 card[i].getBackground().clearColorFilter();
                 v.invalidate();
             }
+            // selected card will have Color Filter
             selectedCard = (ImageButton) v;
             selectedCard.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
             v.invalidate();
 
         }
-        //https://stackoverflow.com/questions/5327553/android-highlight-an-imagebutton-when-clicked
-    }
 
+    }
+    /**
+    External Citations:
+    Date:    1 April 2019
+    Problem: Needed to set Color Filter for cards when player selects
+
+    Resource:
+     https://stackoverflow.com/questions/5327553/android-highlight-an
+     -imagebutton-when-clicked
+    Solution: Used part of the code from this post
+     */
     public class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -108,7 +131,8 @@ public class MainActivity extends AppCompatActivity{
                 play.remove(0);
             }
             switch (v.getId()) {
-                case R.id.playButton:
+                case R.id.playButton: // if play button is selected
+                    // check for what the selected card is
                     if(selectedCard.getTag() == null) {
                         Toast.makeText(getApplication().getApplicationContext(),"No card selected!",
                                 Toast.LENGTH_SHORT).show();
@@ -382,13 +406,13 @@ public class MainActivity extends AppCompatActivity{
                                 toAdd.setCardSuit("Hearts");
                                 break;
                         }
-
+                        // play selected card and change currentPlay ImageView
                         play.add(toAdd);
                         if(initial.playCard(index, play)) {
                             switchHighlight(initial.getCurrentPlayer());
                             selectedCard.setBackgroundResource(0);
                             currentPlay.setImageResource(tagValue);
-                            if(checkSetFinish(index)){
+                            if(checkSetFinish(index)){ // check if player has 0 cards
                                 setCheck[index] = 1;
                                 Toast.makeText(getApplication().getApplicationContext(), "Got rid of Cards!",
                                         Toast.LENGTH_SHORT).show();
@@ -398,26 +422,29 @@ public class MainActivity extends AppCompatActivity{
                                         count++;
                                     }
                                 }
-                                if(count == 4){
+                                if(count == 4){ // check if all players have 0 cards
                                     Toast.makeText(getApplication().getApplicationContext(), "Set over!",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
-                            computerMoves();
+                            computerMoves(); // allow CPU's to play
                         }
                         else{
                             Toast.makeText(getApplication().getApplicationContext(), "Invalid Move!",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
-                    updatePlayerGui(initial);
+                    updatePlayerGui(initial); // update Player GUI
 
                     break;
                 case R.id.pauseButton:
+                    // do nothing
                     break;
                 case R.id.orderButton:
+                    // do nothing
                     break;
-                case R.id.passButton:
+                case R.id.passButton: // if pass button is selected
+                    // check if able to pass
                     if (initial.pass(index)) {
                         switchHighlight(initial.getCurrentPlayer());
                         int count = 0;
@@ -445,12 +472,12 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public boolean checkSetFinish(int idx){
-        if(initial.setFinish()){
+        if(initial.setFinish()){ // checks if player is out of cards
             return true;
         }
         return false;
     }
-    public void switchHighlight(int idx){
+    public void switchHighlight(int idx){ // shows visually whose turn it is
             switch(idx) {
                 case 0:
                     p0.setBackgroundResource(R.color.yellow);
@@ -499,7 +526,7 @@ public class MainActivity extends AppCompatActivity{
             p3.invalidate();
         }
 
-    public void updateCardGui(PresidentGameState gs, int i) {
+    public void updateCardGui(PresidentGameState gs, int i) { // updates card gui
             Card theCard = gs.getPlayers().get(0).getHand().get(i);
             int imageId = getImageId(theCard);
 
@@ -507,7 +534,7 @@ public class MainActivity extends AppCompatActivity{
             card[i].setBackgroundResource(imageId);
     }
 
-    public void updatePlayerGui (PresidentGameState gs) {
+    public void updatePlayerGui (PresidentGameState gs) { // updates the player's hand
         int i = 0;
         for (int j = 0; j < 13; j++) {
             card[j].setBackgroundResource(R.drawable.scoreboard);
@@ -520,12 +547,12 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public void computerMoves() {
+    public void computerMoves() { // computer moves
         while (initial.getTurn() != 0) {
             int turn = initial.getTurn();
             switchHighlight(initial.getCurrentPlayer());
 
-            try {
+            try { // supposed to delay play but doesn't work
                 Thread.sleep(250);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -547,7 +574,7 @@ public class MainActivity extends AppCompatActivity{
         switchHighlight(initial.getCurrentPlayer());
     }
 
-    public void changeCardNum(int idx){
+    public void changeCardNum(int idx){ // grabs the number of cards in other player's hands
         String num = Integer.toString(initial.getPlayers().get(idx).getHand().size());
         switch (idx){
             case 1:
@@ -561,7 +588,7 @@ public class MainActivity extends AppCompatActivity{
                 break;
         }
     }
-    public int getImageId(Card theCard) {
+    public int getImageId(Card theCard) { // grabs Image Button ID
         int imageId = 0;
         if(theCard.getSuit().equals("Spades")) {
             switch(theCard.getValue()) {
@@ -737,5 +764,4 @@ public class MainActivity extends AppCompatActivity{
         }
         return imageId;
     }
-    //http://www.devexchanges.info/2015/03/simple-moving-object-with-touch-events.html
 }

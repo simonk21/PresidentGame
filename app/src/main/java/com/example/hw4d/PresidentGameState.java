@@ -1,12 +1,10 @@
 package com.example.hw4d;
 
-import com.example.hw4d.Player.ComputerPlayer;
 import com.example.hw4d.Player.GamePlayer;
 import com.example.hw4d.Player.HumanPlayer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * PresidentGameState.java
