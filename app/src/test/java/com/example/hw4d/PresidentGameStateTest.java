@@ -11,7 +11,8 @@ import static org.junit.Assert.*;
 public class PresidentGameStateTest {
 
     @Test
-    public void getPlayedCards() {
+    public ArrayList<Card> getPlayedCards() {
+        return null;
     }
 
     @Test
@@ -229,4 +230,5 @@ public class PresidentGameStateTest {
         assertTrue(test.getCurrentSet().get(0).getValue() == 12 && test.getCurrentSet().get(0).getSuit().equals("Clubs"));
         assertTrue(test.getCurrentPlayer() == 1);
     }
+
 }

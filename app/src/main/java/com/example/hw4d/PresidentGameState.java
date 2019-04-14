@@ -793,6 +793,111 @@ public class PresidentGameState implements Serializable {
 
                 }
     }
+    /*
+    * @class smartAI
+    *
+    * A "smart" AI player that only plays the lowest card possible,
+    * and changes its behavior when it has only a few cards left.
+    *
+    * @param GamePlayer
+    * @return cardToPlay(0) (if it has a card that it can play) or null (to pass)
+    * */
+    public Card smartAI(GamePlayer smartBot){
+        int aceCount = 0;
+        int kCount = 0;
+        int qCount = 0;
+        int jCount = 0;
+        ArrayList<Card> botHand = new ArrayList<>();
+        botHand = smartBot.getHand();
+
+        Card tradeCard = new Card(0, "Default");
+        for(Card c: botHand){
+            if(tradeCard.getValue() > c.getValue()){
+                tradeCard.setCardVal(c.getValue());
+                tradeCard.setCardSuit(c.getSuit());
+            }
+        }
+
+        //the bot's selection behavior changes when
+        //it approaches the end of its hand
+        if(botHand.size() < 4) {
+            //counting the high-ranked cards that have
+            //already been played
+            for (Card c : playedCards) {
+                if (c.getValue() == 12) {
+                    aceCount++;
+                }
+                if (c.getValue() == 11) {
+                    kCount++;
+                }
+                if (c.getValue() == 10) {
+                    qCount++;
+                }
+                if (c.getValue() == 9) {
+                    jCount++;
+                }
+            }
+            //if there is at least 3 cards of a higher rank that
+            //have been played, the bot will play the card
+            //one rank below it
+            if (aceCount >= 3 && kCount >= 2) {
+                for (Card c : botHand) {
+                    if (c.getValue() == 12) {
+                        tradeCard.setCardVal(c.getValue());
+                        tradeCard.setCardSuit(c.getSuit());
+                    }
+                }
+            }
+            else if (kCount >= 3 && qCount >= 2) {
+                for (Card c : botHand) {
+                    if (c.getValue() == 11) {
+                        tradeCard.setCardVal(c.getValue());
+                        tradeCard.setCardSuit(c.getSuit());
+                    }
+                }
+            }
+            else if (qCount >= 3 && jCount >= 2) {
+                for (Card c : botHand) {
+                    if (c.getValue() == 10) {
+                        tradeCard.setCardVal(c.getValue());
+                        tradeCard.setCardSuit(c.getSuit());
+                    }
+                }
+            }
+            else if (jCount >= 3) {
+                for (Card c : botHand) {
+                    if (c.getValue() == 9) {
+                        tradeCard.setCardVal(c.getValue());
+                        tradeCard.setCardSuit(c.getSuit());
+                    }
+                }
+            }
+        }
+
+
+        ArrayList<Card> cardToPlay = new ArrayList<>();
+        cardToPlay.add(tradeCard);
+
+
+
+            // If the smart bot can't play only the 1 card it has, then it passes
+            if(currentSet.size() > 1) {
+                pass(smartBot);
+                return null;
+            }
+            else {
+                //play the card
+                if(playCard(smartBot.getPlayerNum(), cardToPlay)) {
+                    smartBot.removeCard(tradeCard.getSuit(), tradeCard.getValue());
+                    return cardToPlay.get(0);
+                }
+                //otherwise, pass
+                else{
+                    pass(getCurrentPlayer());
+                    return null;
+                }
+            }
+    }
 
     public int getTurn() {
         return turn;
